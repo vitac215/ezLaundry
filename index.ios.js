@@ -1,15 +1,20 @@
 'use strict'
-import React, { Component } from 'react';
+import React, { Component, StyleSheet } from 'react';
 import { AppRegistry, Component, Navigator } from 'react-native';
-import ViewContainer from './app/components/ViewContainer';
-import StatusBarBackground from './app/components/StatusBarBackground';
+import AppNavigator from './app/navigation/AppNavigator';
 
-export default class laundry extends Component {
+
+class laundry extends Component {
   render() {
     return (
-      <Navigator>
-    );
+      <AppNavigator
+        initialRoute={{ident: "launch"}}/>
+    )
   }
 }
+
+const styles = StyleSheet.create({
+
+})
 
 AppRegistry.registerComponent('laundry', () => laundry);
