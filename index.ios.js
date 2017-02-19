@@ -1,20 +1,42 @@
 'use strict'
-import React, { Component, StyleSheet } from 'react';
-import { AppRegistry, Component, Navigator } from 'react-native';
-import AppNavigator from './app/navigation/AppNavigator';
 
+import React, { Component } from 'react';
+import { AppRegistry, Navigator, StyleSheet, NavigatorIOS, View } from 'react-native';
 
-class laundry extends Component {
+import LaunchScene from './app/scenes/LaunchScene';
+
+export default class laundry extends Component {
   render() {
+    var defaultRoute = "LaunchScene";
+    var defaultComp = LaunchScene;
+    var deafultTitle = "Welcome";
+
     return (
-      <AppNavigator
-        initialRoute={{ident: "launch"}}/>
+      <NavigatorIOS
+        style={{flex: 1}}
+        barTintColor="#4AC3C0"
+        titleTextColor="#fff"
+        tintColor="fff"
+
+        initialRoute= {{
+          name: defaultRoute,
+          title: deafultTitle,
+          component: LaunchScene
+        }}
+        configureScene={ (route) => {
+          return Navigator.SceneConfigs.PushFromRight;
+        }}
+        renderScene={(route, navigator) => {
+          var Component = route.component;
+          return (
+            <View Style={{flex: 1}}>
+              <Component {...route.params} navigator={navigator} />
+            </View>
+          )
+        }}
+      />
     )
   }
 }
-
-const styles = StyleSheet.create({
-
-})
 
 AppRegistry.registerComponent('laundry', () => laundry);
