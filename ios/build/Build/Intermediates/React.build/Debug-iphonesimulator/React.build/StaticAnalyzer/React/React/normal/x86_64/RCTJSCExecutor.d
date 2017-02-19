@@ -1,0 +1,24 @@
+dependencies: \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Executors/RCTJSCExecutor.mm \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Executors/RCTJSCExecutor.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTJavaScriptExecutor.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/JSBundleType.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Modules/JSCSamplingProfiler.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Modules/RCTDevMenu.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Executors/RCTJSCErrorHandling.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Profiler/RCTJSCProfiler.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTPerformanceLogger.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Base/RCTUtils.h
