@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { AppRegistry, Navigator, Text, View, StyleSheet, Image, TextInput, Alert } from 'react-native';
+import { AppRegistry, Navigator, AsyncStorage, Text, View, StyleSheet, Image, TextInput, Alert } from 'react-native';
 
 import Button from 'apsl-react-native-button';
 import API from '../api';
@@ -15,7 +15,9 @@ export default class LoginScene extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      address: '',
+      propertyName: ''
     }
   }
 
@@ -39,10 +41,18 @@ export default class LoginScene extends Component {
         store.setAddress(user.address);
         store.setPropertyName(user.propertyName);
 
+        this.setState({
+          username: user.username,
+          password: user.password,
+          address: user.address,
+          propertyName: user.propertyName
+        })
+
         // Navigate to the status scene
         navigator.push({
           name: 'Status',
           title: user.propertyName,
+          passProps: this.state,
           component: StatusScene
         })
         return;
@@ -64,7 +74,7 @@ export default class LoginScene extends Component {
           <Image source={require('../img/bg.png')} style={styles.bg} />
         </View>
 
-        <View style={styles.signupContainer}>
+        <View style={styles.loginContainer}>
           <View style={styles.inputContainer}>
 
             <TextInput style={styles.textInput}
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  signupContainer: {
+  loginContainer: {
     justifyContent: 'center',
     marginTop: 150
   }

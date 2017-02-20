@@ -17,7 +17,7 @@ export default class SignupScene extends Component {
       password: '',
       passwordconfirm: '',
       address: '',
-      propertyName: '',
+      propertyName: ''
     }
   }
 
@@ -50,6 +50,7 @@ export default class SignupScene extends Component {
         navigator.push({
           name: 'Status',
           title: propertyName,
+          passProps: this.state,
           component: StatusScene
         })
         return;
@@ -145,6 +146,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0,
     margin: 15,
+    marginTop: 250,
     width: 300
   },
 
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
 
   signupContainer: {
     justifyContent: 'center',
-    marginTop: 80
+    marginTop: 200
   }
 
 });

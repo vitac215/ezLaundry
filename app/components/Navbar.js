@@ -19,9 +19,9 @@ export default class Navbar extends Component {
     const {route} = this.props;
     return (
       <View style={styles.navbar}>
-          <Text style={styles.button} onPress={this.onGoBack.bind(this)}>{route.leftBtn}</Text>
+          <Text style={styles.button} onPress={this.onGoBack.bind(this)}>{this.props.leftBtn}</Text>
           <Text style={styles.title}>{route.title}</Text>
-          <Text style={styles.button}>{route.rightBtn}</Text>
+          <Text style={styles.button}>{this.props.rightBtn}</Text>
       </View>
     )
   }

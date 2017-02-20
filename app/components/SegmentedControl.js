@@ -2,16 +2,15 @@
 
 var React = require('react');
 var ReactNative = require('react-native');
-var { SegmentedControlIOS, StyleSheet, Text, View, ListView, Image } = ReactNative;
+var { SegmentedControlIOS, AsyncStorage, StyleSheet, Text, View, ListView, Image } = ReactNative;
 
 import API from '../api';
 import store from '../store';
 
 var SegmentedControl = React.createClass({
   getInitialState: function() {
-    console.log(store.getAddress());
     return {
-      address: store.getAddress(),
+      address: this.props.address,
       washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       values: ['Washing', 'Dryer'],

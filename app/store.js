@@ -1,46 +1,48 @@
 /*
-  Store the data of the current user
+  Store data of the current user
 */
 
-let data = {
-  username: '',
-  password: '',
-  address: '',
-  propertyName: ''
-}
+import { AsyncStorage } from 'react-native';
 
 let store = {
-  getUsername: () => {
-    return data.username;
+
+  async setUsername(username) {
+    await AsyncStorage.setItem('username', username);
+  },
+  async getUsername() {
+    let res = await AsyncStorage.getItem('username');
+    return res;
   },
 
-  setUsername: (username) => {
-    data.username = username;
+  async setPassword(password) {
+    await AsyncStorage.setItem('password', password);
+  },
+  async getPassword() {
+    let res = await AsyncStorage.getItem('password');
+    return res;
   },
 
-  getPassword: () => {
-    return data.password;
+  async setAddress(address) {
+    await AsyncStorage.setItem('address', address);
+  },
+  async getAddress() {
+    let res = await AsyncStorage.getItem('address');
+    return res;
   },
 
-  setPassword: (password) => {
-    data.password = password;
+  async setPropertyName(propertyName) {
+    await AsyncStorage.setItem('propertyName', propertyName);
+  },
+  async getPropertyName(propertyName) {
+    let res = await AsyncStorage.getItem('propertyName');
+    return res;
   },
 
-  getAddress: () => {
-    return data.Address;
-  },
-
-  setAddress: (address) => {
-    data.address = address;
-  },
-
-  getPropertyName: () => {
-    return data.PropertyName;
-  },
-
-  setPropertyName: (propertyName) => {
-    data.propertyName = propertyName;
+  async removeUser() {
+    let keys = ['username', 'password', 'address', 'propertyName'];
+    await AsyncStorage.multiRemove(keys);
   }
+
 }
 
 export default store;

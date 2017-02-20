@@ -29,8 +29,8 @@ export default class laundry extends Component {
           var Component = route.component;
           return (
             <View Style={{flex: 1}}>
-              <Navbar {...route.params} route={route} navigator={navigator} />
-              <Component {...route.params} navigator={navigator} />
+              <Navbar {...route.passProps} route={route} navigator={navigator} />
+              <Component {...route.passProps} navigator={navigator} />
             </View>
           )
         }}

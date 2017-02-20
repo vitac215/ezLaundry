@@ -14,7 +14,7 @@ export default class StatusScene extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SegmentedControl />
+        <SegmentedControl {...this.props}/>
       </View>
     );
   }
