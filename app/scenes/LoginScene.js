@@ -6,7 +6,8 @@ import { AppRegistry, Navigator, Text, View, StyleSheet, Image, TextInput, Alert
 import Button from 'apsl-react-native-button';
 import API from '../api';
 import store from '../store';
-import LaunchScene from './LaunchScene'; // To be changed to statusScene
+
+import StatusScene from './StatusScene';
 
 export default class LoginScene extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class LoginScene extends Component {
         navigator.push({
           name: 'Status',
           title: user.propertyName,
-          component: LaunchScene // To be changed to statusScene
+          component: StatusScene
         })
         return;
       // Alert error messageå
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0,
     margin: 15,
+    marginTop: 100,
     width: 300
   },
 
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
 
   signupContainer: {
     justifyContent: 'center',
-    marginTop: 80
+    marginTop: 150
   }
 
 });

@@ -1,18 +1,18 @@
 'use strict'
 
 import React, { Component } from 'react';
-import { AppRegistry, Navigator, StyleSheet, NavigatorIOS, View } from 'react-native';
+import { AppRegistry, StyleSheet, Navigator, NavigatorIOS, View } from 'react-native';
 
 import LaunchScene from './app/scenes/LaunchScene';
+import Navbar from './app/components/Navbar';
 
 export default class laundry extends Component {
   render() {
     var defaultRoute = "LaunchScene";
     var defaultComp = LaunchScene;
-    var deafultTitle = "Welcome";
 
     return (
-      <NavigatorIOS
+      <Navigator
         style={{flex: 1}}
         barTintColor="#4AC3C0"
         titleTextColor="#fff"
@@ -20,7 +20,6 @@ export default class laundry extends Component {
 
         initialRoute= {{
           name: defaultRoute,
-          title: deafultTitle,
           component: LaunchScene
         }}
         configureScene={ (route) => {
@@ -30,6 +29,7 @@ export default class laundry extends Component {
           var Component = route.component;
           return (
             <View Style={{flex: 1}}>
+              <Navbar {...route.params} route={route} navigator={navigator} />
               <Component {...route.params} navigator={navigator} />
             </View>
           )

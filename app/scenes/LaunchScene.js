@@ -25,6 +25,7 @@ export default class LaunchScene extends Component {
     this.toNext({
       name: 'LoginScene',
       title: 'Login',
+      leftBtn: 'Back',
       component: LoginScene
     });
   }
@@ -33,6 +34,7 @@ export default class LaunchScene extends Component {
     this.toNext({
       name: 'SignupScene',
       title: 'Sign Up',
+      leftBtn: 'Back',
       component: SignupScene
     });
   }
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
 
   img: {
     alignSelf: 'center',
-    marginTop: 140,
+    marginTop: 100,
     marginBottom: 30
   }
 

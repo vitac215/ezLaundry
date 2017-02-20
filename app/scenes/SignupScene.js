@@ -6,7 +6,8 @@ import { AppRegistry, Navigator, Text, View, StyleSheet, Image, TextInput, Alert
 import Button from 'apsl-react-native-button';
 import store from '../store';
 import API from '../api';
-import LaunchScene from './LaunchScene'; // To be changed to statusScene
+
+import StatusScene from './StatusScene';
 
 export default class SignupScene extends Component {
   constructor(props) {
@@ -48,8 +49,8 @@ export default class SignupScene extends Component {
         // Navigate to the status scene
         navigator.push({
           name: 'Status',
-          title: this.state.propertyName,
-          component: LaunchScene // To be changed to statusScene
+          title: propertyName,
+          component: StatusScene
         })
         return;
       // Alert error message
