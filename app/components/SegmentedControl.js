@@ -20,6 +20,13 @@ var SegmentedControl = React.createClass({
 
   // Fetch data from api
   componentDidMount: function() {
+    this.fetchData()
+    // Fetch data every minute
+    this.timer = setInterval(() => this.fetchData(), 60000)
+  },
+
+  fetchData: async function() {
+    console.log("fetch machine data");
     API.getWashingData(this.state.address)
       .then((res) => {
         this.setState({
@@ -62,7 +69,7 @@ var SegmentedControl = React.createClass({
     return (
       <ListView
         dataSource = {this.state.washingDS}
-        renderRow = {this.renderRow.bind(this)}
+        renderRow = {this.renderRow} // auto bind
       />
     )
   },
@@ -72,7 +79,7 @@ var SegmentedControl = React.createClass({
     return (
       <ListView
         dataSource = {this.state.dryerDS}
-        renderRow = {this.renderRow.bind(this)}
+        renderRow = {this.renderRow} // auto bind
       />
     )
   },
