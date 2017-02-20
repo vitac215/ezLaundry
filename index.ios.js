@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Navigator, NavigatorIOS, View } from 'react-native';

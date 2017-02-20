@@ -1,23 +1,24 @@
-'use strict'
+'use strict';
 
 import React, { Component } from 'react';
 
 import { Text, TextInput, StyleSheet, Image, ScrollView, ListView, View } from 'react-native';
 
-
+import SegmentedControl from '../components/SegmentedControl';
 // function saveData() {
 //     AsyncsStorage.setItem("name", "Test");
 //     this.setState("name", "Test");
 // }
 
-class StatusScene extends Component {
+export default class StatusScene extends Component {
   constructor(props) {
     super(props);
     var ds = new ListView.DataSource(
       {rowHasChanged: (r1, r2) => r1 !== r2});
     var data = [{'machine_id': 1, 'remainTime':'00:30', 'endTime':'8:30', 'status': 'In Use'}, {'machine_id': 2, 'remainTime':'00:20', 'endTime':'8:20', 'status': 'In Use'}, {'machine_id': 3, 'remainTime':'00:10', 'endTime':'8:10', 'status': 'In Use'}];
     this.state = {
-      dataSource: ds.cloneWithRows(data)
+      dataSource: ds.cloneWithRows(data),
+      machineType: 'washing'
     };
   }
 
@@ -42,9 +43,12 @@ class StatusScene extends Component {
 
   render() {
     return (
-      <ListView
-      dataSource={this.state.dataSource}
-      renderRow={this.renderRow.bind(this)}/>
+      <View>
+        <SegmentedControl />
+        <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow.bind(this)}/>
+      </View>
     );
   }
 
@@ -94,5 +98,3 @@ var styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 });
-
-module.exports = StatusScene;
