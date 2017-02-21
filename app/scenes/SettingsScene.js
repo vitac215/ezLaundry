@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { Text, TextInput, StyleSheet, Image, ListView, View } from 'react-native';
+import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -22,12 +22,12 @@ export default class SettingsScene extends Component {
     return (
       <View>
 
-        <View style={styles.rowContainer}>
+        <TouchableOpacity style={styles.rowContainer}>
           <Text style={styles.text}>{rowData}</Text>
           <View style={styles.rightContainer}>
             <Icon style={styles.icon} name="ios-arrow-forward-outline" size={20} color="#4F8EF7" />
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.separator}/>
 
