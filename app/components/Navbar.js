@@ -18,7 +18,6 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const {route} = this.props;
     return (
       <View style={styles.navbar}>
           <Text style={styles.button} onPress={this.onGoBack.bind(this)}>{this.props.leftBtn}</Text>

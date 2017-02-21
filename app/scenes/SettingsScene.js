@@ -7,12 +7,16 @@ import { Text, TextInput, StyleSheet, Image, ScrollView, ListView, View } from '
 export default class SettingsScene extends Component {
   constructor(props) {
     super(props);
+
+    var ds = new ListView.DataSource(
+      {rowHasChanged: (r1, r2) => r1 !== r2});
+    var data = 
   }
 
   render() {
     return (
       <View style={styles.container}>
-        
+
       </View>
     );
   }

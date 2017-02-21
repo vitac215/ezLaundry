@@ -20,7 +20,7 @@ export default class laundry extends Component {
 
         initialRoute= {{
           name: defaultRoute,
-          component: LaunchScene
+          component: defaultComp
         }}
         configureScene={ (route) => {
           return Navigator.SceneConfigs.PushFromRight;
@@ -29,7 +29,7 @@ export default class laundry extends Component {
           var Component = route.component;
           return (
             <View style={{flex: 1}}>
-              <Navbar {...route.passProps} title={route.title} navigator={navigator} />
+              {/* <Navbar {...route.passProps} title={route.title} navigator={navigator} /> */}
               <Component {...route.passProps} navigator={navigator} />
             </View>
           )

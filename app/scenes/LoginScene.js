@@ -7,6 +7,7 @@ import Button from 'apsl-react-native-button';
 import API from '../api';
 import store from '../store';
 
+import Navbar from '../components/Navbar';
 import MainScene from './MainScene';
 
 export default class LoginScene extends Component {
@@ -67,40 +68,47 @@ export default class LoginScene extends Component {
   }
 
   render() {
+    const { navigator } = this.props;
     const { username, password } = this.state;
+    
     return (
       <View style={styles.container}>
-        <View style={styles.bgWrapper}>
-          <Image source={require('../img/bg.png')} style={styles.bg} />
-        </View>
+        <Navbar title='Login' leftBtn='Back' navigator={navigator} />
 
-        <View style={styles.mainContainer}>
-          <View style={styles.inputContainer}>
+        <View style={styles.container}>
 
-            <TextInput style={styles.textInput}
-              onChangeText={ (username) => {this.setState({username})}}
-              placeholder='username'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={username} />
-
-            <TextInput style={styles.textInput}
-              onChangeText={ (password) => {this.setState({password})}}
-              placeholder='password'
-              secureTextEntry
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={password} />
+          <View style={styles.bgWrapper}>
+            <Image source={require('../img/bg.png')} style={styles.bg} />
           </View>
 
-            <Button style={styles.btn}
-                    textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-                    onPress={this.loginAction.bind(this)}>
-              Login
-            </Button>
-        </View>
+          <View style={styles.mainContainer}>
+            <View style={styles.inputContainer}>
 
-      </View>
+              <TextInput style={styles.textInput}
+                onChangeText={ (username) => {this.setState({username})}}
+                placeholder='username'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={username} />
+
+              <TextInput style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder='password'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={password} />
+            </View>
+
+              <Button style={styles.btn}
+                      textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                      onPress={this.loginAction.bind(this)}>
+                Login
+              </Button>
+          </View>
+
+        </View>
+      </View> // include navbar
     );
   }
 }

@@ -22,8 +22,11 @@ export default class MainScene extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+
     this.state = {
       selectedTab: 'Status',
+      title: props.propertyName
     };
   }
 
@@ -32,6 +35,7 @@ export default class MainScene extends React.Component {
     console.log('render tab component');
     return (
       <View style={styles.tabContent}>
+        <Navbar {...this.props} title={this.state.title} />
         <Component />
       </View>
     )
@@ -50,7 +54,8 @@ export default class MainScene extends React.Component {
           selected={this.state.selectedTab === 'Status'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Status'
+              selectedTab: 'Status',
+              title: this.props.propertyName
             });
           }}>
           { this._renderContent(StatusScene) }
@@ -62,7 +67,8 @@ export default class MainScene extends React.Component {
           selected={this.state.selectedTab === 'Reservation'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Reservation'
+              selectedTab: 'Reservation',
+              title: new Date().toString()
             });
           }}>
           { this._renderContent(StatusScene) }
@@ -74,7 +80,8 @@ export default class MainScene extends React.Component {
           selected={this.state.selectedTab === 'Settings'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Settings'
+              selectedTab: 'Settings',
+              title: 'Settings'
             });
             console.log(this.state);
           }}>
