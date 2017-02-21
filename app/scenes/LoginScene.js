@@ -7,7 +7,7 @@ import Button from 'apsl-react-native-button';
 import API from '../api';
 import store from '../store';
 
-import StatusScene from './StatusScene';
+import MainScene from './MainScene';
 
 export default class LoginScene extends Component {
   constructor(props) {
@@ -48,12 +48,12 @@ export default class LoginScene extends Component {
           propertyName: user.propertyName
         })
 
-        // Navigate to the status scene
+        // Navigate to the main scene
         navigator.push({
           name: 'Status',
           title: user.propertyName,
           passProps: this.state,
-          component: StatusScene
+          component: MainScene
         })
         return;
       // Alert error messageå
@@ -74,7 +74,7 @@ export default class LoginScene extends Component {
           <Image source={require('../img/bg.png')} style={styles.bg} />
         </View>
 
-        <View style={styles.loginContainer}>
+        <View style={styles.mainContainer}>
           <View style={styles.inputContainer}>
 
             <TextInput style={styles.textInput}
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0,
     margin: 15,
-    marginTop: 100,
     width: 300
   },
 
@@ -148,9 +147,9 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  loginContainer: {
+  mainContainer: {
     justifyContent: 'center',
-    marginTop: 150
+    marginTop: 50
   }
 
 });

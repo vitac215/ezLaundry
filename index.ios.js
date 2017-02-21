@@ -28,8 +28,8 @@ export default class laundry extends Component {
         renderScene={(route, navigator) => {
           var Component = route.component;
           return (
-            <View Style={{flex: 1}}>
-              <Navbar {...route.passProps} route={route} navigator={navigator} />
+            <View style={{flex: 1}}>
+              <Navbar {...route.passProps} title={route.title} navigator={navigator} />
               <Component {...route.passProps} navigator={navigator} />
             </View>
           )

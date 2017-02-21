@@ -11,8 +11,10 @@ export default class Navbar extends Component {
   }
 
   onGoBack() {
-    const {navigator} = this.props;
-    navigator.pop();
+    if (this.props.leftBtn !== undefined) {
+      const {navigator} = this.props;
+      navigator.pop();
+    }
   }
 
   render() {
@@ -20,7 +22,7 @@ export default class Navbar extends Component {
     return (
       <View style={styles.navbar}>
           <Text style={styles.button} onPress={this.onGoBack.bind(this)}>{this.props.leftBtn}</Text>
-          <Text style={styles.title}>{route.title}</Text>
+          <Text style={styles.title}>{this.props.title}</Text>
           <Text style={styles.button}>{this.props.rightBtn}</Text>
       </View>
     )

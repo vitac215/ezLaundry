@@ -7,7 +7,7 @@ import Button from 'apsl-react-native-button';
 import store from '../store';
 import API from '../api';
 
-import StatusScene from './StatusScene';
+import MainScene from './MainScene';
 
 export default class SignupScene extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ export default class SignupScene extends Component {
           name: 'Status',
           title: propertyName,
           passProps: this.state,
-          component: StatusScene
+          component: MainScene
         })
         return;
       // Alert error message
@@ -75,7 +75,7 @@ export default class SignupScene extends Component {
           <Image source={require('../img/bg.png')} style={styles.bg} />
         </View>
 
-        <View style={styles.signupContainer}>
+        <View style={styles.mainContainer}>
           <View style={styles.inputContainer}>
 
             <TextInput style={styles.textInput}
@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0,
     margin: 15,
-    marginTop: 250,
     width: 300
   },
 
@@ -171,9 +170,9 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  signupContainer: {
+  mainContainer: {
     justifyContent: 'center',
-    marginTop: 200
+    marginTop: 50
   }
 
 });

@@ -21,7 +21,7 @@ var SegmentedControl = React.createClass({
   // Fetch data from api
   componentDidMount: function() {
     this.fetchData()
-    // Fetch data every minute
+    // Fetch data every 1 min
     this.timer = setInterval(() => this.fetchData(), 60000)
   },
 
@@ -47,7 +47,6 @@ var SegmentedControl = React.createClass({
   renderListView: function() {
     // Display washing machines
     if (this.state.selectedTab === 'Washing') {
-      console.log("state is washing");
       return (
         <View>
           {this.renderWashingStatusScene()}
@@ -55,7 +54,6 @@ var SegmentedControl = React.createClass({
       )
     } else if (this.state.selectedTab === 'Dryer') {
     // Display dryers
-      console.log("state is dryer");
       return (
         <View>
           {this.renderDryerStatusScene()}
@@ -65,7 +63,6 @@ var SegmentedControl = React.createClass({
   },
 
   renderWashingStatusScene: function() {
-    console.log("render washing");
     return (
       <ListView
         dataSource = {this.state.washingDS}
@@ -75,7 +72,6 @@ var SegmentedControl = React.createClass({
   },
 
   renderDryerStatusScene: function() {
-    console.log("render dryer");
     return (
       <ListView
         dataSource = {this.state.dryerDS}
@@ -136,17 +132,18 @@ var styles = StyleSheet.create({
   },
 
   scContainer: {
-    backgroundColor: '#4AC3C0',
-    height: 50
+    backgroundColor: '#4AC3C0'
   },
 
   listContainer: {
     backgroundColor: '#fff',
-    height: 800
+    flex: 1
   },
 
   segmentedControl: {
     margin: 10,
+    marginLeft: 30,
+    marginRight: 30
   },
 
   text: {
