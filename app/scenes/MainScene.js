@@ -6,6 +6,7 @@ var { StyleSheet, TabBarIOS, Text, View } = ReactNative;
 
 import Navbar from '../components/Navbar';
 import StatusScene from './StatusScene';
+import SettingsScene from './SettingsScene';
 
 
 var statusIcon =
@@ -85,7 +86,7 @@ export default class MainScene extends React.Component {
             });
             console.log(this.state);
           }}>
-          { this._renderContent(StatusScene) }
+          { this._renderContent(SettingsScene) }
         </TabBarIOS.Item>
 
       </TabBarIOS>

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   navbar: {
     flexDirection:'row',
     paddingTop: 35,
-    paddingBottom: 10,
+    paddingBottom: 12,
     backgroundColor: '#4AC3C0'
   },
 
