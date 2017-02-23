@@ -1,13 +1,14 @@
-'use strict'
+'use strict';
 
 import React, { Component } from 'react';
-import { AppRegistry, Navigator, Text, View, StyleSheet, Image, TextInput, Alert } from 'react-native';
+import { AppRegistry, Navigator, AsyncStorage, Text, View, StyleSheet, Image, TextInput, Alert } from 'react-native';
 
 import Button from 'apsl-react-native-button';
 import API from '../api';
 import store from '../store';
 
-import StatusScene from './StatusScene';
+import Navbar from '../components/Navbar';
+import MainScene from './MainScene';
 
 export default class LoginScene extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ export default class LoginScene extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      address: '',
+      propertyName: ''
     }
   }
 
@@ -39,11 +42,19 @@ export default class LoginScene extends Component {
         store.setAddress(user.address);
         store.setPropertyName(user.propertyName);
 
-        // Navigate to the status scene
+        this.setState({
+          username: user.username,
+          password: user.password,
+          address: user.address,
+          propertyName: user.propertyName
+        })
+
+        // Navigate to the main scene
         navigator.push({
           name: 'Status',
           title: user.propertyName,
-          component: StatusScene
+          passProps: this.state,
+          component: MainScene
         })
         return;
       // Alert error messageå
@@ -57,40 +68,47 @@ export default class LoginScene extends Component {
   }
 
   render() {
+    const { navigator } = this.props;
     const { username, password } = this.state;
+    
     return (
       <View style={styles.container}>
-        <View style={styles.bgWrapper}>
-          <Image source={require('../img/bg.png')} style={styles.bg} />
-        </View>
+        <Navbar title='Login' leftBtn='Back' navigator={navigator} />
 
-        <View style={styles.signupContainer}>
-          <View style={styles.inputContainer}>
+        <View style={styles.container}>
 
-            <TextInput style={styles.textInput}
-              onChangeText={ (username) => {this.setState({username})}}
-              placeholder='username'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={username} />
-
-            <TextInput style={styles.textInput}
-              onChangeText={ (password) => {this.setState({password})}}
-              placeholder='password'
-              secureTextEntry
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={password} />
+          <View style={styles.bgWrapper}>
+            <Image source={require('../img/bg.png')} style={styles.bg} />
           </View>
 
-            <Button style={styles.btn}
-                    textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-                    onPress={this.loginAction.bind(this)}>
-              Login
-            </Button>
-        </View>
+          <View style={styles.mainContainer}>
+            <View style={styles.inputContainer}>
 
-      </View>
+              <TextInput style={styles.textInput}
+                onChangeText={ (username) => {this.setState({username})}}
+                placeholder='username'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={username} />
+
+              <TextInput style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder='password'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={password} />
+            </View>
+
+              <Button style={styles.btn}
+                      textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                      onPress={this.loginAction.bind(this)}>
+                Login
+              </Button>
+          </View>
+
+        </View>
+      </View> // include navbar
     );
   }
 }
@@ -113,7 +131,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 0,
     margin: 15,
-    marginTop: 100,
     width: 300
   },
 
@@ -138,9 +155,9 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  signupContainer: {
+  mainContainer: {
     justifyContent: 'center',
-    marginTop: 150
+    marginTop: 50
   }
 
 });

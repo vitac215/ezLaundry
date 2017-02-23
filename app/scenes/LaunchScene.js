@@ -25,8 +25,10 @@ export default class LaunchScene extends Component {
     this.toNext({
       name: 'LoginScene',
       title: 'Login',
-      leftBtn: 'Back',
-      component: LoginScene
+      component: LoginScene,
+      passProps: {
+        leftBtn: 'Back'
+      }
     });
   }
 
@@ -35,7 +37,10 @@ export default class LaunchScene extends Component {
       name: 'SignupScene',
       title: 'Sign Up',
       leftBtn: 'Back',
-      component: SignupScene
+      component: SignupScene,
+      passProps: {
+        leftBtn: 'Back'
+      }
     });
   }
 

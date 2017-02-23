@@ -7,7 +7,8 @@ import Button from 'apsl-react-native-button';
 import store from '../store';
 import API from '../api';
 
-import StatusScene from './StatusScene';
+import Navbar from '../components/Navbar';
+import MainScene from './MainScene';
 
 export default class SignupScene extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class SignupScene extends Component {
       password: '',
       passwordconfirm: '',
       address: '',
-      propertyName: '',
+      propertyName: ''
     }
   }
 
@@ -50,7 +51,8 @@ export default class SignupScene extends Component {
         navigator.push({
           name: 'Status',
           title: propertyName,
-          component: StatusScene
+          passProps: this.state,
+          component: MainScene
         })
         return;
       // Alert error message
@@ -66,62 +68,67 @@ export default class SignupScene extends Component {
 
 
   render() {
+    const { navigator } = this.props;
     const {username, password, passwordconfirm, address, propertyName} = this.state;
 
     return (
       <View style={styles.container}>
-        <View style={styles.bgWrapper}>
-          <Image source={require('../img/bg.png')} style={styles.bg} />
-        </View>
+        <Navbar title='Sign Up' leftBtn='Back' navigator={navigator} />
 
-        <View style={styles.signupContainer}>
-          <View style={styles.inputContainer}>
-
-            <TextInput style={styles.textInput}
-              onChangeText={ (username) => {this.setState({username})}}
-              placeholder='username'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={username} />
-
-            <TextInput style={styles.textInput}
-              onChangeText={ (password) => {this.setState({password})}}
-              placeholder='password'
-              secureTextEntry
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={password} />
-
-              <TextInput style={styles.textInput}
-              onChangeText={ (passwordconfirm) => {this.setState({passwordconfirm})}}
-              placeholder='confirm password'
-              secureTextEntry
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={passwordconfirm} />
-
-              <TextInput style={styles.textInput}
-              onChangeText={ (address) => {this.setState({address})}}
-              placeholder='address'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={address} />
-
-              <TextInput style={styles.textInput}
-              onChangeText={ (propertyName) => {this.setState({propertyName})}}
-              placeholder='property name'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={propertyName} />
+        <View style={styles.container}>
+          <View style={styles.bgWrapper}>
+            <Image source={require('../img/bg.png')} style={styles.bg} />
           </View>
 
-            <Button style={styles.btn}
-                    textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-                    onPress={this.signupAction.bind(this)}>
-              Sign up
-            </Button>
-        </View>
+          <View style={styles.mainContainer}>
+            <View style={styles.inputContainer}>
 
+              <TextInput style={styles.textInput}
+                onChangeText={ (username) => {this.setState({username})}}
+                placeholder='username'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={username} />
+
+              <TextInput style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder='password'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={password} />
+
+                <TextInput style={styles.textInput}
+                onChangeText={ (passwordconfirm) => {this.setState({passwordconfirm})}}
+                placeholder='confirm password'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={passwordconfirm} />
+
+                <TextInput style={styles.textInput}
+                onChangeText={ (address) => {this.setState({address})}}
+                placeholder='address'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={address} />
+
+                <TextInput style={styles.textInput}
+                onChangeText={ (propertyName) => {this.setState({propertyName})}}
+                placeholder='property name'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={propertyName} />
+            </View>
+
+              <Button style={styles.btn}
+                      textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                      onPress={this.signupAction.bind(this)}>
+                Sign up
+              </Button>
+          </View>
+
+        </View>
       </View>
     );
   }
@@ -169,9 +176,9 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  signupContainer: {
+  mainContainer: {
     justifyContent: 'center',
-    marginTop: 80
+    marginTop: 50
   }
 
 });
