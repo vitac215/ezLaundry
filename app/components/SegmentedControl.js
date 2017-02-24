@@ -1,18 +1,34 @@
 'use strict';
 
-var React = require('react');
-var ReactNative = require('react-native');
-var { SegmentedControlIOS, AsyncStorage, StyleSheet, Text, View, ListView, Image } = ReactNative;
+import React, {Component} from 'react';
+import {
+  SegmentedControlIOS,
+  AsyncStorage,
+  StyleSheet,
+  Text,
+  View,
+  ListView,
+  Image,
+  TouchableHighlight,
+  ScrollView,
+  Navigator
+} from 'react-native';
 
 import API from '../api';
 import store from '../store';
+import CountDown from './CountDown';
+import moment from 'moment';
+import ReserveScene from '../scenes/ReserveScene';
 
 var SegmentedControl = React.createClass({
+
   getInitialState: function() {
+    const {navigator} = this.props;
     return {
       address: this.props.address,
       washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       values: ['Washing', 'Dryer'],
       selectedTab: 'Washing'
     }
@@ -79,26 +95,70 @@ var SegmentedControl = React.createClass({
       />
     )
   },
+  renderReserveScene: function() {
+    console.log("renderReserveScene");
+    return (
+      <Navigator
+        style={styles.container}
+        initialRoute={{type: 'Washing'}}
+        renderScene={(route, navigator) =>
+          <ReserveScene {...this.props}/>
+        }
+        configureScene={(route, routeStack) =>
+          Navigator.SceneConfigs.PushFromRight}
+      />
+    );
+  },
 
+  toNext(data) {
+    const {navigator} = this.props;
+    if (navigator) {
+      navigator.push(data);
+    }
+  },
 
   renderRow(rowData) {
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
-    return (
-      <View>
+    var endTime = moment().add(rowData.remainTime, 'minutes').format('HH:mm');
+    if (rowData.remainTime !== 0) {
+      return (
+          <View>
+            <View style={styles.rowContainer}>
+                <View style={styles.centerContainer}>
+                    <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
+                </View>
+                <Image style={styles.thumb} source={img} />
+                <View style={styles.textContainer}>
+                  <CountDown
+                  time={rowData.remainTime}
+                  />
+                  <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
+                </View>
+            </View>
+            <View style={styles.separator}/>
+          </View>
+      );
+    } else {
+      return (
+        <TouchableHighlight
+          style={styles.wrapper}
+          onPress={ this.renderReserveScene }
+        >
+        <View>
           <View style={styles.rowContainer}>
               <View style={styles.centerContainer}>
                   <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
               </View>
               <Image style={styles.thumb} source={img} />
               <View style={styles.textContainer}>
-                  <Text style={[styles.text, styles.remainTime]}>{rowData.remainTime}</Text>
-                  <Text style={[styles.text, styles.endTime]}>{rowData.endTime}</Text>
-                  <Text>{this.state.name}</Text>
+              <Text style={[styles.text, styles.available]}>Available</Text>
               </View>
           </View>
           <View style={styles.separator}/>
-      </View>
+        </View>
+        </TouchableHighlight>
     );
+  }
   },
 
   render() {
@@ -181,6 +241,14 @@ var styles = StyleSheet.create({
   endTime: {
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  available: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignItems: 'center'
+  },
+  wrapper: {
+    backgroundColor: '#CCFFFF',
   }
 });
 
