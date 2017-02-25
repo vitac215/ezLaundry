@@ -39,11 +39,10 @@ var SegmentedControl = React.createClass({
   componentDidMount: function() {
     this.fetchData()
     // Fetch data every 1 min
-    this.timer = setInterval(() => this.fetchData(), 60000)
+    // this.timer = setInterval(() => this.fetchData(), 60000)
   },
 
   fetchData: async function() {
-    console.log("fetch machine data");
     API.getWashingData(this.state.address)
       .then((res) => {
         this.setState({
@@ -80,7 +79,6 @@ var SegmentedControl = React.createClass({
   },
 
   renderWashingStatusScene: function() {
-    console.log(this.state.washingDS);
     return (
       <ListView
         dataSource = {this.state.washingDS}
@@ -98,7 +96,6 @@ var SegmentedControl = React.createClass({
     )
   },
   renderReserveScene: function() {
-    console.log("renderReserveScene");
     return (
       <Navigator
         style={styles.container}
@@ -113,7 +110,6 @@ var SegmentedControl = React.createClass({
   },
 
   fetchFakeData: async function() {
-    console.log("fetch machine data");
     API.getFakeReserve(this.state.address)
       .then((res) => {
         this.setState({
@@ -128,7 +124,7 @@ var SegmentedControl = React.createClass({
     var res = await API.quickReserve(this.state.username);
     if (res.success === true) {
       // Update the DS state - fetch the data again
-      this.fetchFakeData();
+      this.fetchFakeData();  // to be changed to fetchData
     } else {
       // Do nothing
       console.log("error");
@@ -146,10 +142,22 @@ var SegmentedControl = React.createClass({
     );
   },
 
+  handleCountDown: function(newRemainTime) {
+    console.log("handle count down: "+newRemainTime);
+    if (newRemainTime === 0) {
+      this.fetchFakeData(); // to be changed to fetchData
+      console.log("fetch");
+    } else {
+      return newRemainTime;
+    }
+  },
+
   renderRow(rowData) {
+    console.log("enter row");
+    console.log("remainTime: " + rowData.remainTime);
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
     var endTime = moment().add(rowData.remainTime, 'minutes').format('hh:mm a');
-    if (rowData.remainTime !== 0) {
+    if (rowData.remainTime > 0) {
       return (
           <View>
             <View style={styles.rowContainer}>
@@ -159,8 +167,14 @@ var SegmentedControl = React.createClass({
                 <Image style={styles.thumb} source={img} />
                 <View style={styles.textContainer}>
                   <CountDown
-                  time = {rowData.remainTime}/>
+                  time = {rowData.remainTime}
+                  onCountDown = {
+                    rowData.reamainTime = this.handleCountDown
+                  }/>
                   <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
+                </View>
+                <View>
+                  {console.log("hehehehehe")}
                 </View>
             </View>
             <View style={styles.separator}/>
@@ -192,8 +206,8 @@ var SegmentedControl = React.createClass({
           <View style={styles.separator}/>
         </View>
         </TouchableHighlight>
-    );
-  }
+    );}
+    console.log("end row");
   },
 
   render() {

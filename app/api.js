@@ -88,9 +88,9 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': 60},
-                 {'machine_id': 2, 'remainTime': 50},
-                 {'machine_id': 3, 'remainTime': 40},
+                 {'machine_id': 1, 'remainTime': 6},
+                 {'machine_id': 2, 'remainTime': 4},
+                 {'machine_id': 3, 'remainTime': 5},
                  {'machine_id': 4, 'remainTime': 0}
                ]
     return json;
@@ -152,6 +152,7 @@ const API = {
     return json;
   },
 
+  // To be deleted
   getFakeReserve: async function(address) {
     // let response = await fetch(`${API_URL.getWashingData}`, {
     //   method: 'GET',
@@ -176,7 +177,7 @@ const API = {
 
     let json = [
                  {'machine_id': 1, 'remainTime': 5},
-                 {'machine_id': 2, 'remainTime': 5},
+                 {'machine_id': 2, 'remainTime': 0},
                  {'machine_id': 3, 'remainTime': 5},
                  {'machine_id': 4, 'remainTime': 5}
                ]
