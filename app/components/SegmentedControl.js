@@ -173,9 +173,6 @@ var SegmentedControl = React.createClass({
                   }/>
                   <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
                 </View>
-                <View>
-                  {console.log("hehehehehe")}
-                </View>
             </View>
             <View style={styles.separator}/>
           </View>
