@@ -1,7 +1,17 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { AppRegistry, Navigator, AsyncStorage, Text, View, StyleSheet, Image, TextInput, Alert } from 'react-native';
+import {
+  AppRegistry,
+  Navigator,
+  AsyncStorage,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  Alert
+} from 'react-native';
 
 import Button from 'apsl-react-native-button';
 import API from '../api';
@@ -70,7 +80,7 @@ export default class LoginScene extends Component {
   render() {
     const { navigator } = this.props;
     const { username, password } = this.state;
-    
+
     return (
       <View style={styles.container}>
         <Navbar title='Login' leftBtn='Back' navigator={navigator} />

@@ -2,7 +2,8 @@ const API_URL = {
     'signUp': '/api/add_user',
     'login': '/api/login',
     'getWashingData': '/api/show_all_washing?show_all=True',
-    'getDryerData': '/api/show_all_dryer?show_all=True'
+    'getDryerData': '/api/show_all_dryer?show_all=True',
+    'quickReserve': ''
 }
 
 const API = {
@@ -87,9 +88,10 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime':'00:30', 'endTime':'8:30'},
-                 {'machine_id': 2, 'remainTime':'00:20', 'endTime':'8:20'},
-                 {'machine_id': 3, 'remainTime':'00:10', 'endTime':'8:10'}
+                 {'machine_id': 1, 'remainTime': 15},
+                 {'machine_id': 2, 'remainTime': 8},
+                 {'machine_id': 3, 'remainTime': 10},
+                 {'machine_id': 4, 'remainTime': 0}
                ]
     return json;
   },
@@ -117,9 +119,67 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime':'00:30', 'endTime':'8:30'},
-                 {'machine_id': 2, 'remainTime':'00:20', 'endTime':'8:20'},
-                 {'machine_id': 3, 'remainTime':'00:10', 'endTime':'8:10'}
+                 {'machine_id': 1, 'remainTime': 55},
+                 {'machine_id': 2, 'remainTime': 48},
+                 {'machine_id': 3, 'remainTime': 0},
+               ]
+    return json;
+  },
+
+  quickReserve: async function(username) {
+    // let response = await fetch(`${API_URL.quickReserve}`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     username
+    //   })
+    // });
+    //
+    // let json = {};
+    // try{
+    //   json = await response.json();
+    // } catch(err) {
+    //   json = {
+    //     response
+    //   }
+    // }
+    //
+    // return json;
+
+    let json = {'success': true, 'msg': ''};
+    return json;
+  },
+
+  // To be deleted
+  getFakeReserve: async function(address) {
+    // let response = await fetch(`${API_URL.getWashingData}`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     address
+    //   })
+    // });
+    //
+    // let json = {};
+    // try{
+    //   json = await response.json();
+    // } catch(err) {
+    //   json = {
+    //     response
+    //   }
+    // }
+    //
+    // return json;
+
+    let json = [
+                 {'machine_id': 1, 'remainTime': 7},
+                 {'machine_id': 2, 'remainTime': 0},
+                 {'machine_id': 3, 'remainTime': 2},
+                 {'machine_id': 4, 'remainTime': 0}
                ]
     return json;
   }

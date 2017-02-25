@@ -23,8 +23,6 @@ export default class MainScene extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
-
     this.state = {
       selectedTab: 'Status',
       title: props.propertyName
@@ -37,7 +35,7 @@ export default class MainScene extends React.Component {
     return (
       <View style={styles.tabContent}>
         <Navbar {...this.props} title={this.state.title} />
-        <Component />
+        <Component {...this.props} />
       </View>
     )
   }
