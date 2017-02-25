@@ -89,7 +89,7 @@ const API = {
 
     let json = [
                  {'machine_id': 1, 'remainTime': "1504"},
-                 {'machine_id': 2, 'remainTime': "0003"},
+                 {'machine_id': 2, 'remainTime': "0040"},
                  {'machine_id': 3, 'remainTime': "2200"},
                  {'machine_id': 4, 'remainTime': "0000"}
                ]
@@ -119,9 +119,9 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': 55},
-                 {'machine_id': 2, 'remainTime': 48},
-                 {'machine_id': 3, 'remainTime': 0},
+                {'machine_id': 1, 'remainTime': "2804"},
+                {'machine_id': 2, 'remainTime': "1403"},
+                {'machine_id': 3, 'remainTime': "0000"}
                ]
     return json;
   },
@@ -177,10 +177,10 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': "1501"},
+                 {'machine_id': 1, 'remainTime': "1404"},
                  {'machine_id': 2, 'remainTime': "0000"},
-                 {'machine_id': 3, 'remainTime': "2157"},
-                 {'machine_id': 4, 'remainTime': "0000"}
+                 {'machine_id': 3, 'remainTime': "2100"},
+                 {'machine_id': 4, 'remainTime': "0500"}
                ]
     return json;
   }
