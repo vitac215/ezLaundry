@@ -31,7 +31,6 @@ export default class MainScene extends React.Component {
 
   _renderContent = (component) => {
     var Component = component;
-    console.log('render tab component');
     return (
       <View style={styles.tabContent}>
         <Navbar {...this.props} title={this.state.title} />

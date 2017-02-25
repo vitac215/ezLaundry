@@ -176,9 +176,9 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': 7},
+                 {'machine_id': 1, 'remainTime': 11},
                  {'machine_id': 2, 'remainTime': 0},
-                 {'machine_id': 3, 'remainTime': 2},
+                 {'machine_id': 3, 'remainTime': 12},
                  {'machine_id': 4, 'remainTime': 0}
                ]
     return json;

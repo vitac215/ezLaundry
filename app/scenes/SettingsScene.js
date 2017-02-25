@@ -54,6 +54,7 @@ var styles = StyleSheet.create({
   rowContainer: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'stretch',
     padding: 20,
     paddingBottom: 25
   },

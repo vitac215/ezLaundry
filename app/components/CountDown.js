@@ -15,7 +15,6 @@ import moment from 'moment';
 var CountDown = React.createClass ({
   mixins: [TimerMixin],
   getInitialState: function () {
-    console.log("enter countdown");
     return {
       time: this.props.time,
     };
@@ -31,7 +30,7 @@ var CountDown = React.createClass ({
     var style = [styles.text];
     var component;
     component =
-        <View>
+        <View style={styles.container}>
           <Text style={styles.remainTime}
             onChange={() => this.handleOnChange}>
             00:{this.state.time}
@@ -47,8 +46,6 @@ var CountDown = React.createClass ({
       var time = this.state.time - 1;
       //var time = moment(this.state.time, "mm:ss").subtract('1', 'minutes');
       this.setState({time: time});
-      console.log("start counting down");
-      console.log("count time: "+time);
       this.props.onCountDown(this.state.time);
       if (time > 0) {
         this.setTimeout(timer, 1000);
@@ -62,17 +59,16 @@ var CountDown = React.createClass ({
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   text: {
     color: '#929292',
     fontSize: 15
   },
-  wrapper: {
-    padding: 10,
-    marginRight:10,
-    backgroundColor: '#e5e5e5',
-  },
   remainTime: {
-    fontSize: 30
+    fontSize: 30,
+    color: '#929292'
   },
 });
 

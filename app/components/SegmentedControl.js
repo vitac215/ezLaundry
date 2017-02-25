@@ -9,7 +9,7 @@ import {
   View,
   ListView,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
   ScrollView,
   Navigator,
   Alert
@@ -27,7 +27,8 @@ var SegmentedControl = React.createClass({
     const {navigator} = this.props;
     return {
       address: this.props.address,
-      washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      // washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       values: ['Washing', 'Dryer'],
@@ -159,7 +160,7 @@ var SegmentedControl = React.createClass({
     var endTime = moment().add(rowData.remainTime, 'minutes').format('hh:mm a');
     if (rowData.remainTime > 0) {
       return (
-          <View>
+          <View style={styles.container}>
             <View style={styles.rowContainer}>
                 <View style={styles.centerContainer}>
                     <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
@@ -179,32 +180,32 @@ var SegmentedControl = React.createClass({
       );
     } else {
       return (
-        <TouchableHighlight
-          style={styles.wrapper}
-          onPress={() => Alert.alert(
-            'Reservation',
-            'Would you like to reserve this machine for 5 minutes?',
-            [
-              {text: 'Cancel'},
-              {text: 'Confirm', onPress: () => this.quickReserveConfirm() }
-            ]
-          )}
-        >
-        <View>
-          <View style={styles.rowContainer}>
-              <View style={styles.centerContainer}>
-                  <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.wrapper}
+            onPress={() => Alert.alert(
+              'Reservation',
+              'Would you like to reserve this machine for 5 minutes?',
+              [
+                {text: 'Cancel'},
+                {text: 'Confirm', onPress: () => this.quickReserveConfirm() }
+              ]
+            )}>
+            <View style={styles.container}>
+              <View style={styles.rowContainer}>
+                  <View style={styles.centerContainer}>
+                      <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
+                  </View>
+                  <Image style={styles.thumb} source={img} />
+                  <View style={styles.textContainer}>
+                  <Text style={[styles.text, styles.available]}>Available</Text>
+                  </View>
               </View>
-              <Image style={styles.thumb} source={img} />
-              <View style={styles.textContainer}>
-              <Text style={[styles.text, styles.available]}>Available</Text>
-              </View>
-          </View>
-          <View style={styles.separator}/>
+              <View style={styles.separator}/>
+            </View>
+          </TouchableOpacity>
         </View>
-        </TouchableHighlight>
-    );}
-    console.log("end row");
+      );}
   },
 
   render() {
@@ -222,9 +223,9 @@ var SegmentedControl = React.createClass({
               })
             }}/>
         </View>
-        <View style={styles.listContainer}>
+        <ScrollView style={styles.listContainer}>
           {this.renderListView()}
-        </View>
+        </ScrollView>
       </View>
     );
   },
@@ -242,8 +243,9 @@ var styles = StyleSheet.create({
   },
 
   listContainer: {
-    backgroundColor: '#fff',
-    flex: 1
+    flex: 1,
+    alignSelf: 'stretch',
+    backgroundColor: '#fff'
   },
 
   segmentedControl: {
