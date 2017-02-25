@@ -22,12 +22,10 @@ import moment from 'moment';
 import ReserveScene from '../scenes/ReserveScene';
 
 var SegmentedControl = React.createClass({
-
   getInitialState: function() {
     const {navigator} = this.props;
     return {
       address: this.props.address,
-      // washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -197,8 +195,8 @@ var SegmentedControl = React.createClass({
                       <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
                   </View>
                   <Image style={styles.thumb} source={img} />
-                  <View style={styles.textContainer}>
-                  <Text style={[styles.text, styles.available]}>Available</Text>
+                  <View style={[styles.textContainer, styles.centerContainer]}>
+                    <Text style={[styles.text, styles.available]}>Available</Text>
                   </View>
               </View>
               <View style={styles.separator}/>
@@ -293,7 +291,7 @@ var styles = StyleSheet.create({
   available: {
     fontSize: 25,
     fontWeight: 'bold',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
   wrapper: {
     backgroundColor: '#CCFFFF',
