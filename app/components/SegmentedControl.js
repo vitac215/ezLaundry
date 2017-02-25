@@ -11,7 +11,8 @@ import {
   Image,
   TouchableHighlight,
   ScrollView,
-  Navigator
+  Navigator,
+  Alert
 } from 'react-native';
 
 import API from '../api';
@@ -79,6 +80,7 @@ var SegmentedControl = React.createClass({
   },
 
   renderWashingStatusScene: function() {
+    console.log(this.state.washingDS);
     return (
       <ListView
         dataSource = {this.state.washingDS}
@@ -110,16 +112,43 @@ var SegmentedControl = React.createClass({
     );
   },
 
-  toNext(data) {
-    const {navigator} = this.props;
-    if (navigator) {
-      navigator.push(data);
+  fetchFakeData: async function() {
+    console.log("fetch machine data");
+    API.getFakeReserve(this.state.address)
+      .then((res) => {
+        this.setState({
+          washingDS: this.state.washingDS.cloneWithRows(res),
+        })
+      })
+    .done()
+  },
+
+  quickReserveSuccess: async function() {
+    // Call API to reserve this machine_id
+    var res = await API.quickReserve(this.state.username);
+    if (res.success === true) {
+      // Update the DS state - fetch the data again
+      this.fetchFakeData();
+    } else {
+      // Do nothing
+      console.log("error");
     }
+  },
+
+  quickReserveConfirm: async function() {
+    // Raise another alert to confirm
+    Alert.alert(
+      'Reservation',
+      'You have reserved this machine successfully. Please note that this reservation will expire in 5 minutes.',
+      [
+        {text: 'OK', onPress: () => this.quickReserveSuccess() }
+      ]
+    );
   },
 
   renderRow(rowData) {
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
-    var endTime = moment().add(rowData.remainTime, 'minutes').format('HH:mm');
+    var endTime = moment().add(rowData.remainTime, 'minutes').format('hh:mm a');
     if (rowData.remainTime !== 0) {
       return (
           <View>
@@ -130,8 +159,7 @@ var SegmentedControl = React.createClass({
                 <Image style={styles.thumb} source={img} />
                 <View style={styles.textContainer}>
                   <CountDown
-                  time={rowData.remainTime}
-                  />
+                  time = {rowData.remainTime}/>
                   <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
                 </View>
             </View>
@@ -142,7 +170,14 @@ var SegmentedControl = React.createClass({
       return (
         <TouchableHighlight
           style={styles.wrapper}
-          onPress={ this.renderReserveScene }
+          onPress={() => Alert.alert(
+            'Reservation',
+            'Would you like to reserve this machine for 5 minutes?',
+            [
+              {text: 'Cancel'},
+              {text: 'Confirm', onPress: () => this.quickReserveConfirm() }
+            ]
+          )}
         >
         <View>
           <View style={styles.rowContainer}>

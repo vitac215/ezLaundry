@@ -15,9 +15,9 @@ import moment from 'moment';
 var CountDown = React.createClass ({
   mixins: [TimerMixin],
   getInitialState: function () {
+    console.log(this.props);
     return {
       time: this.props.time,
-      disabled: false
     };
   },
 
@@ -33,39 +33,10 @@ var CountDown = React.createClass ({
         <View>
           <Text style={styles.remainTime}>00:{this.state.time}</Text>
         </View>
-    // if (this.state.disabled) {
-    //   style.push({color: 'gray'});
-    //   style.push(this.props.disabledTextStyle);
-    //   component =
-    //       <View style={[styles.wrapper,this.props.buttonStyle]}>
-    //         <TouchableWithoutFeedback>
-    //           <Text style={[style]}>{this.props.text}({this.state.time})</Text>
-    //         </TouchableWithoutFeedback>
-    //       </View>
-    // } else {
-    //   component =
-    //       <TouchableHighlight
-    //           style={[styles.wrapper,this.props.buttonStyle]}
-    //           onPress={this._onPress.bind(this)}
-    //           >
-    //         <Text style={[style,this.props.textStyle]}>{this.props.text}({this.state.time})</Text>
-    //       </TouchableHighlight>
-    // }
     return (
         component
     )
   },
-  // _onPress(){
-  //   if (this.state.disabled) {
-  //     //nothing
-  //   } else {
-  //     this.setState({disabled: true});
-  //     this._countdown();
-  //     if(this.props.onPress){
-  //         this.props.onPress();
-  //     }
-  //   }
-  // },
 
   _countdown(){
     var timer = function () {
@@ -75,8 +46,7 @@ var CountDown = React.createClass ({
       if (time > 0) {
         this.setTimeout(timer, 1000);
       } else {
-        this.setState({disabled: false});
-        this.setState({time: this.props.time ? this.props.time : 60});
+        this.setState({time: this.state.time});
       }
     };
     this.setTimeout(timer.bind(this), 1000);
