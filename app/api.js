@@ -88,10 +88,10 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': 15},
-                 {'machine_id': 2, 'remainTime': 8},
-                 {'machine_id': 3, 'remainTime': 10},
-                 {'machine_id': 4, 'remainTime': 0}
+                 {'machine_id': 1, 'remainTime': "1504"},
+                 {'machine_id': 2, 'remainTime': "0003"},
+                 {'machine_id': 3, 'remainTime': "2200"},
+                 {'machine_id': 4, 'remainTime': "0000"}
                ]
     return json;
   },
@@ -126,14 +126,15 @@ const API = {
     return json;
   },
 
-  quickReserve: async function(username) {
+  quickReserve: async function(username, machine_id) {
     // let response = await fetch(`${API_URL.quickReserve}`, {
     //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json',
     //   },
     //   body: JSON.stringify({
-    //     username
+    //     username,
+    //     machine_id
     //   })
     // });
     //
@@ -176,10 +177,10 @@ const API = {
     // return json;
 
     let json = [
-                 {'machine_id': 1, 'remainTime': 11},
-                 {'machine_id': 2, 'remainTime': 0},
-                 {'machine_id': 3, 'remainTime': 12},
-                 {'machine_id': 4, 'remainTime': 0}
+                 {'machine_id': 1, 'remainTime': "1501"},
+                 {'machine_id': 2, 'remainTime': "0000"},
+                 {'machine_id': 3, 'remainTime': "2157"},
+                 {'machine_id': 4, 'remainTime': "0000"}
                ]
     return json;
   }

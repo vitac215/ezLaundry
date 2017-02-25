@@ -33,7 +33,7 @@ var CountDown = React.createClass ({
         <View style={styles.container}>
           <Text style={styles.remainTime}
             onChange={() => this.handleOnChange}>
-            00:{this.state.time}
+            {moment(this.state.time, "mmss").format('mm:ss')}
           </Text>
         </View>
     return (
@@ -43,11 +43,19 @@ var CountDown = React.createClass ({
 
   _countdown(){
     var timer = function () {
-      var time = this.state.time - 1;
-      //var time = moment(this.state.time, "mm:ss").subtract('1', 'minutes');
+      // var time = this.state.time - 1;
+        // console.log(moment("0810", "mmss"));
+        // console.log(moment("0810", "mmss").subtract('12', 'seconds'));
+      var time = moment(this.state.time, "mmss").subtract('1', 'seconds');
+
+      console.log(moment(time,"mmss").format('mmss'));
+
+      var displayTime = moment(time,"mmss").format('mmss');
+
       this.setState({time: time});
-      this.props.onCountDown(this.state.time);
-      if (time > 0) {
+      this.props.onCountDown(displayTime);
+
+      if (displayTime !== '0000') {
         this.setTimeout(timer, 1000);
       } else {
         this.setState({time: this.props.time});
