@@ -52,6 +52,7 @@ export default class LaunchScene extends Component {
         </View>
 
         <Image source={require('../img/logo.png')} style={styles.img}/>
+        <Image source={require('../img/logo2.png')} style={styles.img2}/>
 
         <Button style={styles.btn}
                 textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
@@ -94,6 +95,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 100,
     marginBottom: 30
+  },
+
+  img2: {
+    alignSelf: 'center',
+    width: 180,
+    marginBottom: 40
   }
 
 });
