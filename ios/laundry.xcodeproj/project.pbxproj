@@ -43,6 +43,10 @@
 		7CB8A67823A746FDB4B28D0C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A3BD9F6227C486197A4E5C1 /* Zocial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		889D3B2586D44DF694D8FAF2 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9D6AD510A3D41C1A7DEFA31 /* Octicons.ttf */; };
+<<<<<<< HEAD
+=======
+		B22E15171E61356C00A4C2D0 /* laundry.app in Resources */ = {isa = PBXBuildFile; fileRef = 13B07F961A680F5B00A75B9A /* laundry.app */; };
+>>>>>>> b754740e67fd0ebc02b03b0fb1eceda2ec5c6fdc
 		DECBE978E1D244C3996AE268 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41940E03719469E8E4FFB65 /* FontAwesome.ttf */; };
 		DF42298CF9514D84884EC6B3 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96F2D3276D5049B2B8323B05 /* MaterialCommunityIcons.ttf */; };
 		EC2988843B5E4B2E8EFC2F11 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1B86D5A99B14D5E9D7E0098 /* Entypo.ttf */; };
@@ -246,6 +250,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		B22E15151E61350700A4C2D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCCE2E0F7186454485C16FEF /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -446,6 +457,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		1FE42AE41E61F6ED00CCE0F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +466,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> b754740e67fd0ebc02b03b0fb1eceda2ec5c6fdc
 		2163339ACB1C4DCC8FE259E8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +555,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
+=======
+		B22E14F91E61350500A4C2D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B22E15161E61350700A4C2D0 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+>>>>>>> b754740e67fd0ebc02b03b0fb1eceda2ec5c6fdc
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -697,7 +722,11 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+<<<<<<< HEAD
 					ProductGroup = 1FE42AE41E61F6ED00CCE0F3 /* Products */;
+=======
+					ProductGroup = B22E14F91E61350500A4C2D0 /* Products */;
+>>>>>>> b754740e67fd0ebc02b03b0fb1eceda2ec5c6fdc
 					ProjectRef = FCCE2E0F7186454485C16FEF /* RNVectorIcons.xcodeproj */;
 				},
 			);
@@ -894,6 +923,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B22E15161E61350700A4C2D0 /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = B22E15151E61350700A4C2D0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -917,6 +953,7 @@
 				67302425AB2E40DBA18D93D6 /* Ionicons.ttf in Resources */,
 				DF42298CF9514D84884EC6B3 /* MaterialCommunityIcons.ttf in Resources */,
 				F63BA55F66554DF0B36944C5 /* MaterialIcons.ttf in Resources */,
+				B22E15171E61356C00A4C2D0 /* laundry.app in Resources */,
 				889D3B2586D44DF694D8FAF2 /* Octicons.ttf in Resources */,
 				6DE0B16A9B4E44CBB8075056 /* SimpleLineIcons.ttf in Resources */,
 				7CB8A67823A746FDB4B28D0C /* Zocial.ttf in Resources */,
@@ -1093,6 +1130,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = laundry;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1110,6 +1148,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = laundry;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
