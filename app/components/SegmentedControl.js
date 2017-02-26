@@ -166,7 +166,7 @@ var SegmentedControl = React.createClass({
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
     var min = parseInt(rowData.remainTime.substring(0,2));
     var sec = parseInt(rowData.remainTime.substring(2,4));
-    var endTime = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm a');
+    var endTime = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
     if (rowData.remainTime > 0) {
       return (
           <View style={styles.container}>
