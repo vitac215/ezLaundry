@@ -40,7 +40,7 @@ export default class SignupScene extends Component {
     try {
       let res = await API.signUp(username, password, address, propertyName);
       console.log(res);
-      if (res && res.success===true) {
+      if (res.message === "success") {
         // Store the user data
         store.setUsername(username);
         store.setPassword(password);
@@ -57,7 +57,7 @@ export default class SignupScene extends Component {
         return;
       // Alert error message
       } else {
-        Alert.alert(res.msg);
+        Alert.alert(res.message);
         return;
       }
       return;

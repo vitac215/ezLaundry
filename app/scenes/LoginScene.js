@@ -44,7 +44,7 @@ export default class LoginScene extends Component {
     try {
       const res = await API.login(username, password);
 
-      if (res && res.success===true && res.user) {
+      if (res.message === "success") {
         // Store the user data
         let user = res.user;
         store.setUsername(user.username);
@@ -69,7 +69,7 @@ export default class LoginScene extends Component {
         return;
       // Alert error messageå
       } else {
-        Alert.alert(res.msg);
+        Alert.alert(res.message);
         return;
       }
     } catch(err) {

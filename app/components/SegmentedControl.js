@@ -18,9 +18,9 @@ import {
 import API from '../api';
 import store from '../store';
 import CountDown from './CountDown';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import ReserveScene from '../scenes/ReserveScene';
-import deepForceUpdate from 'react-deep-force-update';
+
 
 var SegmentedControl = React.createClass({
 
@@ -162,12 +162,17 @@ var SegmentedControl = React.createClass({
 
   renderRow(rowData) {
     console.log("enter row");
-    console.log("remainTime: " + rowData.remainTime);
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
-    var min = parseInt(rowData.remainTime.substring(0,2));
-    var sec = parseInt(rowData.remainTime.substring(2,4));
-    var endTime = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
-    if (rowData.remainTime > 0) {
+
+    var endTime = moment(rowData.endTime).tz("America/New_York").format('hh:mm A');
+    var raw_remainTime = moment(rowData.endTime).tz("America/New_York") - moment().tz("America/New_York");
+
+    var remainTime = moment(raw_remainTime).format('mmss');
+    console.log("remain Time in ms: "+raw_remainTime);
+    console.log("remain Time formateed: "+remainTime);
+
+
+    if (remainTime > 0) {
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -177,9 +182,9 @@ var SegmentedControl = React.createClass({
                 <Image style={styles.thumb} source={img} />
                 <View style={styles.textContainer}>
                   <CountDown
-                  time = {rowData.remainTime}
+                  time = {remainTime}
                   onCountDown = {
-                    rowData.reamainTime = this.handleCountDown
+                    remainTime = this.handleCountDown
                   }/>
                   <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
                 </View>
