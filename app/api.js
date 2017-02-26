@@ -1,8 +1,8 @@
 const API_URL = {
-    'signUp': '/api/add_user',
-    'login': '/api/login',
-    'getWashingData': '/api/show_all_washing?show_all=True',
-    'getDryerData': '/api/show_all_dryer?show_all=True',
+    'signUp': 'http://ec2-52-73-134-152.compute-1.amazonaws.com:3000/api/add_user',
+    'login': 'http://ec2-52-73-134-152.compute-1.amazonaws.com:3000/api/login',
+    'getWashingData': 'http://ec2-52-73-134-152.compute-1.amazonaws.com:3000/api/show_all_washing?show_all=True',
+    'getDryerData': 'http://ec2-52-73-134-152.compute-1.amazonaws.com:3000/api/show_all_dryer?show_all=True',
     'quickReserve': ''
 }
 
@@ -20,7 +20,7 @@ const API = {
     //     propertyName
     //   })
     // });
-    //
+    // console.log(username);
     // let json = {};
     // try{
     //   json = await response.json();
