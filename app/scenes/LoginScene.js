@@ -28,7 +28,7 @@ export default class LoginScene extends Component {
       username: '',
       password: '',
       address: '',
-      propertyName: ''
+      property_name: ''
     }
   }
 
@@ -47,22 +47,22 @@ export default class LoginScene extends Component {
       if (res.message === "SUCCESS") {
         // Store the user data
         let user = res.user;
+        console.log(user);
         store.setUsername(user.username);
         store.setPassword(user.password);
-        store.setAddress(user.address);
-        store.setPropertyName(user.propertyName);
+        store.setPropertyName(user.property_name);
 
         this.setState({
           username: user.username,
           password: user.password,
           address: user.address,
-          propertyName: user.propertyName
+          property_name: user.property_name
         })
 
         // Navigate to the main scene
         navigator.push({
           name: 'Status',
-          title: user.propertyName,
+          title: user.property_name,
           passProps: this.state,
           component: MainScene
         })

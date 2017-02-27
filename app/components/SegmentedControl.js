@@ -29,7 +29,7 @@ var SegmentedControl = React.createClass({
     const {navigator} = this.props;
 
     return {
-      address: this.props.address,
+      username: this.props.username,
       washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -46,7 +46,7 @@ var SegmentedControl = React.createClass({
   },
 
   fetchData: async function() {
-    API.getWashingData(this.state.address)
+    API.getMachineData(this.state.username, "washing")
       .then((res) => {
         this.setState({
           washingDS: this.state.washingDS.cloneWithRows(res),
@@ -55,7 +55,7 @@ var SegmentedControl = React.createClass({
         this.forceUpdate();
       })
     .then(() => {
-      API.getDryerData(this.state.address)
+      API.getMachineData(this.state.username, "dryer")
         .then((res) => {
           this.setState({
             dryerDS: this.state.dryerDS.cloneWithRows(res),

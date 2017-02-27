@@ -17,16 +17,19 @@ export default class SignupScene extends Component {
       username: '',
       password: '',
       passwordconfirm: '',
+      city: '',
       address: '',
-      propertyName: ''
+      property_name: '',
+      longitude: '',
+      latitude: ''
     }
   }
 
   async signupAction() {
     const { navigator } = this.props;
-    const { username, password, passwordconfirm, address, city, propertyName } = this.state;
+    const { username, password, passwordconfirm, address, city, property_name } = this.state;
 
-    if (!username || !password || !address || !city || !propertyName ) {
+    if (!username || !password || !address || !city || !property_name ) {
       Alert.alert('Please enter all the information');
       return;
     }
@@ -38,19 +41,21 @@ export default class SignupScene extends Component {
 
     // Create a new user
     try {
-      let res = await API.signUp(username, password, address, city, propertyName);
+      let res = await API.signUp(username, password, address, city, property_name);
       if (res.message === "SUCCESS") {
         // Store the user data
-        store.setUsername(username);
-        store.setPassword(password);
-        store.setAddress(address);
-        store.setAddress(city);
-        store.setPropertyName(propertyName);
+        let user = res.user;
+        store.setUsername(user.username);
+        store.setPassword(user.password);
+        store.setCity(user.city);
+        store.setLongitude(user.longitude);
+        store.setLatitude(user.latitude);
+        store.setPropertyName(user.property_name);
 
         // Navigate to the status scene
         navigator.push({
           name: 'Status',
-          title: propertyName,
+          title: property_name,
           passProps: this.state,
           component: MainScene
         })
@@ -69,7 +74,7 @@ export default class SignupScene extends Component {
 
   render() {
     const { navigator } = this.props;
-    const {username, password, passwordconfirm, address, propertyName} = this.state;
+    const {username, password, passwordconfirm, address, city, property_name} = this.state;
 
     return (
       <View style={styles.container}>
@@ -131,12 +136,12 @@ export default class SignupScene extends Component {
 
               <TextInput
                 style={styles.textInput}
-                onChangeText={ (propertyName) => {this.setState({propertyName})}}
+                onChangeText={ (property_name) => {this.setState({property_name})}}
                 placeholder='property name'
                 autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
-                value={propertyName} />
+                value={property_name} />
             </View>
 
             <Button style={styles.btn}

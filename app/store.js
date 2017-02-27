@@ -22,24 +22,40 @@ let store = {
     return res;
   },
 
-  async setAddress(address) {
-    await AsyncStorage.setItem('address', address);
+  async setCity(city) {
+    await AsyncStorage.setItem('city', city);
   },
-  async getAddress() {
-    let res = await AsyncStorage.getItem('address');
+  async getCity() {
+    let res = await AsyncStorage.getItem('city');
     return res;
   },
 
-  async setPropertyName(propertyName) {
-    await AsyncStorage.setItem('propertyName', propertyName);
+  async setLongitude(longitude) {
+    await AsyncStorage.setItem('longitude', longitude);
   },
-  async getPropertyName(propertyName) {
-    let res = await AsyncStorage.getItem('propertyName');
+  async getLongitude() {
+    let res = await AsyncStorage.getItem('longitude');
+    return res;
+  },
+
+  async setLatitude(longitude) {
+    await AsyncStorage.setItem('latitude', latitude);
+  },
+  async getLatitude() {
+    let res = await AsyncStorage.getItem('latitude');
+    return res;
+  },
+
+  async setPropertyName(property_name) {
+    await AsyncStorage.setItem('property_name', property_name);
+  },
+  async getPropertyName(property_name) {
+    let res = await AsyncStorage.getItem('property_name');
     return res;
   },
 
   async removeUser() {
-    let keys = ['username', 'password', 'address', 'propertyName'];
+    let keys = ['username', 'password', 'address', 'property_name'];
     await AsyncStorage.multiRemove(keys);
   }
 
