@@ -77,8 +77,8 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
-      return json;
+      console.log(json.schedules);
+      return json.schedules;
     } catch(err) {
       console.log(err);
     }

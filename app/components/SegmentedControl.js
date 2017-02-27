@@ -55,7 +55,7 @@ var SegmentedControl = React.createClass({
         this.forceUpdate();
       })
     .then(() => {
-      API.getMachineData(this.state.username, "dryer")
+      API.getMachineData(this.state.username, "dryer") // to be changed to dryer
         .then((res) => {
           this.setState({
             dryerDS: this.state.dryerDS.cloneWithRows(res),
@@ -152,7 +152,7 @@ var SegmentedControl = React.createClass({
     if (res.success === true) {
       // Update the DS state - fetch the data again
       this.fetchData();
-      //this.fetchFakeData();  // to be changed to fetchData
+      //this.fetchFakeData();
     } else {
       // Do nothing
       console.log("error");
@@ -162,7 +162,7 @@ var SegmentedControl = React.createClass({
   handleCountDown: function(newRemainTime) {
     if (newRemainTime === "0000") {
       this.fetchData();
-      //this.fetchFakeData(); // to be changed to fetchData
+      //this.fetchFakeData();
     } else {
       return newRemainTime;
     }
@@ -170,6 +170,7 @@ var SegmentedControl = React.createClass({
 
   renderRow(rowData) {
     console.log("enter row");
+    console.log(rowData);
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
     var endTime = moment(rowData.endTime).tz("America/New_York").format('hh:mm A');

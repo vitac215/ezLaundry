@@ -25,7 +25,7 @@ export default class MainScene extends React.Component {
 
     this.state = {
       selectedTab: 'Status',
-      title: props.propertyName
+      title: props.property_name
     };
   }
 
@@ -53,7 +53,7 @@ export default class MainScene extends React.Component {
           onPress={() => {
             this.setState({
               selectedTab: 'Status',
-              title: this.props.propertyName
+              title: this.props.property_name
             });
           }}>
           { this._renderContent(StatusScene) }
