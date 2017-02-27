@@ -44,7 +44,7 @@ export default class LoginScene extends Component {
     try {
       const res = await API.login(username, password);
 
-      if (res.message === "success") {
+      if (res.message === "SUCCESS") {
         // Store the user data
         let user = res.user;
         store.setUsername(user.username);
@@ -93,17 +93,20 @@ export default class LoginScene extends Component {
 
           <View style={styles.mainContainer}>
             <View style={styles.inputContainer}>
-
-              <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (username) => {this.setState({username})}}
                 placeholder='username'
+                autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={username} />
 
-              <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (password) => {this.setState({password})}}
                 placeholder='password'
+                autoCapitalize='none'
                 secureTextEntry
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}

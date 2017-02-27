@@ -25,8 +25,6 @@ var CountDown = React.createClass ({
   },
 
   render(){
-    /*console.log(moment({m:time, s:00}).format("mm:ss"));*/
-    /*console.log(moment().subtract(1, 'minutes').format('HH:mm'));*/
     var style = [styles.text];
     var component;
     component =

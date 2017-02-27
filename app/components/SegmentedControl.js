@@ -49,8 +49,8 @@ var SegmentedControl = React.createClass({
     API.getWashingData(this.state.address)
       .then((res) => {
         this.setState({
-          // washingDS: this.state.washingDS.cloneWithRows(res),
-          washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
+          washingDS: this.state.washingDS.cloneWithRows(res),
+          // washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
         });
         this.forceUpdate();
       })
@@ -100,32 +100,38 @@ var SegmentedControl = React.createClass({
       />
     )
   },
-  renderReserveScene: function() {
-    return (
-      <Navigator
-        style={styles.container}
-        initialRoute={{type: 'Washing'}}
-        renderScene={(route, navigator) =>
-          <ReserveScene {...this.props}/>
-        }
-        configureScene={(route, routeStack) =>
-          Navigator.SceneConfigs.PushFromRight}
-      />
-    );
-  },
 
-  fetchFakeData: async function() {
-    console.log("fetch");
-    API.getFakeReserve(this.state.address)
-      .then((res) => {
-        this.setState({
-          // washingDS: this.state.washingDS.cloneWithRows(res),
-          washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
-        });
-        // deepForceUpdate();
-      })
-    .done();
-  },
+  // renderReserveScene: function() {
+  //   return (
+  //     <Navigator
+  //       style={styles.container}
+  //       initialRoute={{type: 'Washing'}}
+  //       renderScene={(route, navigator) =>
+  //         <ReserveScene {...this.props}/>
+  //       }
+  //       configureScene={(route, routeStack) =>
+  //         Navigator.SceneConfigs.PushFromRight}
+  //     />
+  //   );
+  // },
+
+  // fetchFakeData: async function() {
+  //   console.log("fetch");
+  //   API.getFakeReserve(this.state.address)
+  //     .then((res) => {
+  //       this.setState({
+  //         // washingDS: this.state.washingDS.cloneWithRows(res),
+  //         washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
+  //       });
+  //     })
+  //     .then((res) => {
+  //       this.setState({
+  //         // washingDS: this.state.washingDS.cloneWithRows(res),
+  //         dryerDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
+  //       });
+  //     })
+  //   .done();
+  // },
 
   quickReserveConfirm: async function(machine_id) {
     // Raise another alert to confirm
@@ -145,7 +151,8 @@ var SegmentedControl = React.createClass({
     var res = await API.quickReserve(this.state.username, machine_id);
     if (res.success === true) {
       // Update the DS state - fetch the data again
-      this.fetchFakeData();  // to be changed to fetchData
+      this.fetchData();
+      //this.fetchFakeData();  // to be changed to fetchData
     } else {
       // Do nothing
       console.log("error");
@@ -154,7 +161,8 @@ var SegmentedControl = React.createClass({
 
   handleCountDown: function(newRemainTime) {
     if (newRemainTime === "0000") {
-      this.fetchFakeData(); // to be changed to fetchData
+      this.fetchData();
+      //this.fetchFakeData(); // to be changed to fetchData
     } else {
       return newRemainTime;
     }

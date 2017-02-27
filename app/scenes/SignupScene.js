@@ -39,8 +39,7 @@ export default class SignupScene extends Component {
     // Create a new user
     try {
       let res = await API.signUp(username, password, address, propertyName);
-      console.log(res);
-      if (res.message === "success") {
+      if (res.message === "SUCCESS") {
         // Store the user data
         store.setUsername(username);
         store.setPassword(password);
@@ -82,50 +81,59 @@ export default class SignupScene extends Component {
 
           <View style={styles.mainContainer}>
             <View style={styles.inputContainer}>
-
-              <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (username) => {this.setState({username})}}
                 placeholder='username'
+                autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={username} />
 
-              <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (password) => {this.setState({password})}}
                 placeholder='password'
+                autoCapitalize='none'
                 secureTextEntry
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={password} />
 
-                <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (passwordconfirm) => {this.setState({passwordconfirm})}}
                 placeholder='confirm password'
+                autoCapitalize='none'
                 secureTextEntry
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={passwordconfirm} />
 
-                <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (address) => {this.setState({address})}}
                 placeholder='address'
+                autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={address} />
 
-                <TextInput style={styles.textInput}
+              <TextInput
+                style={styles.textInput}
                 onChangeText={ (propertyName) => {this.setState({propertyName})}}
                 placeholder='property name'
+                autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={propertyName} />
             </View>
 
-              <Button style={styles.btn}
-                      textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-                      onPress={this.signupAction.bind(this)}>
-                Sign up
-              </Button>
+            <Button style={styles.btn}
+                    textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                    onPress={this.signupAction.bind(this)}>
+              Sign up
+            </Button>
           </View>
 
         </View>
