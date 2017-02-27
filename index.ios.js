@@ -6,7 +6,7 @@ import { AppRegistry, StyleSheet, Navigator, NavigatorIOS, View } from 'react-na
 import LaunchScene from './app/scenes/LaunchScene';
 import Navbar from './app/components/Navbar';
 
-export default class laundry extends Component {
+export default class ezLaundry extends Component {
   render() {
     var defaultRoute = "LaunchScene";
     var defaultComp = LaunchScene;
@@ -39,4 +39,4 @@ export default class laundry extends Component {
   }
 }
 
-AppRegistry.registerComponent('laundry', () => laundry);
+AppRegistry.registerComponent('ezLaundry', () => ezLaundry);

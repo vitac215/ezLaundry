@@ -24,9 +24,9 @@ export default class SignupScene extends Component {
 
   async signupAction() {
     const { navigator } = this.props;
-    const { username, password, passwordconfirm, address, propertyName } = this.state;
+    const { username, password, passwordconfirm, address, city, propertyName } = this.state;
 
-    if (!username || !password || !address || !propertyName) {
+    if (!username || !password || !address || !city || !propertyName ) {
       Alert.alert('Please enter all the information');
       return;
     }
@@ -38,12 +38,13 @@ export default class SignupScene extends Component {
 
     // Create a new user
     try {
-      let res = await API.signUp(username, password, address, propertyName);
+      let res = await API.signUp(username, password, address, city, propertyName);
       if (res.message === "SUCCESS") {
         // Store the user data
         store.setUsername(username);
         store.setPassword(password);
         store.setAddress(address);
+        store.setAddress(city);
         store.setPropertyName(propertyName);
 
         // Navigate to the status scene
@@ -118,6 +119,15 @@ export default class SignupScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={address} />
+
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={ (city) => {this.setState({city})}}
+                  placeholder='city'
+                  autoCapitalize='none'
+                  placeholderTextColor='rgba(51,51,51,0.5)'
+                  autoCorrect={false}
+                  value={city} />
 
               <TextInput
                 style={styles.textInput}

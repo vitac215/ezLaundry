@@ -8,7 +8,7 @@ const API_URL = {
 }
 
 const API = {
-  signUp: async function(username, password, address, propertyName) {
+  signUp: async function(username, password, address, city, propertyName) {
     try{
       let response = await fetch(`${API_URL.signUp}`, {
         method: 'POST',
@@ -19,6 +19,7 @@ const API = {
           username,
           password,
           address,
+          city,
           propertyName
         })
       })
