@@ -49,7 +49,6 @@ var SegmentedControl = React.createClass({
       .then((res) => {
         this.setState({
           washingDS: this.state.washingDS.cloneWithRows(res),
-          // washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
         });
         this.forceUpdate();
       })
@@ -142,26 +141,20 @@ var SegmentedControl = React.createClass({
   handleCountDown: function(newRemainTime) {
     if (newRemainTime === "0000") {
       this.fetchData();
-      //this.fetchFakeData();
     } else {
       return newRemainTime;
     }
   },
 
   renderRow(rowData) {
-    console.log("enter row");
-    console.log(rowData);
-
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
+    // Convert the end time to readable format
     var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
-    console.log("row end time: "+rowData.end_time);
-    console.log("end time: "+end_time);
 
+    // Calculate the remain time in mmss
     var raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
     var remainTime = moment(raw_remainTime).format('mmss');
-    console.log("remain Time in ms: "+raw_remainTime);
-    console.log("remain Time formated: "+remainTime);
 
     if (raw_remainTime > 0) {
       return (

@@ -7,7 +7,6 @@ export default class AppNavigator extends Component {
   constructor(props) {
     super(props);
     const {navigator} = this.props;
-    console.log(props.title);
   }
 
   render() {

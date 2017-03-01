@@ -81,7 +81,6 @@ export default class MainScene extends React.Component {
               selectedTab: 'Settings',
               title: 'Settings'
             });
-            console.log(this.state);
           }}>
           { this._renderContent(SettingsScene) }
         </TabBarIOS.Item>

@@ -47,7 +47,6 @@ export default class LoginScene extends Component {
       if (res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
         let user = res.user;
-        console.log(user);
         store.setUsername(user.username);
         store.setPassword(user.password);
         store.setPropertyName(user.property_name);

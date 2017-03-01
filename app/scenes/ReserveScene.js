@@ -14,7 +14,6 @@ export default class ReserveScene extends Component {
 
   render() {
     const {navigator} = this.props;
-    console.log("Reserve!!!")
     return (
       <View style={styles.container}>
       <Navbar title='Pick Your Time' leftBtn='Back' navigator={navigator} />
