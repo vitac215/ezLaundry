@@ -42,7 +42,7 @@ export default class SignupScene extends Component {
     // Create a new user
     try {
       let res = await API.signUp(username, password, address, city, property_name);
-      if (res.message === "SUCCESS") {
+      if (res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
         let user = res.user;
         store.setUsername(user.username);

@@ -21,6 +21,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1F3D94DA1E6682B300C49B95 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3D94D91E6682B300C49B95 /* Ionicons.ttf */; };
+		1F3D94DB1E6682B300C49B95 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3D94D91E6682B300C49B95 /* Ionicons.ttf */; };
+		1F3D94DC1E6682B300C49B95 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3D94D91E6682B300C49B95 /* Ionicons.ttf */; };
+		1F3D94DD1E6682B300C49B95 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F3D94D91E6682B300C49B95 /* Ionicons.ttf */; };
 		1F4648601E63DC2F00EB0569 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1F4648611E63DC3100EB0569 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1F4648621E63DC3200EB0569 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -268,6 +272,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ezLaundry/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ezLaundry/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1F3D94D91E6682B300C49B95 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ezLaundry-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ezLaundry-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ezLaundry-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ezLaundry-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A36A7FB834E4693BDC98B5B /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -457,6 +462,7 @@
 				D9D6AD510A3D41C1A7DEFA31 /* Octicons.ttf */,
 				DCAAC95514C5421EAFB7B0C3 /* SimpleLineIcons.ttf */,
 				7A3BD9F6227C486197A4E5C1 /* Zocial.ttf */,
+				1F3D94D91E6682B300C49B95 /* Ionicons.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -908,6 +914,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3D94DB1E6682B300C49B95 /* Ionicons.ttf in Resources */,
 				1F4648611E63DC3100EB0569 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,6 +923,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3D94DA1E6682B300C49B95 /* Ionicons.ttf in Resources */,
 				1F4648601E63DC2F00EB0569 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,6 +932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3D94DC1E6682B300C49B95 /* Ionicons.ttf in Resources */,
 				1F4648621E63DC3200EB0569 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,6 +941,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3D94DD1E6682B300C49B95 /* Ionicons.ttf in Resources */,
 				1F4648631E63DC3200EB0569 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

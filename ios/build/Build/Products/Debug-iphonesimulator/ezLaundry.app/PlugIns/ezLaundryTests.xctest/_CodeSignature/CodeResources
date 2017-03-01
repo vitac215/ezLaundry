@@ -8,9 +8,25 @@
 		<data>
 		0m5CqWeFsaE3T7+YzTGvkKtPJ4w=
 		</data>
+		<key>Ionicons.ttf</key>
+		<data>
+		D3lWcE/mG0nEHqGiIFEkD3AKK0Q=
+		</data>
 	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Ionicons.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			D3lWcE/mG0nEHqGiIFEkD3AKK0Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			u0dnmwuuuEgbf1HGitM65aUmc2y1CxcXzGD/a2X5CKM=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^</key>

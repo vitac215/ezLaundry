@@ -24,7 +24,6 @@ import ReserveScene from '../scenes/ReserveScene';
 
 var SegmentedControl = React.createClass({
 
-
   getInitialState: function() {
     const {navigator} = this.props;
 
@@ -42,7 +41,7 @@ var SegmentedControl = React.createClass({
   componentDidMount: function() {
     this.fetchData()
     // Fetch data every 1 min
-    // this.timer = setInterval(() => this.fetchData(), 60000)
+    this.timer = setInterval(() => this.fetchData(), 60000)
   },
 
   fetchData: async function() {
@@ -115,28 +114,10 @@ var SegmentedControl = React.createClass({
   //   );
   // },
 
-  // fetchFakeData: async function() {
-  //   console.log("fetch");
-  //   API.getFakeReserve(this.state.address)
-  //     .then((res) => {
-  //       this.setState({
-  //         // washingDS: this.state.washingDS.cloneWithRows(res),
-  //         washingDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
-  //       });
-  //     })
-  //     .then((res) => {
-  //       this.setState({
-  //         // washingDS: this.state.washingDS.cloneWithRows(res),
-  //         dryerDS: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(res)
-  //       });
-  //     })
-  //   .done();
-  // },
-
   quickReserveConfirm: async function(machine_id) {
     // Raise another alert to confirm
     Alert.alert(
-      'Reservation',
+      'Reservation Code: 0002',  // to be changed
       'You have reserved this machine successfully. Please note that this reservation will expire in 5 minutes.',
       [
         { text: 'OK', onPress: (id) => {
@@ -149,13 +130,12 @@ var SegmentedControl = React.createClass({
   quickReserveSuccess: async function(machine_id) {
     // Call API to reserve this machine_id
     var res = await API.quickReserve(this.state.username, machine_id);
-    if (res.success === true) {
+    if (res.message.toUpperCase() === "SUCCESS") {
       // Update the DS state - fetch the data again
       this.fetchData();
-      //this.fetchFakeData();
     } else {
       // Do nothing
-      console.log("error");
+      console.log(res.message);
     }
   },
 
@@ -171,17 +151,19 @@ var SegmentedControl = React.createClass({
   renderRow(rowData) {
     console.log("enter row");
     console.log(rowData);
+
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
-    var endTime = moment(rowData.endTime).tz("America/New_York").format('hh:mm A');
-    var raw_remainTime = moment(rowData.endTime).tz("America/New_York") - moment().tz("America/New_York");
+    var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
+    console.log("row end time: "+rowData.end_time);
+    console.log("end time: "+end_time);
 
+    var raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
     var remainTime = moment(raw_remainTime).format('mmss');
     console.log("remain Time in ms: "+raw_remainTime);
-    console.log("remain Time formateed: "+remainTime);
+    console.log("remain Time formated: "+remainTime);
 
-
-    if (remainTime > 0) {
+    if (raw_remainTime > 0) {
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -195,7 +177,7 @@ var SegmentedControl = React.createClass({
                   onCountDown = {
                     remainTime = this.handleCountDown
                   }/>
-                  <Text style={[styles.text, styles.endTime]}>{endTime}</Text>
+                  <Text style={[styles.text, styles.end_time]}>{end_time}</Text>
                 </View>
             </View>
             <View style={styles.separator}/>
@@ -311,7 +293,7 @@ var styles = StyleSheet.create({
   remainTime: {
     fontSize: 30
   },
-  endTime: {
+  end_time: {
     fontSize: 15,
     fontWeight: 'bold'
   },
