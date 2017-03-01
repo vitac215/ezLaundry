@@ -114,9 +114,10 @@ var SegmentedControl = React.createClass({
   // },
 
   quickReserveConfirm: async function(machine_id) {
+    const fake_access_code = '1001';
     // Raise another alert to confirm
     Alert.alert(
-      'Reservation Code: 0002',  // to be changed
+      'Reservation Code: ' + fake_access_code,  // to be changed
       'You have reserved this machine successfully. Please note that this reservation will expire in 5 minutes.',
       [
         { text: 'OK', onPress: (id) => {
@@ -129,12 +130,14 @@ var SegmentedControl = React.createClass({
   quickReserveSuccess: async function(machine_id) {
     // Call API to reserve this machine_id
     var res = await API.quickReserve(this.state.username, machine_id);
-    if (res.message.toUpperCase() === "SUCCESS") {
+    // if (res.message.toUpperCase() === "SUCCESS") {
+    if (res.message && res.message.toUpperCase() === 'SUCCESS') {
       // Update the DS state - fetch the data again
+      console.log("quick reserve success feftch data");
       this.fetchData();
     } else {
       // Do nothing
-      console.log(res.message);
+      Alert.alert(res.message);
     }
   },
 

@@ -6,6 +6,8 @@ import { AppRegistry, StyleSheet, Navigator, NavigatorIOS, View } from 'react-na
 import LaunchScene from './app/scenes/LaunchScene';
 import Navbar from './app/components/Navbar';
 
+console.disableYellowBox = true;
+
 export default class ezLaundry extends Component {
   render() {
     var defaultRoute = "LaunchScene";
