@@ -41,7 +41,8 @@ var SegmentedControl = React.createClass({
   componentDidMount: function() {
     this.fetchData();
     // Fetch data every 10 sec
-    this.timer = setInterval(() => this.fetchData(), 60000);
+    // this.timer = setInterval(() => this.fetchData(), 60000);
+    this.timer = setInterval(() => this.fetchData(), 5000);
   },
 
   fetchData: async function() {
@@ -50,7 +51,6 @@ var SegmentedControl = React.createClass({
         this.setState({
           washingDS: this.state.washingDS.cloneWithRows(res),
         });
-        this.forceUpdate();
       })
     .then(() => {
       API.getMachineData(this.state.username, "dryer") // to be changed to dryer
@@ -130,7 +130,6 @@ var SegmentedControl = React.createClass({
   quickReserveSuccess: async function(machine_id) {
     // Call API to reserve this machine_id
     var res = await API.quickReserve(this.state.username, machine_id);
-    // if (res.message.toUpperCase() === "SUCCESS") {
     if (res.message && res.message.toUpperCase() === 'SUCCESS') {
       // Update the DS state - fetch the data again
       console.log("quick reserve success feftch data");
@@ -141,11 +140,16 @@ var SegmentedControl = React.createClass({
     }
   },
 
-  handleCountDown: function(newRemainTime, end_time) {
+  handleCountDown: function(newRemainTime, end_time, username) {
     console.log("handleCountDown:\t" + end_time);
     const now = moment(new Date()).tz("America/New_York");
     if ( moment(now).isAfter(end_time) ) {
       console.log("handleCountDown:\t timeout!");
+
+      if (username === this.state.username) {
+        Alert.alert("Your reservation just expired!");
+      }
+
       this.fetchData();
     } else {
       console.log("handleCountDown:\t still waiting");
@@ -181,6 +185,7 @@ var SegmentedControl = React.createClass({
                   <CountDown
                   time = {remainTime}
                   end_time = {rowData.end_time}
+                  username = {rowData.username}
                   onCountDown = {
                     remainTime = this.handleCountDown
                   }/>
