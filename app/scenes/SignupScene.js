@@ -44,12 +44,10 @@ export default class SignupScene extends Component {
       let res = await API.signUp(username, password, address, city, property_name);
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
+        console.log(res);
         let user = res.user;
         store.setUsername(user.username);
         store.setPassword(user.password);
-        store.setCity(user.city);
-        store.setLongitude(user.longitude);
-        store.setLatitude(user.latitude);
         store.setPropertyName(user.property_name);
 
         // Navigate to the status scene

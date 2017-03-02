@@ -22,30 +22,6 @@ let store = {
     return res;
   },
 
-  async setCity(city) {
-    await AsyncStorage.setItem('city', city);
-  },
-  async getCity() {
-    let res = await AsyncStorage.getItem('city');
-    return res;
-  },
-
-  async setLongitude(longitude) {
-    await AsyncStorage.setItem('longitude', longitude);
-  },
-  async getLongitude() {
-    let res = await AsyncStorage.getItem('longitude');
-    return res;
-  },
-
-  async setLatitude(longitude) {
-    await AsyncStorage.setItem('latitude', latitude);
-  },
-  async getLatitude() {
-    let res = await AsyncStorage.getItem('latitude');
-    return res;
-  },
-
   async setPropertyName(property_name) {
     await AsyncStorage.setItem('property_name', property_name);
   },

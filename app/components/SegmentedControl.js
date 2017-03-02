@@ -39,9 +39,9 @@ var SegmentedControl = React.createClass({
 
   // Fetch data from api
   componentDidMount: function() {
-    this.fetchData()
-    // Fetch data every 1 min
-    this.timer = setInterval(() => this.fetchData(), 60000)
+    this.fetchData();
+    // Fetch data every 10 sec
+    this.timer = setInterval(() => this.fetchData(), 60000);
   },
 
   fetchData: async function() {
@@ -141,10 +141,14 @@ var SegmentedControl = React.createClass({
     }
   },
 
-  handleCountDown: function(newRemainTime) {
-    if (newRemainTime === "0000") {
+  handleCountDown: function(newRemainTime, end_time) {
+    console.log("handleCountDown:\t" + end_time);
+    const now = moment(new Date()).tz("America/New_York");
+    if ( moment(now).isAfter(end_time) ) {
+      console.log("handleCountDown:\t timeout!");
       this.fetchData();
     } else {
+      console.log("handleCountDown:\t still waiting");
       return newRemainTime;
     }
   },
@@ -152,24 +156,31 @@ var SegmentedControl = React.createClass({
   renderRow(rowData) {
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
-    // Convert the end time to readable format
-    var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
+    var raw_remainTime;
 
-    // Calculate the remain time in mmss
-    var raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
-    var remainTime = moment(raw_remainTime).format('mmss');
+    if (rowData.end_time != null) {
+      // Convert the end time to readable format
+      var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
+      // Calculate the remain time in mmss
+      raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
+      var remainTime = moment(raw_remainTime).format('mmss');
+    } else {
+      raw_remainTime = 0;
+    }
+
 
     if (raw_remainTime > 0) {
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
                 <View style={styles.centerContainer}>
-                    <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
+                    <Text style={[styles.text, styles.machine_id]}>{rowData.display_id}</Text>
                 </View>
                 <Image style={styles.thumb} source={img} />
                 <View style={styles.textContainer}>
                   <CountDown
                   time = {remainTime}
+                  end_time = {rowData.end_time}
                   onCountDown = {
                     remainTime = this.handleCountDown
                   }/>
@@ -180,6 +191,10 @@ var SegmentedControl = React.createClass({
           </View>
       );
     } else {
+      // If the machine is available and the reservation belongs to the current user
+      // if (rowData.username === this.state.username) {
+      //   Alert.alert("Your reservation has just expired!");
+      // };
       return (
         <View style={styles.container}>
           <TouchableOpacity
@@ -197,7 +212,7 @@ var SegmentedControl = React.createClass({
             <View style={styles.container}>
               <View style={styles.rowContainer}>
                   <View style={styles.centerContainer}>
-                      <Text style={[styles.text, styles.machine_id]}>{rowData.machine_id}</Text>
+                      <Text style={[styles.text, styles.machine_id]}>{rowData.display_id}</Text>
                   </View>
                   <Image style={styles.thumb} source={img} />
                   <View style={[styles.textContainer, styles.centerContainer]}>
