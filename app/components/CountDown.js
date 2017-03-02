@@ -42,6 +42,11 @@ var CountDown = React.createClass ({
 
   _countdown(){
     var timer = function () {
+      // var time = this.state.time - 1;
+      // var time = moment(this.state.time, "mmss").subtract('1', 'seconds');
+      //
+      // var displayTime = moment(time,"mmss").format('mmss');
+      //
       const now = moment(new Date()).tz("America/New_York");
       //
       // this.setState({time: time});
