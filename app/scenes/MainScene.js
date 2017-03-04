@@ -6,6 +6,7 @@ var { StyleSheet, TabBarIOS, Text, View } = ReactNative;
 
 import Navbar from '../components/Navbar';
 import StatusScene from './StatusScene';
+import ReserveScene from './ReserveScene';
 import SettingsScene from './SettingsScene';
 
 
@@ -69,7 +70,7 @@ export default class MainScene extends React.Component {
               title: new Date().toString()
             });
           }}>
-          { this._renderContent(StatusScene) }
+          { this._renderContent(ReserveScene) }
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
