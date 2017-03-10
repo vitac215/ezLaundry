@@ -12,6 +12,7 @@ Also check out the repository for the [back-end development](https://github.com/
 <img src="http://i.imgur.com/1wdBrLX.png" width="150">
 <img src="http://i.imgur.com/xTzpuiR.png" width="150">
 <img src="http://i.imgur.com/tWjatqq.png" width="150">
+
 <img src="http://i.imgur.com/NpRYn2n.png" width="150">
 <img src="http://i.imgur.com/lx3W0rj.png" width="150">
 <img src="http://i.imgur.com/kUBzPW6.png" width="150">
