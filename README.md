@@ -7,6 +7,8 @@ ezLaundry is a mobile + IoT solution (including hardware, server+DB, and mobile 
 This is the repository for the front-end development (IOS app) in React Native.
 Also check out the repository for the [back-end development](https://github.com/haojian/snapmail).
 
+Video demo: https://www.youtube.com/watch?v=U14PvntNAwo&feature=youtu.be
+
 
 ## App Interface
 <img src="http://i.imgur.com/1wdBrLX.png" width="150">
