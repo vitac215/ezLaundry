@@ -19,6 +19,8 @@ Also check out the repository for the [back-end development](https://github.com/
 
 
 ## Basic Usage
+* <b>Registration</b>
+   * You can register by entering your username, password, and address. (The address must be a registered address that have the supporting facilities)
 * <b>Check status</b>
    * You can check the availability of washing machines and dryers at a registered apartment.
 * <b>Make a quick reservation</b>
