@@ -33,9 +33,12 @@ Video demo: https://www.youtube.com/watch?v=U14PvntNAwo&feature=youtu.be
 
 ## TODO
 * Change address/password, forget password
+* 3rd-party registration/login (Facebook, Google)
 * Push notification where there is an available machine
 * Notification settings
 * Push notification when the user's laundry is done
-* Report to maintance form, Send app feedback form
+* Report to maintenance form, Send app feedback form
 * Make reservation at a certain time
-* Emebeded payment
+* 3rd-party embedded payment
+* Andorid 
+* Deploy on App store and Google play store
