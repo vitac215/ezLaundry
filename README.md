@@ -5,7 +5,7 @@
 ezLaundry is a mobile + IoT solution (including hardware, server+DB, and mobile app) for apartment residents to check availability of public laundry facilities in real time and make reservations.
 
 This is the repository for the front-end development (IOS app) in React Native.
-Also check out the repository for the [back-end development](https://github.com/haojian/snapmail).
+Also check out the repository for [back-end development](https://github.com/wanghaodawn/Laundry-Helper).
 
 Video demo: https://www.youtube.com/watch?v=U14PvntNAwo&feature=youtu.be
 
