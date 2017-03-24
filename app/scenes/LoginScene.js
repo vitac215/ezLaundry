@@ -42,8 +42,17 @@ export default class LoginScene extends Component {
     }
 
     try {
-      const res = await API.login(username, password);
-
+      // original
+      //const res = await API.login(username, password);
+      // change
+      const res = {"message": "SUCCESS",
+                   "user": {"username": "v",
+                            "password": "v",
+                            "property_name": "Forbes",
+                            "address": "forbes ave"
+                           },
+                  };
+      // end change
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
         let user = res.user;
