@@ -10,13 +10,21 @@ import {
   ListView,
   SegmentedControlIOS,
   ScrollView,
-  TouchableHighlight} from 'react-native';
+  TouchableHighlight,
+  Alert,
+  Navbar,
+} from 'react-native';
+import moment from 'moment';
+import SegmentedControl from '../components/SegmentedControl.js';
 
 var ReserveScene = React.createClass({
   getInitialState: function() {
+    var count = "0";
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
       dataSource: ds.cloneWithRows(this._genRows({})),
+      values: ['Washing', 'Dryer'],
+      selectedTab: 'Washing',
     };
   },
   _pressData: ({}: {[key: number]: boolean}),
@@ -27,35 +35,66 @@ var ReserveScene = React.createClass({
 
   render: function() {
     return (
+      <View style={styles.container}>
+      <View style={styles.scContainer}>
+        <SegmentedControlIOS
+          style={styles.segmentedControl}
+          tintColor='#B0FFFE'
+          values={this.state.values}
+          selectedIndex={0}
+          onValueChange={(val)=> {
+            this.setState({
+              selectedTab: val
+            })
+          }}/>
+      </View>
       <ScrollView style={styles.listContainer}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}
+          renderRow={this._renderRow}
         />
       </ScrollView>
+      </View>
     );
   },
   _renderRow: function(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+    // console.log("rowData", rowData);
+    // console.log("sectionID", sectionID);
+    // console.log("rowID", rowID);
+    var time = moment().startOf('day').add(rowID * 30, 'minutes').format('hh:mm A');
     return (
       <TouchableHighlight onPress={() => {
           this._pressRow(rowID);
           highlightRow(sectionID, rowID);
+          Alert.alert(
+            'Reserve a ' + this.state.selectedTab + ' machine at ' + time +'?',
+            'Please note that your reservation will be cancelled if you are late for 10 minutes',
+            [
+              {text: 'Cancel'},
+              {text: 'Confirm', onPress: (time) => {
+                var machine_id = rowData.machine_id;
+                this.reservationConfirm(time)} }
+            ]
+          );
         }}>
         <View>
-          <View style={styles.row}>
+          <View style={styles.row, styles.separator}>
+          </View>
+          <View style={styles.timeContainer}>
             <Text style={styles.text}>
+              {time}
+
             </Text>
           </View>
-          <View style={styles.separator}/>
         </View>
       </TouchableHighlight>
     );
   },
   _genRows: function(pressData: {[key: number]: boolean}): Array<string> {
     var dataBlob = [];
-    for (var ii = 0; ii < 100; ii++) {
-      var pressedText = pressData[ii] ? ' (pressed)' : '';
-      dataBlob.push('Row ' + ii + pressedText);
+    for (var ii = 0; ii < 48; ii++) {
+      dataBlob.push(ii);   // passed back to row data
+      console.log("genRow data.push");
     }
     return dataBlob;
   },
@@ -65,14 +104,26 @@ var ReserveScene = React.createClass({
       this._genRows(this._pressData)
     )});
   },
+  reservationConfirm: function(time) {
+      return (
+        <View style={styles.tabContent}>
+          <Navbar {...this.props} title='Your Reservation' />
+          <SegmentedControl {...this.props} />
+        </View>
+      )
+  }
 });
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
+    marginLeft: 60,
   },
   thumb: {
     width: 64,
@@ -90,6 +141,20 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#fff'
   },
+  scContainer: {
+    backgroundColor: '#4AC3C0'
+  },
+  segmentedControl: {
+    margin: 10,
+    marginLeft: 30,
+    marginRight: 30
+  },
+  timeContainer: {
+    flex: 1,
+    margin: 10,
+    justifyContent: 'flex-start',
+    backgroundColor: '#fff'
+  }
 });
 
 module.exports = ReserveScene;

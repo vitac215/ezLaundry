@@ -12,7 +12,7 @@ export default class SettingsScene extends Component {
     super(props);
 
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var data = ['Notification', 'Report to Maintenance', 'Change Address', 'Send App Feedback'];
+    var data = ['Account', 'Notification', 'Report to Maintenance', 'Change Address', 'Privacy', 'Send App Feedback', 'Sign out'];
     this.state = {
       dataSource: ds.cloneWithRows(data)
     }
@@ -55,8 +55,7 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'stretch',
-    padding: 20,
-    paddingBottom: 25
+    padding: 10,
   },
   rightContainer: {
     flex: 1,
@@ -64,8 +63,10 @@ var styles = StyleSheet.create({
   },
   text: {
     color: '#929292',
-    fontSize: 20,
-    marginLeft: 10
+    fontSize: 15,
+    fontFamily: 'Helvetica',
+    marginLeft: 10,
+    textAlign: 'center',
   },
   icon: {
     color: '#929292',

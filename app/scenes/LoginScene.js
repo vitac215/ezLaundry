@@ -49,7 +49,7 @@ export default class LoginScene extends Component {
                    "user": {"username": "v",
                             "password": "v",
                             "property_name": "Forbes",
-                            "address": "forbes ave"
+                            "address": "forbes"
                            },
                   };
       // end change

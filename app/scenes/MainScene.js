@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import StatusScene from './StatusScene';
 import ReserveScene from './ReserveScene';
 import SettingsScene from './SettingsScene';
+import moment from 'moment';
 
 
 var statusIcon =
@@ -67,7 +68,7 @@ export default class MainScene extends React.Component {
           onPress={() => {
             this.setState({
               selectedTab: 'Reservation',
-              title: new Date().toString()
+              title: moment().format('M/D/YYYY hh:mm A'),
             });
           }}>
           { this._renderContent(ReserveScene) }

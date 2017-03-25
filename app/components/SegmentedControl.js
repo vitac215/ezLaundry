@@ -19,7 +19,7 @@ import API from '../api';
 import store from '../store';
 import CountDown from './CountDown';
 import moment from 'moment-timezone';
-import ReserveScene from '../scenes/ReserveScene';
+import ReserveScene from '../scenes/ReserveScene.js';
 import PushController from './PushController.js';
 
 
@@ -35,6 +35,7 @@ var SegmentedControl = React.createClass({
       reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       values: ['Washing', 'Dryer'],
       selectedTab: 'Washing'
+      title: this.props.title,
     }
   },
 
