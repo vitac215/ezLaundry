@@ -92,23 +92,26 @@ const API = {
 
 
   quickReserve: async function(username, machine_id) {
-    try{
-      let response = await fetch(`${API_URL.quickReserve}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          machine_id
-        })
-      })
-      let json = await response.json();
-      console.log(json);
-      return json;
-    } catch(err) {
-      console.log(err);
-    }
+    // try{
+    //   let response = await fetch(`${API_URL.quickReserve}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_id
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   console.log(json);
+    //   return json;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+
+    let json = {'message': "SUCCESS"}
+    return json;
   }
 
 }

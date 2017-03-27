@@ -21,6 +21,7 @@ import CountDown from './CountDown';
 import moment from 'moment-timezone';
 import ReserveScene from '../scenes/ReserveScene.js';
 import PushController from './PushController.js';
+import ReserveConfirmScene from '../scenes/ReserveConfirmScene.js';
 
 
 var SegmentedControl = React.createClass({
@@ -115,11 +116,11 @@ var SegmentedControl = React.createClass({
   // },
 
   quickReserveConfirm: async function(machine_id) {
-    const fake_access_code = '1001';
+    const fake_access_code = '1001';    // TODO:
     // Raise another alert to confirm
     Alert.alert(
       'Reservation Code: ' + fake_access_code,  // to be changed
-      'You have reserved this machine successfully. Please note that this reservation will expire in 5 minutes.',
+      'You have reserved this machine successfully. Please note that this reservation will expire in 10 minutes.',
       [
         { text: 'OK', onPress: (id) => {
           var id = machine_id;
@@ -131,10 +132,23 @@ var SegmentedControl = React.createClass({
   quickReserveSuccess: async function(machine_id) {
     // Call API to reserve this machine_id
     var res = await API.quickReserve(this.state.username, machine_id);
+    console.log("quick reserve", res);
+    console.log("seg props", this.props);
     if (res.message && res.message.toUpperCase() === 'SUCCESS') {
       // Update the DS state - fetch the data again
       console.log("quick reserve success feftch data");
       this.fetchData();
+      this.props.navigator.push({
+      component: ReserveConfirmScene,
+      passProps: {
+        username: this.props.username,
+        reserve_time: moment().format("hh:mm A"),
+        type: this.state.selectedTab,
+        title: "Your Reservation",
+        bottomTab: 'Reservation',
+      }
+      });
+      console.log("push end");
     } else {
       // Do nothing
       Alert.alert(res.message);

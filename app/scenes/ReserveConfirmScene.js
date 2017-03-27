@@ -13,7 +13,8 @@ import {
   ScrollView,
   Navigator,
   Alert,
-  TabBarIOS
+  TabBarIOS,
+  TouchableHighlight,
 } from 'react-native';
 
 import Navbar from '../components/Navbar';
@@ -39,18 +40,26 @@ var ReserveConfirmScene = React.createClass({
   getInitialState: function() {
     const {navigator} = this.props;
     console.log('reserve confirm scene', this.props);
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
       username: this.props.username,
       reserve_time: this.props.reserve_time,
-      washingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
-      dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      washingDS: ds,
+      dryerDS: ds,
+      reserveDS: ds.cloneWithRows(this._genRows({})),
       values: ['Washing', 'Dryer'],
-      selectedTab: 'Washing'
+      selectedTab: this.props.type,
+      selectedIndex: this.props.type === 'Washing' ? 0: 1,
+      title: this.props.title,
+      bottomTab: this.props.bottomTab,
+      type: this.props.type,
     }
   },
   componentDidMount: function() {
     this.fetchData();
+  },
+  componentWillMount: function() {
+    this._pressData = {};
   },
   fetchData: async function() {
     API.getMachineData(this.state.username, "washing")
@@ -62,6 +71,7 @@ var ReserveConfirmScene = React.createClass({
     .then(() => {
       API.getMachineData(this.state.username, "dryer") // to be changed to dryer
         .then((res) => {
+          console.log("fetched data", res);
           this.setState({
             dryerDS: this.state.dryerDS.cloneWithRows(res),
           })
@@ -81,23 +91,23 @@ var ReserveConfirmScene = React.createClass({
   },
   render() {
     console.log('initial state', this.props.reserve_time);
+    // var reserved = this.props.reserved;
+    if (this.state.type === this.state.selectedTab) {
+      return (
+        this.renderReserved()
+      );
+    } else {
+      console.log("no reservation");
+      return (
+        this.renderUnreserved()
+      );
+    }
+
+  },
+  renderReserved: function() {
+    console.log("render reserved");
     return (
       <View style={styles.container}>
-        <View style={styles.tabContent}>
-        <View style={styles.scContainer}>
-        <Navbar {...this.props} title="Your Reservation" />
-          <SegmentedControlIOS
-            style={styles.segmentedControl}
-            tintColor='#B0FFFE'
-            values={this.state.values}
-            selectedIndex={0}
-            onValueChange={(val)=> {
-              this.setState({
-                selectedTab: val
-              })
-            }}/>
-            </View>
-        </View>
         <TabBarIOS
           unselectedTintColor='#565656'
           tintColor='#2E8A87'
@@ -106,49 +116,196 @@ var ReserveConfirmScene = React.createClass({
           <TabBarIOS.Item
             title="Status"
             icon={{uri: statusIcon, scale: 3}}
-            selected={this.state.selectedTab === 'Status'}
+            selected={this.state.bottomTab === 'Status'}
             onPress={() => {
               this.setState({
-                selectedTab: 'Status',
+                bottomTab: 'Status',
                 title: this.props.property_name
               });
             }}>
-            <MainScene {...this.props}/>
+            { this._renderContent(StatusScene) }
           </TabBarIOS.Item>
 
           <TabBarIOS.Item
             title="Reservation"
             icon={{uri: reservationIcon, scale: 3}}
-            selected={this.state.selectedTab === 'Reservation'}
+            selected={this.state.bottomTab === 'Reservation'}
             onPress={() => {
               this.setState({
-                selectedTab: 'Reservation',
-                title: moment().format('M/D/YYYY hh:mm A'),
+                bottomTab: 'Reservation',
+                title: this.props.title,
               });
             }}>
+            <View style={styles.tabContent}>
+              <View style={styles.scContainer}>
+                <Navbar {...this.props} title={this.props.title} />
+                <SegmentedControlIOS
+                  style={styles.segmentedControl}
+                  tintColor='#B0FFFE'
+                  values={this.state.values}
+                  selectedIndex={this.state.selectedIndex}
+                  onValueChange={(val)=> {
+                    this.setState({
+                      selectedTab: val
+                    })
+                }}/>
+              </View>
+              <ScrollView style={styles.listContainer}>
+                {this.renderListView()}
+              </ScrollView>
+            </View>
 
-            <ScrollView style={styles.listContainer}>
-              {this.renderListView()}
-            </ScrollView>
           </TabBarIOS.Item>
 
           <TabBarIOS.Item
             title="Settings"
             icon={{uri: settingsIcon, scale: 3}}
-            selected={this.state.selectedTab === 'Settings'}
+            selected={this.state.bottomTab === 'Settings'}
             onPress={() => {
               this.setState({
-                selectedTab: 'Settings',
+                bottomTab: 'Settings',
                 title: 'Settings'
               });
             }}>
             { this._renderContent(SettingsScene) }
           </TabBarIOS.Item>
-
         </TabBarIOS>
-
       </View>
+    )
+  },
+  renderUnreserved: function() {
+    console.log("render unreserved");
+    return (
+      <View style={styles.container}>
+      <TabBarIOS
+        unselectedTintColor='#565656'
+        tintColor='#2E8A87'
+        barTintColor='#F8F8F8'>
+
+        <TabBarIOS.Item
+          title="Status"
+          icon={{uri: statusIcon, scale: 3}}
+          selected={this.state.bottomTab === 'Status'}
+          onPress={() => {
+            this.setState({
+              bottomTab: 'Status',
+              title: this.props.property_name
+            });
+          }}>
+          { this._renderContent(StatusScene) }
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title="Reservation"
+          icon={{uri: reservationIcon, scale: 3}}
+          selected={this.state.bottomTab === 'Reservation'}
+          onPress={() => {
+            this.setState({
+              bottomTab: 'Reservation',
+              title: this.props.title,
+            });
+          }}>
+          <View style={styles.tabContent}>
+            <View style={styles.scContainer}>
+              <Navbar {...this.props} title={this.props.title} />
+              <SegmentedControlIOS
+                style={styles.segmentedControl}
+                tintColor='#B0FFFE'
+                values={this.state.values}
+                selectedIndex={0}
+                onValueChange={(val)=> {
+                  this.setState({
+                    selectedTab: val
+                  })
+                }}/>
+            </View>
+            <ScrollView style={styles.listContainer}>
+              <ListView
+                dataSource={this.state.reserveDS}
+                renderRow={this._renderRow}
+              />
+            </ScrollView>
+          </View>
+
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title="Settings"
+          icon={{uri: settingsIcon, scale: 3}}
+          selected={this.state.bottomTab === 'Settings'}
+          onPress={() => {
+            this.setState({
+              bottomTab: 'Settings',
+              title: 'Settings'
+            });
+          }}>
+          { this._renderContent(SettingsScene) }
+        </TabBarIOS.Item>
+      </TabBarIOS>
+    </View>
     );
+  },
+  _renderRow: function(rowData: string, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
+    // console.log("rowData", rowData);
+    // console.log("sectionID", sectionID);
+    // console.log("rowID", rowID);
+    var time = moment().startOf('day').add(rowID * 30, 'minutes').format('hh:mm A');
+    return (
+      <TouchableHighlight onPress={() => {
+          this._pressRow(rowID);
+          highlightRow(sectionID, rowID);
+          Alert.alert(
+            'Reserve a ' + this.state.selectedTab + ' machine at ' + time +'?',
+            'Please note that your reservation will be cancelled if you are late for 10 minutes',
+            [
+              {text: 'Cancel'},
+              {text: 'Confirm', onPress: (reserveTime) => {
+                var reserveTime = time;
+                this.reservationConfirm(reserveTime);} }   // TODO: pass time to api
+            ]
+          );
+        }}>
+        <View>
+          <View style={styles.row, styles.separator}>
+          </View>
+          <View style={styles.timeContainer}>
+            <Text style={styles.text}>
+              {time}
+            </Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  },
+  _genRows: function(pressData: {[key: number]: boolean}): Array<string> {
+    var dataBlob = [];
+    for (var ii = 0; ii < 48; ii++) {
+      dataBlob.push(ii);   // passed back to row data
+      console.log("genRow data.push");
+    }
+    return dataBlob;
+  },
+  _pressData: ({}: {[key: number]: boolean}),
+  _pressRow: function(rowID: number) {
+      this._pressData[rowID] = !this._pressData[rowID];
+      this.setState({dataSource: this.state.reserveDS.cloneWithRows(
+      this._genRows(this._pressData)
+    )});
+  },
+  reservationConfirm: function(reserveTime) {
+    console.log("time", reserveTime);
+    console.log("reserve props", this.props);
+    this.props.navigator.push({
+    component: ReserveConfirmScene,
+    passProps: {
+      information:this.props,
+      reserve_time: reserveTime,
+      type: this.state.selectedTab,
+      title: "Your Reservation",
+      bottomTab: 'Reservation',
+      reserved: true,
+    }
+    });
   },
   renderListView: function() {
     // Display washing machines
@@ -211,7 +368,7 @@ var ReserveConfirmScene = React.createClass({
                 </View>
                 <Image style={styles.thumb} source={img} />
                 <View style={[styles.textContainer, styles.centerContainer]}>
-                <Text style={[styles.text]}>Washing</Text>
+                <Text style={[styles.text]}>{this.state.selectedTab}</Text>
                   <Text style={[styles.text, styles.available]}>EXPIRED: {expire_time}</Text>
                   <Text style={[styles.text]}>Access code: 1001</Text>
                   <Button style={styles.btn}
@@ -234,6 +391,16 @@ var ReserveConfirmScene = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  tabContent: {
+    flex: 1
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#F6F6F6',
+    marginLeft: 60,
   },
 
   scContainer: {
@@ -269,6 +436,12 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 15
+  },
+  timeContainer: {
+    flex: 1,
+    margin: 10,
+    justifyContent: 'flex-start',
+    backgroundColor: '#fff'
   },
   centerContainer: {
     justifyContent: 'center'

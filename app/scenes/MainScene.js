@@ -27,7 +27,7 @@ export default class MainScene extends React.Component {
 
     this.state = {
       selectedTab: this.props.tab,
-      title: this.props.property_name
+      title: this.props.property_name,
     };
   }
 
@@ -44,6 +44,7 @@ export default class MainScene extends React.Component {
   }
 
   render() {
+    console.log('mainscene', this.props);
     return (
       <TabBarIOS
         unselectedTintColor='#565656'
@@ -70,7 +71,7 @@ export default class MainScene extends React.Component {
           onPress={() => {
             this.setState({
               selectedTab: 'Reservation',
-              title: moment().format('M/D/YYYY hh:mm A'),
+              title: this.props.title,
             });
           }}>
           { this._renderContent(ReserveScene) }

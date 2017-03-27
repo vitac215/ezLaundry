@@ -77,7 +77,7 @@ var ReserveScene = React.createClass({
               {text: 'Cancel'},
               {text: 'Confirm', onPress: (reserveTime) => {
                 var reserveTime = time;
-                this.reservationConfirm(reserveTime)} }   // TODO: pass time to api
+                this.reservationConfirm(reserveTime);} }   // TODO: pass time to api
             ]
           );
         }}>
@@ -117,7 +117,8 @@ var ReserveScene = React.createClass({
       reserve_time: reserveTime,
       type: this.state.selectedTab,
       title: "Your Reservation",
-      tab: 'Reservation',
+      bottomTab: 'Reservation',
+      reserved: true,
     }
     });
   }
@@ -140,6 +141,8 @@ var styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    color: '#929292',
+    fontSize: 15,
   },
   separator: {
     height: 1,
