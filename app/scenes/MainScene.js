@@ -26,13 +26,15 @@ export default class MainScene extends React.Component {
     super(props);
 
     this.state = {
-      selectedTab: 'Status',
-      title: props.property_name
+      selectedTab: this.props.tab,
+      title: this.props.property_name
     };
   }
 
+
   _renderContent = (component) => {
     var Component = component;
+    console.log('props', {...this.props});
     return (
       <View style={styles.tabContent}>
         <Navbar {...this.props} title={this.state.title} />

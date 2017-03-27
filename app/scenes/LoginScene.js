@@ -71,8 +71,14 @@ export default class LoginScene extends Component {
         navigator.push({
           name: 'Status',
           title: user.property_name,
-          passProps: this.state,
-          component: MainScene
+          component: MainScene,
+          passProps: {
+            username: '',
+            password: '',
+            address: '',
+            property_name: '',
+            tab: 'Status',
+          }
         })
         return;
       // Alert error messageå

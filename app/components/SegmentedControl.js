@@ -34,8 +34,7 @@ var SegmentedControl = React.createClass({
       dryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       reserveDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       values: ['Washing', 'Dryer'],
-      selectedTab: 'Washing'
-      title: this.props.title,
+      selectedTab: 'Washing',
     }
   },
 
@@ -169,7 +168,6 @@ var SegmentedControl = React.createClass({
 
   renderRow(rowData) {
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
-
     var raw_remainTime;
 
     if (rowData.end_time != null) {
@@ -182,18 +180,14 @@ var SegmentedControl = React.createClass({
 
       // changed
       raw_remainTime = rowData.end_time;
-
       var remainTime = moment(raw_remainTime).format('mmss');
       var min = parseInt(rowData.end_time.substring(0,2));
       var sec = parseInt(rowData.end_time.substring(2,4));
       var end_time = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
       // end change
-
     } else {
       raw_remainTime = 0;
     }
-
-
     if (raw_remainTime > 0) {
       return (
           <View style={styles.container}>

@@ -12,13 +12,17 @@ import {
   ScrollView,
   TouchableHighlight,
   Alert,
-  Navbar,
 } from 'react-native';
+import Navbar from '../components/Navbar';
 import moment from 'moment';
 import SegmentedControl from '../components/SegmentedControl.js';
+import ReserveConfirmScene from './ReserveConfirmScene.js';
+import ReserveRender from './ReserveRender.js'
 
 var ReserveScene = React.createClass({
   getInitialState: function() {
+    const {navigator} = this.props;
+
     var count = "0";
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
@@ -71,9 +75,9 @@ var ReserveScene = React.createClass({
             'Please note that your reservation will be cancelled if you are late for 10 minutes',
             [
               {text: 'Cancel'},
-              {text: 'Confirm', onPress: (time) => {
-                var machine_id = rowData.machine_id;
-                this.reservationConfirm(time)} }
+              {text: 'Confirm', onPress: (reserveTime) => {
+                var reserveTime = time;
+                this.reservationConfirm(reserveTime)} }   // TODO: pass time to api
             ]
           );
         }}>
@@ -83,7 +87,6 @@ var ReserveScene = React.createClass({
           <View style={styles.timeContainer}>
             <Text style={styles.text}>
               {time}
-
             </Text>
           </View>
         </View>
@@ -104,13 +107,19 @@ var ReserveScene = React.createClass({
       this._genRows(this._pressData)
     )});
   },
-  reservationConfirm: function(time) {
-      return (
-        <View style={styles.tabContent}>
-          <Navbar {...this.props} title='Your Reservation' />
-          <SegmentedControl {...this.props} />
-        </View>
-      )
+  reservationConfirm: function(reserveTime) {
+    console.log("time", reserveTime);
+    console.log("reserve props", this.props);
+    this.props.navigator.push({
+    component: ReserveConfirmScene,
+    passProps: {
+      information:this.props,
+      reserve_time: reserveTime,
+      type: this.state.selectedTab,
+      title: "Your Reservation",
+      tab: 'Reservation',
+    }
+    });
   }
 });
 
