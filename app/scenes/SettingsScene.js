@@ -2,38 +2,46 @@
 
 import React, { Component } from 'react';
 
-import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity } from 'react-native';
+import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, Navigator } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import AccountScene from './AccountScene.js';
+import Navbar from '../components/Navbar';
 
+var routes = [
+  {title: 'First Scene', index: 0},
+  {title: 'Second Scene', index: 1},
+];
+var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+var data = ['Account', 'Notification', 'Report to Maintenance', 'Privacy', 'Send App Feedback', 'Sign out'];
 
-export default class SettingsScene extends Component {
-  constructor(props) {
-    super(props);
+var SettingsScene = React.createClass({
 
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var data = ['Account', 'Notification', 'Report to Maintenance', 'Change Address', 'Privacy', 'Send App Feedback', 'Sign out'];
-    this.state = {
+  getInitialState: function() {
+    const {navigator} = this.props;
+    return {
       dataSource: ds.cloneWithRows(data)
     }
-  }
+  },
 
-  renderRow(rowData) {
+  renderRow: function(rowData) {
+    console.log("setting props", this.props);
     return (
       <View>
-
-        <TouchableOpacity style={styles.rowContainer}>
+        <TouchableOpacity
+          style={styles.rowContainer}
+          onPress={() => {
+            this.renderSettingScene(rowData);
+          }}>
           <Text style={styles.text}>{rowData}</Text>
           <View style={styles.rightContainer}>
             <Icon style={styles.icon} name="ios-arrow-forward-outline" size={20} color="#4F8EF7" />
           </View>
         </TouchableOpacity>
-
         <View style={styles.separator}/>
-
       </View>
     )
-  }
+  },
 
   render() {
     return (
@@ -43,9 +51,34 @@ export default class SettingsScene extends Component {
           renderRow={this.renderRow} />
       </View>
     );
-  }
-
-}
+  },
+  renderSettingScene: function(rowData) {
+    const { navigator } = this.props;
+    if (rowData === 'Account') {
+      console.log("rowData", rowData);
+      console.log("renderSettingScene", this.props);
+      navigator.push ({
+        component: AccountScene,
+        passProps: {
+          username: this.props.username,
+          password: this.props.password,
+          address: this.props.address,
+          property_name: this.props.property_name,
+          title: rowData,
+        }
+      });
+      // <View>
+      // <Navigator
+      //   initialRoute={{ title: 'Awesome Scene', index: 0 }}
+      //   renderScene={(route, navigator) =>
+      //     <Text>Hello {route.title}!</Text>
+      //   }
+      //   style={{padding: 100}}
+      // />
+      // </View>
+    }
+  },
+});
 
 var styles = StyleSheet.create({
   container: {
@@ -78,3 +111,4 @@ var styles = StyleSheet.create({
     backgroundColor: '#dddddd'
   },
 });
+module.exports = SettingsScene;

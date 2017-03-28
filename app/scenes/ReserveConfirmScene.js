@@ -53,6 +53,7 @@ var ReserveConfirmScene = React.createClass({
       title: this.props.title,
       bottomTab: this.props.bottomTab,
       type: this.props.type,
+      reserved: this.props.reserved,
     }
   },
   componentDidMount: function() {
@@ -92,7 +93,7 @@ var ReserveConfirmScene = React.createClass({
   render() {
     console.log('initial state', this.props.reserve_time);
     // var reserved = this.props.reserved;
-    if (this.state.type === this.state.selectedTab) {
+    if (this.state.reserved && this.state.type === this.state.selectedTab) {
       return (
         this.renderReserved()
       );
@@ -212,7 +213,7 @@ var ReserveConfirmScene = React.createClass({
                 style={styles.segmentedControl}
                 tintColor='#B0FFFE'
                 values={this.state.values}
-                selectedIndex={0}
+                selectedIndex={this.state.selectedIndex}
                 onValueChange={(val)=> {
                   this.setState({
                     selectedTab: val
@@ -357,8 +358,8 @@ var ReserveConfirmScene = React.createClass({
     console.log('rowData', rowData)
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
     var raw_remainTime = rowData.end_time;
-    var expire_time = moment().add(10, 'minutes').format('hh:mm A');
-    var predict_time = moment(this.props.reserve_time, "hh:mm A").add(40, 'minutes').format('hh:mm A');
+    var predict_time = moment().add(10, 'minutes').format('hh:mm A');
+    var expire_time = moment(this.props.reserve_time, "hh:mm A").add(10, 'minutes').format('hh:mm A');
     if (raw_remainTime === "0000") {
       return (
           <View style={styles.container}>
@@ -373,7 +374,12 @@ var ReserveConfirmScene = React.createClass({
                   <Text style={[styles.text]}>Access code: 1001</Text>
                   <Button style={styles.btn}
                           textStyle={{fontSize: 10, color: '#4AC3C0'}}
-                          onPress={null}>
+                          onPress={() => {
+                            this.setState({
+                              reserved: false,
+                            });
+                            this.renderUnreserved;
+                          }}>
                     Cancel
                   </Button>
                 </View>

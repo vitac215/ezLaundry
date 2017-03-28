@@ -64,7 +64,7 @@ export default class LoginScene extends Component {
           username: user.username,
           password: user.password,
           address: user.address,
-          property_name: user.property_name
+          property_name: user.property_name,
         })
 
         // Navigate to the main scene
@@ -73,10 +73,10 @@ export default class LoginScene extends Component {
           title: user.property_name,
           component: MainScene,
           passProps: {
-            username: '',
-            password: '',
-            address: '',
-            property_name: '',
+            username: user.username,
+            password: user.password,
+            address: user.address,
+            property_name: user.property_name,
             tab: 'Status',
           }
         })
@@ -98,9 +98,7 @@ export default class LoginScene extends Component {
     return (
       <View style={styles.container}>
         <Navbar title='Login' leftBtn='Back' navigator={navigator} />
-
         <View style={styles.container}>
-
           <View style={styles.bgWrapper}>
             <Image source={require('../img/bg.png')} style={styles.bg} />
           </View>
