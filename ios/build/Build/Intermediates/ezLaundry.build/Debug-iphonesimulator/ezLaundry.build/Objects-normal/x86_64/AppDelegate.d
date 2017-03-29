@@ -9,4 +9,6 @@ dependencies: \
   /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
   /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h
+  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  ../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotificationManager.h \
+  /Users/vitachen/Documents/SP2017/laundry/laundry/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h

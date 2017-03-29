@@ -13,7 +13,7 @@ var routes = [
   {title: 'Second Scene', index: 1},
 ];
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-var data = ['Account', 'Notification', 'Report to Maintenance', 'Privacy', 'Send App Feedback', 'Sign out'];
+var data = ['Account', 'Notification', 'Report to Maintenance', 'Send Us Feedback','Privacy Policy', 'Sign out'];
 
 var SettingsScene = React.createClass({
 
@@ -24,15 +24,13 @@ var SettingsScene = React.createClass({
     }
   },
 
-  renderRow: function(rowData) {
+  renderRow(rowData) {
     console.log("setting props", this.props);
     return (
       <View>
         <TouchableOpacity
           style={styles.rowContainer}
-          onPress={() => {
-            this.renderSettingScene(rowData);
-          }}>
+          onPress={ () => {this.renderSettingScene(rowData)} }>
           <Text style={styles.text}>{rowData}</Text>
           <View style={styles.rightContainer}>
             <Icon style={styles.icon} name="ios-arrow-forward-outline" size={20} color="#4F8EF7" />
@@ -52,21 +50,27 @@ var SettingsScene = React.createClass({
       </View>
     );
   },
-  renderSettingScene: function(rowData) {
+
+  renderSettingScene(rowData) {
     const { navigator } = this.props;
-    if (rowData === 'Account') {
-      console.log("rowData", rowData);
-      console.log("renderSettingScene", this.props);
-      navigator.push ({
-        component: AccountScene,
-        passProps: {
-          username: this.props.username,
-          password: this.props.password,
-          address: this.props.address,
-          property_name: this.props.property_name,
-          title: rowData,
-        }
-      });
+    console.log(rowData);
+    switch (rowData) {
+      case 'Account':
+        console.log("rowData", rowData);
+        console.log("renderSettingScene", this.props);
+        navigator.push({
+          component: AccountScene,
+          passProps: {
+            username: this.props.username,
+            password: this.props.password,
+            address: this.props.address,
+            city: this.props.city,
+            property_name: this.props.property_name,
+            title: rowData}
+        });
+        break;
+    };
+
       // <View>
       // <Navigator
       //   initialRoute={{ title: 'Awesome Scene', index: 0 }}
@@ -76,8 +80,8 @@ var SettingsScene = React.createClass({
       //   style={{padding: 100}}
       // />
       // </View>
-    }
-  },
+  }
+
 });
 
 var styles = StyleSheet.create({
@@ -88,16 +92,17 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'stretch',
-    padding: 10,
+    padding: 20,
+    paddingBottom: 25
   },
   rightContainer: {
     flex: 1,
     alignItems: 'flex-end'
   },
   text: {
-    color: '#929292',
-    fontSize: 15,
     fontFamily: 'Helvetica',
+    color: '#929292',
+    fontSize: 20,
     marginLeft: 10,
     textAlign: 'center',
   },

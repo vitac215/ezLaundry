@@ -295,7 +295,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		oBwfJQOKSYEEKbZt1DmrT2CeNNY=
+		Dsarc9n7Ru9yXtzx+TuOAGjJ1vk=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -309,13 +309,17 @@
 		<data>
 		0m5CqWeFsaE3T7+YzTGvkKtPJ4w=
 		</data>
+		<key>PlugIns/ezLaundryTests.xctest/Ionicons.ttf</key>
+		<data>
+		D3lWcE/mG0nEHqGiIFEkD3AKK0Q=
+		</data>
 		<key>PlugIns/ezLaundryTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		FnxsfomXivItfkroEPOhH9xHNR0=
+		xuzQnxbsKs5nH308iLWPldePj0Q=
 		</data>
 		<key>PlugIns/ezLaundryTests.xctest/ezLaundryTests</key>
 		<data>
-		wdYmOwpOKi1l14D5vx3wx9micPE=
+		J3I8odW6KZJi1/tZihm3nmiRhqg=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -1130,26 +1134,37 @@
 			PYONRbhZ/0AlsHvkE8I9Km99nhpPzNEeAI8PiAzvloU=
 			</data>
 		</dict>
+		<key>PlugIns/ezLaundryTests.xctest/Ionicons.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			D3lWcE/mG0nEHqGiIFEkD3AKK0Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			u0dnmwuuuEgbf1HGitM65aUmc2y1CxcXzGD/a2X5CKM=
+			</data>
+		</dict>
 		<key>PlugIns/ezLaundryTests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FnxsfomXivItfkroEPOhH9xHNR0=
+			xuzQnxbsKs5nH308iLWPldePj0Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			fC8TyCxucnDNvbeWThhbVOpfNxEgOKsiDONP0npis3I=
+			G4jQa04WsPUdetsbqErgxZ1XkoMmHw5tg7J6poySfn0=
 			</data>
 		</dict>
 		<key>PlugIns/ezLaundryTests.xctest/ezLaundryTests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wdYmOwpOKi1l14D5vx3wx9micPE=
+			J3I8odW6KZJi1/tZihm3nmiRhqg=
 			</data>
 			<key>hash2</key>
 			<data>
-			E3a7SeM1kanq62lVOmFHqUTq30o3vBSx/kCoewHordc=
+			e6i6Vyvt727AzAeVjoJTg2QE+x1U3c6tN5uV3cg+bEQ=
 			</data>
 		</dict>
 	</dict>
