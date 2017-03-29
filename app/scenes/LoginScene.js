@@ -28,6 +28,7 @@ export default class LoginScene extends Component {
       username: '',
       password: '',
       address: '',
+      city: '',
       property_name: ''
     }
   }
@@ -49,6 +50,7 @@ export default class LoginScene extends Component {
                    "user": {"username": "v",
                             "password": "v",
                             "property_name": "Forbes",
+                            "city": 'Pittsburgh',
                             "address": "forbes"
                            },
                   };
@@ -64,6 +66,7 @@ export default class LoginScene extends Component {
           username: user.username,
           password: user.password,
           address: user.address,
+          ciyty: user.city,
           property_name: user.property_name,
         })
 
@@ -76,6 +79,7 @@ export default class LoginScene extends Component {
             username: user.username,
             password: user.password,
             address: user.address,
+            city: user.city,
             property_name: user.property_name,
             tab: 'Status',
           }

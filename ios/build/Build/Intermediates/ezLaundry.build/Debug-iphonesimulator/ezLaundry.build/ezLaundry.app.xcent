@@ -3,10 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>4DPB7PXWSS.ezezLaundry</string>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>4DPB7PXWSS.ezezLaundry</string>
-	</array>
+	<string>EK9E957M8M.easyLaundry</string>
+	<key>aps-environment</key>
+	<string>development</string>
 </dict>
 </plist>

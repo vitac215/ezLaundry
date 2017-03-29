@@ -123,14 +123,14 @@ export default class SignupScene extends Component {
                 autoCorrect={false}
                 value={address} />
 
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={ (city) => {this.setState({city})}}
-                  placeholder='city'
-                  autoCapitalize='none'
-                  placeholderTextColor='rgba(51,51,51,0.5)'
-                  autoCorrect={false}
-                  value={city} />
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (city) => {this.setState({city})}}
+                placeholder='city'
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={city} />
 
               <TextInput
                 style={styles.textInput}
