@@ -8,11 +8,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AccountScene from './AccountScene.js';
 import MaintainScene from './MaintainScene.js';
 import NotificationsScene from './NotificationsScene.js';
+import FeedbackScene from './FeedbackScene.js';
 import Navbar from '../components/Navbar';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-var data = ['Account', 'Notifications', 'Report to Maintenance', 'Send us Feedback','Privacy Policy', 'Sign out'];
+var data = ['Account', 'Notifications', 'Report to Maintenance', 'Send us Feedback', 'Privacy Policy'];
+
+const ACCOUNT = 'Account';
+const NOTIFICATION = 'Notifications';
+const MAINTAIN = 'Report to Maintenance';
+const FEEDBACK = 'Send us Feedback';
+const PRIVACY = 'Privacy Policy';
 
 var SettingsScene = React.createClass({
 
@@ -43,56 +50,85 @@ var SettingsScene = React.createClass({
   render() {
     return (
       <View style={styles.container}>
+
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow} />
-      </View>
-    );
-  },
+
+        <View style={styles.logoutContainer}>
+          <View style={styles.separator}/>
+          <TouchableOpacity
+            style={styles.rowContainer}>
+            <Text style={styles.text}>Sign Out</Text>
+          </TouchableOpacity>
+          <View style={styles.separator}/>
+        </View>
+
+    </View>
+  )},
 
   renderSettingScene(rowData) {
     const { navigator } = this.props;
 
     switch (rowData) {
-      case 'Account':
+      case ACCOUNT:
         console.log("rowData", rowData);
         console.log("renderSettingScene", this.props);
         navigator.push ({
           component: AccountScene,
           passProps: {
             username: this.props.username,
+            email: this.props.email,
             password: this.props.password,
             address: this.props.address,
+            city: this.props.city,
             property_name: this.props.property_name,
             title: rowData}
         });
         break;
-      case 'Report to Maintenance':
+      case MAINTAIN:
         console.log("rowData", rowData);
         console.log("renderSettingScene", this.props);
         navigator.push ({
           component: MaintainScene,
           passProps: {
             username: this.props.username,
+            email: this.props.email,
             password: this.props.password,
             address: this.props.address,
+            city: this.props.city,
             property_name: this.props.property_name,
             title: rowData,}
         });
         break;
-      case 'Notifications':
+      case NOTIFICATION:
         console.log("rowData", rowData);
         console.log("renderSettingScene", this.props);
         navigator.push ({
           component: NotificationsScene,
           passProps: {
             username: this.props.username,
+            email: this.props.email,
             password: this.props.password,
             address: this.props.address,
+            city: this.props.city,
             property_name: this.props.property_name,
             title: rowData,}
         });
         break;
+      case FEEDBACK:
+      navigator.push ({
+        component: FeedbackScene,
+        passProps: {
+          username: this.props.username,
+          email: this.props.email,
+          password: this.props.password,
+          address: this.props.address,
+          city: this.props.city,
+          property_name: this.props.property_name,
+          title: rowData,}
+      });
+      break;
     } // end switch
   },
 
@@ -138,5 +174,10 @@ var styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#dddddd'
   },
+  logoutContainer: {
+    flex: 1,
+    // marginTop: 0,
+    // marginBottom: 100,
+  }
 });
 module.exports = SettingsScene;

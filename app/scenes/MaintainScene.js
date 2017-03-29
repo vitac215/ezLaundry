@@ -13,12 +13,11 @@ import {
   Alert,
 } from 'react-native';
 
-import FloatLabelTextInput from 'react-native-floating-label-text-input';
+
 import Navbar from '../components/Navbar';
 
 
-
-export default class AccountScene extends Component {
+export default class MaintainScene extends Component {
 
   constructor(props) {
     super(props);
@@ -32,78 +31,17 @@ export default class AccountScene extends Component {
   };
 
   render() {
-    console.log('AccountScene', this.props);
+    console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name } = this.state;
 
     return (
       <View style={styles.container}>
-        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Save' navigator={navigator} />
+        <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
         <View style={styles.container}>
           <View style={styles.mainContainer}>
 
-            <View style={styles.input}>
-              <Text style={styles.label}>Username</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (username) => {this.setState({username})}}
-                placeholder={ username }
-                value={ username }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
 
-            <View style={styles.input}>
-              <Text style={styles.label}>Password</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (password) => {this.setState({password})}}
-                placeholder={ password }
-
-                value={ password }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
-
-            <View style={styles.input}>
-              <Text style={styles.label}>Address</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (address) => {this.setState({address})}}
-                placeholder={ address }
-                value={ address }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
-
-            <View style={styles.input}>
-              <Text style={styles.label}>City</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (city) => {this.setState({city})}}
-                placeholder={ city }
-
-                value={ city }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
-
-            <View style={styles.input}>
-              <Text style={styles.label}>Property Name</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (property_name) => {this.setState({property_name})}}
-                placeholder={ property_name }
-
-                value={ property_name }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
 
           </View>
         </View>

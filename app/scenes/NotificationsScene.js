@@ -13,12 +13,11 @@ import {
   Alert,
 } from 'react-native';
 
-import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import Navbar from '../components/Navbar';
 
 
 
-export default class AccountScene extends Component {
+export default class NotificationsScene extends Component {
 
   constructor(props) {
     super(props);
