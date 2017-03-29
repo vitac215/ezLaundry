@@ -6,14 +6,13 @@ import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, N
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import AccountScene from './AccountScene.js';
+import MaintainScene from './MaintainScene.js';
+import NotificationsScene from './NotificationsScene.js';
 import Navbar from '../components/Navbar';
 
-var routes = [
-  {title: 'First Scene', index: 0},
-  {title: 'Second Scene', index: 1},
-];
+
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-var data = ['Account', 'Notification', 'Report to Maintenance', 'Privacy', 'Send App Feedback', 'Sign out'];
+var data = ['Account', 'Notifications', 'Report to Maintenance', 'Privacy', 'Send us Feedback', 'Sign out'];
 
 var SettingsScene = React.createClass({
 
@@ -67,15 +66,34 @@ var SettingsScene = React.createClass({
           title: rowData,
         }
       });
-      // <View>
-      // <Navigator
-      //   initialRoute={{ title: 'Awesome Scene', index: 0 }}
-      //   renderScene={(route, navigator) =>
-      //     <Text>Hello {route.title}!</Text>
-      //   }
-      //   style={{padding: 100}}
-      // />
-      // </View>
+    }
+    if (rowData === 'Report to Maintenance') {
+      console.log("rowData", rowData);
+      console.log("renderSettingScene", this.props);
+      navigator.push ({
+        component: MaintainScene,
+        passProps: {
+          username: this.props.username,
+          password: this.props.password,
+          address: this.props.address,
+          property_name: this.props.property_name,
+          title: rowData,
+        }
+      });
+    }
+    if (rowData === 'Notifications') {
+      console.log("rowData", rowData);
+      console.log("renderSettingScene", this.props);
+      navigator.push ({
+        component: MaintainScene,
+        passProps: {
+          username: this.props.username,
+          password: this.props.password,
+          address: this.props.address,
+          property_name: this.props.property_name,
+          title: rowData,
+        }
+      });
     }
   },
 });

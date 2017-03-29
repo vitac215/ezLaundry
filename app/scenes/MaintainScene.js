@@ -16,7 +16,8 @@ import {
 
 import Navbar from '../components/Navbar';
 
-var AccountScene = React.createClass({
+
+var MaintainScene = React.createClass({
 
   getInitialState: function() {
     const {navigator} = this.props;
@@ -29,11 +30,11 @@ var AccountScene = React.createClass({
   },
 
   render: function() {
-    console.log('AccountScene', this.props);
+    console.log('MaintainScene', this.props);
     const { navigator } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Done' navigator={navigator} />
+        <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
         <View style={styles.mainContainer}>
         <View style={styles.inputContainer}>
         <Text>
@@ -102,4 +103,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = AccountScene;
+module.exports = MaintainScene;
