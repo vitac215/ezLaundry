@@ -6,11 +6,7 @@ import {
   TextInput,
   StyleSheet,
   View,
-  ListView,
-  SegmentedControlIOS,
-  ScrollView,
   TouchableHighlight,
-  Alert,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';

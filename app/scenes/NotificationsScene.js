@@ -2,110 +2,90 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
-  TextInput,
-  StyleSheet,
   View,
-  ListView,
-  SegmentedControlIOS,
-  ScrollView,
-  TouchableHighlight,
-  Alert,
+  StyleSheet,
+  Text,
+  Switch,
 } from 'react-native';
 
+import store from '../store';
 import Navbar from '../components/Navbar';
-
-
 
 export default class NotificationsScene extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      username: this.props.username,
-      password: this.props.password,
-      address: this.props.address,
-      city: this.props.city,
-      property_name: this.props.property_name
+      remindWashingAvailable: false,
+      remindDryerAvailable: false,
+      remindDone: false,
     }
   };
 
+  async componentDidMount() {
+    // let remind = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
+    let remind = await store.getRemindDone();
+    console.log("from store: " + remind);
+    this.setState({
+      remindDone: remind,
+    });
+  }
+
+  async storeRemindDone(value) {
+    console.log("value to be stored: "+value);
+    await store.setRemindDone(value);
+    // console.log("after store: "+await store.getRemindDone());
+  }
+
   render() {
-    console.log('AccountScene', this.props);
     const { navigator } = this.props;
-    const { username, password, passwordconfirm, address, city, property_name } = this.state;
+    console.log(this.state);
 
     return (
       <View style={styles.container}>
-        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Save' navigator={navigator} />
-        <View style={styles.container}>
-          <View style={styles.mainContainer}>
+        <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
+          <View style={styles.inputContainer}>
 
             <View style={styles.input}>
-              <Text style={styles.label}>Username</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (username) => {this.setState({username})}}
-                placeholder={ username }
-                value={ username }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
+              <Text style={styles.label}>Remind me when a washing machine becomes available: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindWashingAvailable}
+                onValueChange={
+                  (value) => {
+                    this.setState({remindWashingAvailable: value});
+                    // store.setRemindDone(value);
+                  }
+                }/>
             </View>
+            <View style={styles.separator}/>
 
             <View style={styles.input}>
-              <Text style={styles.label}>Password</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (password) => {this.setState({password})}}
-                placeholder={ password }
-
-                value={ password }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
+              <Text style={styles.label}>Remind me when a dryer becomes available: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindDryerAvailable}
+                onValueChange={(value) => this.setState({remindDryerAvailable: value})} />
             </View>
+            <View style={styles.separator}/>
+
 
             <View style={styles.input}>
-              <Text style={styles.label}>Address</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (address) => {this.setState({address})}}
-                placeholder={ address }
-                value={ address }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
+              <Text style={styles.label}>Remind me when my laundry is done: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindDone}
+                onValueChange={
+                  (value) => {
+                    this.storeRemindDone(value);
+                    this.setState({remindDone: value});
+                  }
+                }/>
             </View>
-
-            <View style={styles.input}>
-              <Text style={styles.label}>City</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (city) => {this.setState({city})}}
-                placeholder={ city }
-
-                value={ city }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
-
-            <View style={styles.input}>
-              <Text style={styles.label}>Property Name</Text>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (property_name) => {this.setState({property_name})}}
-                placeholder={ property_name }
-
-                value={ property_name }
-                autoCapitalize='none'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false} />
-            </View>
+            <View style={styles.separator}/>
 
           </View>
-        </View>
       </View>
     );
   };
@@ -116,46 +96,32 @@ var styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  default: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
-  },
-  mainContainer: {
-    justifyContent: 'center',
-    marginTop: 30
+  inputContainer: {
+    marginBottom: 20,
+    padding: 20,
   },
   input: {
-    alignSelf: 'center',
     flexDirection:'row',
-    borderBottomColor: '#dddddd',
-    // height: 40,
-    // width: 250,
+    alignSelf: 'center',
     marginTop: 10,
-    // fontSize: 17,
-    // padding: 10,
+    marginBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   label: {
     justifyContent: "flex-start",
-    width: 120,
-    fontWeight: 'bold',
-    // marginLeft: 30,
-    fontSize: 17,
-    padding: 10
+    flexGrow: 0.8,
+    width: 150,
+    fontSize: 15,
+    marginRight: 20,
   },
-  textInput: {
+  switch: {
     justifyContent: "flex-end",
-    width: 200,
-    // alignSelf: 'center',
-    // height: 40,
-    // width: 250,
-    // marginTop: 26,
-    // marginRight: 30,
-    fontSize: 17,
-    padding: 10,
-    backgroundColor: '#F6F6F6'
-  }
+    flexGrow: 0.2,
+    width: 50,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#dddddd'
+  },
 });

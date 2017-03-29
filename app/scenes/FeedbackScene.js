@@ -6,11 +6,7 @@ import {
   TextInput,
   StyleSheet,
   View,
-  ListView,
-  SegmentedControlIOS,
-  ScrollView,
   TouchableHighlight,
-  Alert,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -23,6 +19,7 @@ export default class FeedbackScene extends Component {
     this.state = {
       feedback: '',
       username: this.props.username,
+      email: this.props.email,
     }
   };
 
@@ -33,7 +30,7 @@ export default class FeedbackScene extends Component {
   render() {
     console.log('Feedback Scene', this.props);
     const { navigator } = this.props;
-    const { username, feedback } = this.state;
+    const { username, feedback, email } = this.state;
 
     return (
       <View style={styles.container}>

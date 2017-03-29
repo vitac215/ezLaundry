@@ -33,9 +33,9 @@ var SettingsScene = React.createClass({
   renderRow(rowData) {
     console.log("setting props", this.props);
     return (
-      <View>
+      <View style={styles.rowContainer}>
         <TouchableOpacity
-          style={styles.rowContainer}
+          style={styles.clickContainer}
           onPress={ () => {this.renderSettingScene(rowData)} }>
           <Text style={styles.text}>{rowData}</Text>
           <View style={styles.rightContainer}>
@@ -56,15 +56,19 @@ var SettingsScene = React.createClass({
           renderRow={this.renderRow} />
 
         <View style={styles.logoutContainer}>
-          <View style={styles.separator}/>
-          <TouchableOpacity
-            style={styles.rowContainer}>
-            <Text style={styles.text}>Sign Out</Text>
-          </TouchableOpacity>
-          <View style={styles.separator}/>
+          <View style={styles.rowContainer}>
+
+            <View style={styles.separator}/>
+            <TouchableOpacity
+              style={styles.logout}>
+              <Text style={styles.text}>Sign Out</Text>
+            </TouchableOpacity>
+            <View style={styles.separator}/>
+
+          </View>
         </View>
 
-    </View>
+      </View>
   )},
 
   renderSettingScene(rowData) {
@@ -148,11 +152,14 @@ var styles = StyleSheet.create({
     flex: 1
   },
   rowContainer: {
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+  clickContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'stretch',
     padding: 20,
-    paddingBottom: 25
   },
   rightContainer: {
     flex: 1,
@@ -176,8 +183,10 @@ var styles = StyleSheet.create({
   },
   logoutContainer: {
     flex: 1,
-    // marginTop: 0,
-    // marginBottom: 100,
+  },
+  logout: {
+    padding: 20,
+    alignItems: 'flex-start'
   }
 });
 module.exports = SettingsScene;
