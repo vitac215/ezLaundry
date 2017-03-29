@@ -1,106 +1,127 @@
 'use strict';
 
 import React, { Component } from 'react';
-
 import {
-  Text,
-  TextInput,
-  StyleSheet,
   View,
-  ListView,
-  SegmentedControlIOS,
-  ScrollView,
-  TouchableHighlight,
-  Alert,
+  StyleSheet,
+  Text,
+  Switch,
 } from 'react-native';
 
+import store from '../store';
 import Navbar from '../components/Navbar';
 
+export default class NotificationsScene extends Component {
 
-var NotificationsScene = React.createClass({
+  constructor(props) {
+    super(props);
 
-  getInitialState: function() {
-    const {navigator} = this.props;
+    this.state = {
+      remindWashingAvailable: false,
+      remindDryerAvailable: false,
+      remindDone: false,
+    }
+  };
 
-    return {
-      email: this.props.username,
-      password: this.props.password,
-      address: this.props.address,
-    };
-  },
+  async componentDidMount() {
+    // let remind = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
+    let remind = await store.getRemindDone();
+    console.log("from store: " + remind);
+    this.setState({
+      remindDone: remind,
+    });
+  }
 
-  render: function() {
-    console.log('NotificationsScene', this.props);
+  async storeRemindDone(value) {
+    console.log("value to be stored: "+value);
+    await store.setRemindDone(value);
+    // console.log("after store: "+await store.getRemindDone());
+  }
+
+  render() {
     const { navigator } = this.props;
+    console.log(this.state);
+
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
-        <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-        <Text>
-          <Text>&ensp;&ensp;&ensp;Email&ensp;&ensp;&ensp;</Text>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (email) => {this.setState({email})}}
-            placeholder={this.props.username}
-            autoCapitalize='none'
-            autoCorrect={false}
-            value={this.state.email}/>
-        </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (password) => {this.setState({password})}}
-            placeholder='password'
-            autoCapitalize='none'
-            secureTextEntry
-            placeholderTextColor='rgba(51,51,51,0.5)'
-            autoCorrect={false}
-            value={this.state.password} />
-        </View>
-        </View>
+          <View style={styles.inputContainer}>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Remind me when a washing machine becomes available: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindWashingAvailable}
+                onValueChange={
+                  (value) => {
+                    this.setState({remindWashingAvailable: value});
+                    // store.setRemindDone(value);
+                  }
+                }/>
+            </View>
+            <View style={styles.separator}/>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Remind me when a dryer becomes available: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindDryerAvailable}
+                onValueChange={(value) => this.setState({remindDryerAvailable: value})} />
+            </View>
+            <View style={styles.separator}/>
+
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Remind me when my laundry is done: </Text>
+              <Switch
+                style={styles.switch}
+                value={this.state.remindDone}
+                onValueChange={
+                  (value) => {
+                    this.storeRemindDone(value);
+                    this.setState({remindDone: value});
+                  }
+                }/>
+            </View>
+            <View style={styles.separator}/>
+
+          </View>
       </View>
     );
-  },
-});
+  };
+
+};
 
 var styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  default: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
-  },
   inputContainer: {
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
+    marginBottom: 20,
+    padding: 20,
   },
-  textInput: {
+  input: {
+    flexDirection:'row',
     alignSelf: 'center',
-    height: 40,
-    width: 250,
-    marginTop: 26,
-    fontSize: 17,
-    padding: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-  mainContainer: {
-    justifyContent: 'center',
-    marginTop: 50
+  label: {
+    justifyContent: "flex-start",
+    flexGrow: 0.8,
+    width: 150,
+    fontSize: 15,
+    marginRight: 20,
   },
-  labelContainer: {
-    flexDirection: 'row',
-    marginVertical: 2,
-    flex: 1,
+  switch: {
+    justifyContent: "flex-end",
+    flexGrow: 0.2,
+    width: 50,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#dddddd'
   },
 });
-
-module.exports = NotificationsScene;

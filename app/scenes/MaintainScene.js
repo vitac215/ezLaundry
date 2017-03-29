@@ -1,7 +1,6 @@
 'use strict';
 
 import React, { Component } from 'react';
-
 import {
   Text,
   TextInput,
@@ -18,23 +17,27 @@ import {
 
 import Navbar from '../components/Navbar';
 
-var MaintainScene = React.createClass({
 
-  getInitialState: function() {
-    const {navigator} = this.props;
+export default class MaintainScene extends Component {
 
-    return {
-      email: this.props.username,
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: this.props.username,
       password: this.props.password,
       address: this.props.address,
       selectedMachine: '0',
       problem: '',
-    };
-  },
+      city: this.props.city,
+      property_name: this.props.property_name
+    }
+  };
 
-  render: function() {
-    console.log('MaintainScene', this.props);
+  render() {
+    console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
+    const { username, password, passwordconfirm, address, city, property_name } = this.state;
+
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
@@ -82,10 +85,27 @@ var styles = StyleSheet.create({
   picker: {
     width: 100,
   },
-  inputContainer: {
-    paddingBottom: 10,
-    borderBottomWidth: 1,
+  mainContainer: {
+    justifyContent: 'center',
+    marginTop: 30
+  },
+  input: {
+    alignSelf: 'center',
+    flexDirection:'row',
     borderBottomColor: '#dddddd',
+    // height: 40,
+    // width: 250,
+    marginTop: 10,
+    // fontSize: 17,
+    // padding: 10,
+  },
+  label: {
+    justifyContent: "flex-start",
+    width: 120,
+    fontWeight: 'bold',
+    // marginLeft: 30,
+    fontSize: 17,
+    padding: 10
   },
   text: {
     textAlign: 'center',
@@ -96,16 +116,6 @@ var styles = StyleSheet.create({
     marginRight: 10,
     backgroundColor: '#4AC3C0',
     padding: 10,
-  },
-  mainContainer: {
-    justifyContent: 'center',
-    marginTop: 50
-  },
-  labelContainer: {
-    flexDirection: 'row',
-    marginVertical: 2,
-    flex: 1,
-  },
+    backgroundColor: '#F6F6F6'
+  }
 });
-
-module.exports = MaintainScene;

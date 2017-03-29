@@ -26,6 +26,7 @@ export default class LoginScene extends Component {
 
     this.state = {
       username: '',
+      email: '',
       password: '',
       address: '',
       city: '',
@@ -48,6 +49,7 @@ export default class LoginScene extends Component {
       // change
       const res = {"message": "SUCCESS",
                    "user": {"username": "v",
+                            "email": "v@gmail.com",
                             "password": "v",
                             "property_name": "Forbes",
                             "city": 'Pittsburgh',
@@ -64,9 +66,10 @@ export default class LoginScene extends Component {
 
         this.setState({
           username: user.username,
+          email: user.email,
           password: user.password,
           address: user.address,
-          ciyty: user.city,
+          city: user.city,
           property_name: user.property_name,
         })
 
@@ -77,6 +80,7 @@ export default class LoginScene extends Component {
           component: MainScene,
           passProps: {
             username: user.username,
+            email: user.email,
             password: user.password,
             address: user.address,
             city: user.city,
@@ -131,11 +135,11 @@ export default class LoginScene extends Component {
                 value={password} />
             </View>
 
-              <Button style={styles.btn}
-                      textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-                      onPress={this.loginAction.bind(this)}>
-                Login
-              </Button>
+            <Button style={styles.btn}
+                    textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                    onPress={this.loginAction.bind(this)}>
+              Login
+            </Button>
           </View>
 
         </View>

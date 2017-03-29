@@ -12,8 +12,11 @@
     "moment-timezone": "^0.5.11",
     "react": "15.4.2",
     "react-native": "0.41.2",
+<<<<<<< HEAD
     "react-native-floating-label-text-input": "^0.1.4",
     "react-native-multiple-select": "^0.1.0",
+=======
+>>>>>>> c26997c4aa309ab8f5066b824a22fe5ea60c2d4e
     "react-native-notifications": "^1.1.9",
     "react-native-push-notification": "^2.2.1",
     "react-native-vector-icons": "^4.0.0",

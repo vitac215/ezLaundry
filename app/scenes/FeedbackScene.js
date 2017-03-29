@@ -1,71 +1,63 @@
 'use strict';
 
 import React, { Component } from 'react';
-
 import {
   Text,
   TextInput,
   StyleSheet,
   View,
-  ListView,
-  SegmentedControlIOS,
-  ScrollView,
   TouchableHighlight,
-  Alert,
 } from 'react-native';
 
+import Button from 'apsl-react-native-button';
 import Navbar from '../components/Navbar';
 
+export default class FeedbackScene extends Component {
 
-var FeedbackScene = React.createClass({
+  constructor(props) {
+    super(props);
+    this.state = {
+      feedback: '',
+      username: this.props.username,
+      email: this.props.email,
+    }
+  };
 
-  getInitialState: function() {
-    const {navigator} = this.props;
+  sendFeedback() {
+    console.log("send feedback");
+  }
 
-    return {
-      email: this.props.username,
-      password: this.props.password,
-      address: this.props.address,
-    };
-  },
-
-  render: function() {
-    console.log('FeedbackScene', this.props);
+  render() {
+    console.log('Feedback Scene', this.props);
     const { navigator } = this.props;
+    const { username, feedback, email } = this.state;
+
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
-        <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-        <Text>
-          <Text>&ensp;&ensp;&ensp;Email&ensp;&ensp;&ensp;</Text>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (email) => {this.setState({email})}}
-            placeholder={this.props.username}
-            autoCapitalize='none'
-            autoCorrect={false}
-            value={this.state.email}/>
-        </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (password) => {this.setState({password})}}
-            placeholder='password'
-            autoCapitalize='none'
-            secureTextEntry
-            placeholderTextColor='rgba(51,51,51,0.5)'
-            autoCorrect={false}
-            value={this.state.password} />
-        </View>
-        </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textArea}
+              onChangeText={ (feedback) => {this.setState({feedback})}}
+              placeholder="Let us know what you think about this app!"
+              value={ feedback }
+              autoCapitalize='none'
+              placeholderTextColor='rgba(51,51,51,0.5)'
+              editable={true}
+              multiline={true}
+              autoCorrect={false} />
+          </View>
+
+          <Button style={styles.btn}
+                  textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                  onPress={this.sendFeedback.bind(this)}>
+            Send
+          </Button>
       </View>
     );
-  },
-});
+  };
+
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -80,27 +72,23 @@ var styles = StyleSheet.create({
     padding: 4,
   },
   inputContainer: {
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
-  },
-  textInput: {
-    alignSelf: 'center',
-    height: 40,
-    width: 250,
-    marginTop: 26,
-    fontSize: 17,
-    padding: 10,
-  },
-  mainContainer: {
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 30,
+    marginBottom: 20,
   },
-  labelContainer: {
-    flexDirection: 'row',
-    marginVertical: 2,
-    flex: 1,
+  textArea: {
+    alignSelf: 'center',
+    width: 300,
+    height: 250,
+    fontSize: 17,
+    padding: 15,
+    backgroundColor: '#F6F6F6',
+  },
+  btn: {
+    backgroundColor: '#4AC3C0',
+    alignSelf: 'center',
+    borderWidth: 0,
+    margin: 15,
+    width: 300
   },
 });
-
-module.exports = FeedbackScene;

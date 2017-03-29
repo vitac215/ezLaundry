@@ -15,6 +15,7 @@ export default class SignupScene extends Component {
     super(props);
     this.state = {
       username: '',
+      email: '',
       password: '',
       passwordconfirm: '',
       city: '',
@@ -29,7 +30,7 @@ export default class SignupScene extends Component {
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name } = this.state;
 
-    if (!username || !password || !address || !city || !property_name ) {
+    if (!username || !email || !password || !address || !city || !property_name ) {
       Alert.alert('Please enter all the information');
       return;
     }
@@ -41,7 +42,7 @@ export default class SignupScene extends Component {
 
     // Create a new user
     try {
-      let res = await API.signUp(username, password, address, city, property_name);
+      let res = await API.signUp(username, email, password, address, city, property_name);
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
         console.log(res);
@@ -72,7 +73,7 @@ export default class SignupScene extends Component {
 
   render() {
     const { navigator } = this.props;
-    const {username, password, passwordconfirm, address, city, property_name} = this.state;
+    const {username, email, password, passwordconfirm, address, city, property_name} = this.state;
 
     return (
       <View style={styles.container}>
@@ -94,6 +95,16 @@ export default class SignupScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={username} />
+
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (email) => {this.setState({email})}}
+                placeholder='email address'
+                autoCapitalize='none'
+                sectionColor='#4AC3C0'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={email} />
 
               <TextInput
                 style={styles.textInput}
