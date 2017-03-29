@@ -12,11 +12,7 @@ import Navbar from '../components/Navbar';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-<<<<<<< HEAD
-var data = ['Account', 'Notifications', 'Report to Maintenance', 'Privacy', 'Send us Feedback', 'Sign out'];
-=======
-var data = ['Account', 'Notification', 'Report to Maintenance', 'Send Us Feedback','Privacy Policy', 'Sign out'];
->>>>>>> upstream/master
+var data = ['Account', 'Notifications', 'Report to Maintenance', 'Send us Feedback','Privacy Policy', 'Sign out'];
 
 var SettingsScene = React.createClass({
 
@@ -56,7 +52,6 @@ var SettingsScene = React.createClass({
 
   renderSettingScene(rowData) {
     const { navigator } = this.props;
-<<<<<<< HEAD
     if (rowData === 'Account') {
       console.log("rowData", rowData);
       console.log("renderSettingScene", this.props);
@@ -100,24 +95,22 @@ var SettingsScene = React.createClass({
       });
     }
   },
-=======
-    console.log(rowData);
-    switch (rowData) {
-      case 'Account':
-        console.log("rowData", rowData);
-        console.log("renderSettingScene", this.props);
-        navigator.push({
-          component: AccountScene,
-          passProps: {
-            username: this.props.username,
-            password: this.props.password,
-            address: this.props.address,
-            city: this.props.city,
-            property_name: this.props.property_name,
-            title: rowData}
-        });
-        break;
-    };
+    // switch (rowData) {
+    //   case 'Account':
+    //     console.log("rowData", rowData);
+    //     console.log("renderSettingScene", this.props);
+    //     navigator.push({
+    //       component: AccountScene,
+    //       passProps: {
+    //         username: this.props.username,
+    //         password: this.props.password,
+    //         address: this.props.address,
+    //         city: this.props.city,
+    //         property_name: this.props.property_name,
+    //         title: rowData}
+    //     });
+    //     break;
+    // };
 
       // <View>
       // <Navigator
@@ -128,9 +121,6 @@ var SettingsScene = React.createClass({
       //   style={{padding: 100}}
       // />
       // </View>
-  }
-
->>>>>>> upstream/master
 });
 
 var styles = StyleSheet.create({

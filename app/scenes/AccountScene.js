@@ -14,12 +14,9 @@ import {
 } from 'react-native';
 
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
-
-<<<<<<< HEAD
-var AccountScene = React.createClass({
-=======
 import Navbar from '../components/Navbar';
->>>>>>> upstream/master
+
+
 
 export default class AccountScene extends Component {
 
@@ -41,36 +38,7 @@ export default class AccountScene extends Component {
 
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
         <Navbar title={this.props.title} leftBtn='Back' rightBtn='Done' navigator={navigator} />
-        <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-        <Text>
-          <Text>&ensp;&ensp;&ensp;Email&ensp;&ensp;&ensp;</Text>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (email) => {this.setState({email})}}
-            placeholder={this.props.username}
-            autoCapitalize='none'
-            autoCorrect={false}
-            value={this.state.email}/>
-        </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (password) => {this.setState({password})}}
-            placeholder='password'
-            autoCapitalize='none'
-            secureTextEntry
-            placeholderTextColor='rgba(51,51,51,0.5)'
-            autoCorrect={false}
-            value={this.state.password} />
-        </View>
-=======
-        <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
         <View style={styles.container}>
           <View style={styles.mainContainer}>
 
@@ -86,6 +54,69 @@ export default class AccountScene extends Component {
                 value={username} />
             </View>
 
+            <View style={styles.input}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder={ password }
+                autoCapitalize='none'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={password} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Confirm Password</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (passwordconfirm) => {this.setState({passwordconfirm})}}
+                placeholder='Please retype your password'
+                autoCapitalize='none'
+                secureTextEntry
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value='' />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Address</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (address) => {this.setState({address})}}
+                placeholder={ address }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={address} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>City</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (city) => {this.setState({city})}}
+                placeholder={ city }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={city} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Property Name</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (property_name) => {this.setState({property_name})}}
+                placeholder={ property_name }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false}
+                value={property_name} />
+            </View>
+
+
             {/* <TextInput
               style={styles.textInput}
               onChangeText={ (password) => {this.setState({password})}}
@@ -95,7 +126,6 @@ export default class AccountScene extends Component {
               placeholderTextColor='rgba(51,51,51,0.5)'
               autoCorrect={false}
               value={password} />
-
             <TextInput
               style={styles.textInput}
               onChangeText={ (address) => {this.setState({address})}}
@@ -104,7 +134,6 @@ export default class AccountScene extends Component {
               placeholderTextColor='rgba(51,51,51,0.5)'
               autoCorrect={false}
               value={address} />
-
             <TextInput
               style={styles.textInput}
               onChangeText={ (city) => {this.setState({city})}}
@@ -113,7 +142,6 @@ export default class AccountScene extends Component {
               placeholderTextColor='rgba(51,51,51,0.5)'
               autoCorrect={false}
               value={city} />
-
             <TextInput
               style={styles.textInput}
               onChangeText={ (property_name) => {this.setState({property_name})}}
@@ -124,7 +152,6 @@ export default class AccountScene extends Component {
               value={property_name} /> */}
 
           </View>
->>>>>>> upstream/master
         </View>
       </View>
     );
@@ -160,9 +187,9 @@ var styles = StyleSheet.create({
   label: {
     justifyContent: "flex-start",
     width: 120,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     fontSize: 17,
-    marginLeft: 50
+    marginLeft: 25,
   },
   textInput: {
     justifyContent: "flex-end",
