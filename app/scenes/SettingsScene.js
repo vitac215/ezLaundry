@@ -84,7 +84,7 @@ var SettingsScene = React.createClass({
       console.log("rowData", rowData);
       console.log("renderSettingScene", this.props);
       navigator.push ({
-        component: MaintainScene,
+        component: NotificationsScene,
         passProps: {
           username: this.props.username,
           password: this.props.password,

@@ -12,10 +12,11 @@ import {
   ScrollView,
   TouchableHighlight,
   Alert,
+  Picker,
 } from 'react-native';
 
-import Navbar from '../components/Navbar';
 
+import Navbar from '../components/Navbar';
 
 var MaintainScene = React.createClass({
 
@@ -26,6 +27,8 @@ var MaintainScene = React.createClass({
       email: this.props.username,
       password: this.props.password,
       address: this.props.address,
+      selectedMachine: '0',
+      problem: '',
     };
   },
 
@@ -35,35 +38,39 @@ var MaintainScene = React.createClass({
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
-        <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-        <Text>
-          <Text>&ensp;&ensp;&ensp;Email&ensp;&ensp;&ensp;</Text>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (email) => {this.setState({email})}}
-            placeholder={this.props.username}
-            autoCapitalize='none'
-            autoCorrect={false}
-            value={this.state.email}/>
-        </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (password) => {this.setState({password})}}
-            placeholder='password'
-            autoCapitalize='none'
-            secureTextEntry
-            placeholderTextColor='rgba(51,51,51,0.5)'
-            autoCorrect={false}
-            value={this.state.password} />
-        </View>
-        </View>
+        <Text style={styles.text}>Choose Machines</Text>
+        <Picker
+          selectedValue={this.state.selectedMachine}
+          onValueChange={(val) => this.setState({selectedMachine: val})}>
+          <Picker.Item label="1" value="1" />
+          <Picker.Item label="2" value="2" />
+          <Picker.Item label="3" value="3" />
+          <Picker.Item label="4" value="4" />
+          <Picker.Item label="5" value="5" />
+          <Picker.Item label="6" value="6" />
+          <Picker.Item label="General Problem" value="0" />
+        </Picker>
+        <Text style={styles.text}>What is the problem?</Text>
+        <Picker
+          selectedValue={this.state.problem}
+          onValueChange={(prob) => this.setState({problem: prob})}>
+          <Picker.Item label="Machine is broken." value="1" />
+          <Picker.Item label="Machine is dirty." value="2" />
+        </Picker>
       </View>
     );
+  },
+  changeMode: function() {
+    const newMode = this.state.mode === Picker.MODE_DIALOG
+        ? Picker.MODE_DROPDOWN
+        : Picker.MODE_DIALOG;
+    this.setState({mode: newMode});
+  },
+
+  onValueChange: function(key: string, value: string) {
+    const newState = {};
+    newState[key] = value;
+    this.setState(newState);
   },
 });
 
@@ -71,25 +78,23 @@ var styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  default: {
-    height: 26,
-    borderWidth: 0.5,
-    borderColor: '#0f0f0f',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
+
+  picker: {
+    width: 100,
   },
   inputContainer: {
     paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#dddddd',
   },
-  textInput: {
-    alignSelf: 'center',
-    height: 40,
-    width: 250,
-    marginTop: 26,
-    fontSize: 17,
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: '#4AC3C0',
     padding: 10,
   },
   mainContainer: {
