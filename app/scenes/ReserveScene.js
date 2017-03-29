@@ -113,7 +113,10 @@ var ReserveScene = React.createClass({
     this.props.navigator.push({
     component: ReserveConfirmScene,
     passProps: {
-      information:this.props,
+      username: this.props.username,
+      address: this.props.address,
+      password: this.props.password,
+      property_name: this.props.property_name,
       reserve_time: reserveTime,
       type: this.state.selectedTab,
       title: "Your Reservation",
