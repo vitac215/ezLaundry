@@ -17,7 +17,7 @@ var data = ['Account', 'Notification', 'Report to Maintenance', 'Send Us Feedbac
 
 var SettingsScene = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     const {navigator} = this.props;
     return {
       dataSource: ds.cloneWithRows(data)

@@ -47,48 +47,59 @@ export default class AccountScene extends Component {
                 style={styles.textInput}
                 onChangeText={ (username) => {this.setState({username})}}
                 placeholder={ username }
+                value={ username }
                 autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false}
-                value={username} />
+                autoCorrect={false} />
             </View>
 
-            {/* <TextInput
-              style={styles.textInput}
-              onChangeText={ (password) => {this.setState({password})}}
-              placeholder='password'
-              autoCapitalize='none'
-              secureTextEntry
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={password} />
+            <View style={styles.input}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder={ password }
+                value={ password }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              onChangeText={ (address) => {this.setState({address})}}
-              placeholder='address'
-              autoCapitalize='none'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={address} />
+            <View style={styles.input}>
+              <Text style={styles.label}>Address</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (address) => {this.setState({address})}}
+                placeholder={ address }
+                value={ address }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              onChangeText={ (city) => {this.setState({city})}}
-              placeholder='city'
-              autoCapitalize='none'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={city} />
+            <View style={styles.input}>
+              <Text style={styles.label}>City</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (city) => {this.setState({city})}}
+                placeholder={ city }
+                value={ city }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
 
-            <TextInput
-              style={styles.textInput}
-              onChangeText={ (property_name) => {this.setState({property_name})}}
-              placeholder='property name'
-              autoCapitalize='none'
-              placeholderTextColor='rgba(51,51,51,0.5)'
-              autoCorrect={false}
-              value={property_name} /> */}
+            <View style={styles.input}>
+              <Text style={styles.label}>Property Name</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (property_name) => {this.setState({property_name})}}
+                placeholder={ property_name }
+                value={ property_name }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
 
           </View>
         </View>
@@ -112,14 +123,15 @@ var styles = StyleSheet.create({
   },
   mainContainer: {
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 30
   },
   input: {
-    // alignSelf: 'center',
+    alignSelf: 'center',
     flexDirection:'row',
+    borderBottomColor: '#dddddd',
     // height: 40,
     // width: 250,
-    // marginTop: 26,
+    marginTop: 10,
     // fontSize: 17,
     // padding: 10,
   },
@@ -127,8 +139,9 @@ var styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: 120,
     fontWeight: 'bold',
+    // marginLeft: 30,
     fontSize: 17,
-    marginLeft: 50
+    padding: 10
   },
   textInput: {
     justifyContent: "flex-end",
@@ -137,7 +150,9 @@ var styles = StyleSheet.create({
     // height: 40,
     // width: 250,
     // marginTop: 26,
+    // marginRight: 30,
     fontSize: 17,
-    // padding: 10,
+    padding: 10,
+    backgroundColor: '#F6F6F6'
   }
 });

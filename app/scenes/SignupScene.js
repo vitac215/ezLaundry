@@ -90,6 +90,7 @@ export default class SignupScene extends Component {
                 onChangeText={ (username) => {this.setState({username})}}
                 placeholder='username'
                 autoCapitalize='none'
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={username} />
@@ -100,6 +101,7 @@ export default class SignupScene extends Component {
                 placeholder='password'
                 autoCapitalize='none'
                 secureTextEntry
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={password} />
@@ -110,6 +112,7 @@ export default class SignupScene extends Component {
                 placeholder='confirm password'
                 autoCapitalize='none'
                 secureTextEntry
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={passwordconfirm} />
@@ -119,6 +122,7 @@ export default class SignupScene extends Component {
                 onChangeText={ (address) => {this.setState({address})}}
                 placeholder='address'
                 autoCapitalize='none'
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={address} />
@@ -128,6 +132,7 @@ export default class SignupScene extends Component {
                 onChangeText={ (city) => {this.setState({city})}}
                 placeholder='city'
                 autoCapitalize='none'
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={city} />
@@ -137,6 +142,7 @@ export default class SignupScene extends Component {
                 onChangeText={ (property_name) => {this.setState({property_name})}}
                 placeholder='property name'
                 autoCapitalize='none'
+                sectionColor='#4AC3C0'
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={property_name} />

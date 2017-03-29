@@ -115,6 +115,7 @@ export default class LoginScene extends Component {
                 placeholder='username'
                 autoCapitalize='none'
                 placeholderTextColor='rgba(51,51,51,0.5)'
+                sectionColor='#4AC3C0'
                 autoCorrect={false}
                 value={username} />
 
@@ -123,6 +124,7 @@ export default class LoginScene extends Component {
                 onChangeText={ (password) => {this.setState({password})}}
                 placeholder='password'
                 autoCapitalize='none'
+                sectionColor='#4AC3C0'
                 secureTextEntry
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
