@@ -38,7 +38,7 @@ export default class AccountScene extends Component {
 
     return (
       <View style={styles.container}>
-        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Done' navigator={navigator} />
+        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Save' navigator={navigator} />
         <View style={styles.container}>
           <View style={styles.mainContainer}>
 
