@@ -1,7 +1,6 @@
 'use strict';
 
 import React, { Component } from 'react';
-
 import {
   Text,
   TextInput,
@@ -14,58 +13,105 @@ import {
   Alert,
 } from 'react-native';
 
+import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import Navbar from '../components/Navbar';
 
 
-var MaintainScene = React.createClass({
 
-  getInitialState: function() {
-    const {navigator} = this.props;
+export default class AccountScene extends Component {
 
-    return {
-      email: this.props.username,
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: this.props.username,
       password: this.props.password,
       address: this.props.address,
-    };
-  },
+      city: this.props.city,
+      property_name: this.props.property_name
+    }
+  };
 
-  render: function() {
-    console.log('MaintainScene', this.props);
+  render() {
+    console.log('AccountScene', this.props);
     const { navigator } = this.props;
+    const { username, password, passwordconfirm, address, city, property_name } = this.state;
+
     return (
       <View style={styles.container}>
-        <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
-        <View style={styles.mainContainer}>
-        <View style={styles.inputContainer}>
-        <Text>
-          <Text>&ensp;&ensp;&ensp;Email&ensp;&ensp;&ensp;</Text>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (email) => {this.setState({email})}}
-            placeholder={this.props.username}
-            autoCapitalize='none'
-            autoCorrect={false}
-            value={this.state.email}/>
-        </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            autoCapitalize="none"
-            style={styles.textInput}
-            onChangeText={ (password) => {this.setState({password})}}
-            placeholder='password'
-            autoCapitalize='none'
-            secureTextEntry
-            placeholderTextColor='rgba(51,51,51,0.5)'
-            autoCorrect={false}
-            value={this.state.password} />
-        </View>
+        <Navbar title={this.props.title} leftBtn='Back' rightBtn='Save' navigator={navigator} />
+        <View style={styles.container}>
+          <View style={styles.mainContainer}>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Username</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (username) => {this.setState({username})}}
+                placeholder={ username }
+                value={ username }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Password</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (password) => {this.setState({password})}}
+                placeholder={ password }
+
+                value={ password }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Address</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (address) => {this.setState({address})}}
+                placeholder={ address }
+                value={ address }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>City</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (city) => {this.setState({city})}}
+                placeholder={ city }
+
+                value={ city }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
+
+            <View style={styles.input}>
+              <Text style={styles.label}>Property Name</Text>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={ (property_name) => {this.setState({property_name})}}
+                placeholder={ property_name }
+
+                value={ property_name }
+                autoCapitalize='none'
+                placeholderTextColor='rgba(51,51,51,0.5)'
+                autoCorrect={false} />
+            </View>
+
+          </View>
         </View>
       </View>
     );
-  },
-});
+  };
+
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -79,28 +125,38 @@ var styles = StyleSheet.create({
     fontSize: 13,
     padding: 4,
   },
-  inputContainer: {
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
-  },
-  textInput: {
-    alignSelf: 'center',
-    height: 40,
-    width: 250,
-    marginTop: 26,
-    fontSize: 17,
-    padding: 10,
-  },
   mainContainer: {
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 30
   },
-  labelContainer: {
-    flexDirection: 'row',
-    marginVertical: 2,
-    flex: 1,
+  input: {
+    alignSelf: 'center',
+    flexDirection:'row',
+    borderBottomColor: '#dddddd',
+    // height: 40,
+    // width: 250,
+    marginTop: 10,
+    // fontSize: 17,
+    // padding: 10,
   },
+  label: {
+    justifyContent: "flex-start",
+    width: 120,
+    fontWeight: 'bold',
+    // marginLeft: 30,
+    fontSize: 17,
+    padding: 10
+  },
+  textInput: {
+    justifyContent: "flex-end",
+    width: 200,
+    // alignSelf: 'center',
+    // height: 40,
+    // width: 250,
+    // marginTop: 26,
+    // marginRight: 30,
+    fontSize: 17,
+    padding: 10,
+    backgroundColor: '#F6F6F6'
+  }
 });
-
-module.exports = MaintainScene;

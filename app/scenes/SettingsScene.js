@@ -52,65 +52,49 @@ var SettingsScene = React.createClass({
 
   renderSettingScene(rowData) {
     const { navigator } = this.props;
-    if (rowData === 'Account') {
-      console.log("rowData", rowData);
-      console.log("renderSettingScene", this.props);
-      navigator.push ({
-        component: AccountScene,
-        passProps: {
-          username: this.props.username,
-          password: this.props.password,
-          address: this.props.address,
-          property_name: this.props.property_name,
-          title: rowData,
-        }
-      });
-    }
-    if (rowData === 'Report to Maintenance') {
-      console.log("rowData", rowData);
-      console.log("renderSettingScene", this.props);
-      navigator.push ({
-        component: MaintainScene,
-        passProps: {
-          username: this.props.username,
-          password: this.props.password,
-          address: this.props.address,
-          property_name: this.props.property_name,
-          title: rowData,
-        }
-      });
-    }
-    if (rowData === 'Notifications') {
-      console.log("rowData", rowData);
-      console.log("renderSettingScene", this.props);
-      navigator.push ({
-        component: MaintainScene,
-        passProps: {
-          username: this.props.username,
-          password: this.props.password,
-          address: this.props.address,
-          property_name: this.props.property_name,
-          title: rowData,
-        }
-      });
-    }
+
+    switch (rowData) {
+      case 'Account':
+        console.log("rowData", rowData);
+        console.log("renderSettingScene", this.props);
+        navigator.push ({
+          component: AccountScene,
+          passProps: {
+            username: this.props.username,
+            password: this.props.password,
+            address: this.props.address,
+            property_name: this.props.property_name,
+            title: rowData}
+        });
+        break;
+      case 'Report to Maintenance':
+        console.log("rowData", rowData);
+        console.log("renderSettingScene", this.props);
+        navigator.push ({
+          component: MaintainScene,
+          passProps: {
+            username: this.props.username,
+            password: this.props.password,
+            address: this.props.address,
+            property_name: this.props.property_name,
+            title: rowData,}
+        });
+        break;
+      case 'Notifications':
+        console.log("rowData", rowData);
+        console.log("renderSettingScene", this.props);
+        navigator.push ({
+          component: NotificationsScene,
+          passProps: {
+            username: this.props.username,
+            password: this.props.password,
+            address: this.props.address,
+            property_name: this.props.property_name,
+            title: rowData,}
+        });
+        break;
+    } // end switch
   },
-    // switch (rowData) {
-    //   case 'Account':
-    //     console.log("rowData", rowData);
-    //     console.log("renderSettingScene", this.props);
-    //     navigator.push({
-    //       component: AccountScene,
-    //       passProps: {
-    //         username: this.props.username,
-    //         password: this.props.password,
-    //         address: this.props.address,
-    //         city: this.props.city,
-    //         property_name: this.props.property_name,
-    //         title: rowData}
-    //     });
-    //     break;
-    // };
 
       // <View>
       // <Navigator
