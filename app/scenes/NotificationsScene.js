@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   Text,
+  AsyncStorage,
   Switch,
 } from 'react-native';
 
@@ -23,20 +24,30 @@ export default class NotificationsScene extends Component {
     }
   };
 
-  async componentDidMount() {
-    // let remind = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
-    let remind = await store.getRemindDone();
-    console.log("from store: " + remind);
-    this.setState({
-      remindDone: remind,
-    });
+  componentDidMount() {
+    // let done = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
+    AsyncStorage.getItem("done").then((res) => {
+            this.setState({
+              remindDone: (res === null) ? false : Boolean(res),
+            });
+            console.log(this.state);
+        }).done();
   }
 
-  async storeRemindDone(value) {
-    console.log("value to be stored: "+value);
-    await store.setRemindDone(value);
-    // console.log("after store: "+await store.getRemindDone());
+  saveNoti(value, type) {
+    console.log(type);
+    console.log(value);
+    AsyncStorage.setItem(type, JSON.stringify(value));
+    this.setState({remindDone: value});
+    // AsyncStorage.getItem("done").then((res) => {
+    //         console.log(res);
+    //         this.setState({remindDone: value});
+    //         AsyncStorage.getAllKeys((keys) => {
+    //           console.log(keys);
+    //         });
+    //     }).done();
   }
+
 
   render() {
     const { navigator } = this.props;
@@ -78,8 +89,7 @@ export default class NotificationsScene extends Component {
                 value={this.state.remindDone}
                 onValueChange={
                   (value) => {
-                    this.storeRemindDone(value);
-                    this.setState({remindDone: value});
+                    this.saveNoti(value, "done");
                   }
                 }/>
             </View>

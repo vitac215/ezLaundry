@@ -53,7 +53,7 @@ let store = {
   },
   async getRemindDone() {
     let res = await AsyncStorage.getItem('remindDone');
-    console.log("value got: "+res);
+    console.log("value got: " + res);
     return Boolean(res);
   },
 
