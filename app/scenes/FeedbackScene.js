@@ -7,6 +7,7 @@ import {
   StyleSheet,
   View,
   TouchableHighlight,
+  Alert,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -25,6 +26,7 @@ export default class FeedbackScene extends Component {
 
   sendFeedback() {
     console.log("send feedback");
+    Alert.alert('We have received your feedbacK. Thanks!');
   }
 
   render() {
