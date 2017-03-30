@@ -5,7 +5,9 @@ const API_URL = {
     'signUp': server + 'api/add_user/',
     'login': server + 'api/login_user/',
     'getMachineData': server + 'api/show_all_user_schedules_type_after_now/',
-    'quickReserve': server + 'api/quick_reservation/'
+    'quickReserve': server + 'api/quick_reservation/',
+    'updateUser': server +  '/api/update_user_info/',
+    'report': server + '/api/send_email_to_landlord/',
 }
 
 const API = {
@@ -112,7 +114,47 @@ const API = {
 
     let json = {'message': "SUCCESS"}
     return json;
-  }
+  },
+  updateUser: async function(username, new_password, address, city) {
+    try{
+      let response = await fetch(`${API_URL.updateUser}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          new_password,
+          address,
+          city,
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+        return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  report: async function(username, report) {
+    try{
+      let response = await fetch(`${API_URL.updateUser}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          report,
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+        return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
 
 }
 

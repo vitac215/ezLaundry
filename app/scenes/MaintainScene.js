@@ -16,6 +16,7 @@ import {
 
 
 import Navbar from '../components/Navbar';
+import Button from 'apsl-react-native-button';
 
 
 export default class MaintainScene extends Component {
@@ -29,53 +30,77 @@ export default class MaintainScene extends Component {
       selectedMachine: '0',
       problem: '',
       city: this.props.city,
-      property_name: this.props.property_name
+      property_name: this.props.property_name,
+      report:'',
     }
   };
+  async report() {
+    Alert.alert("Your report is on its way");
+    try {
+      let res = await API.report(username, report);
+      if (res.message && res.message.toUpperCase() === "SUCCESS") {
+        // Store the user data
+        console.log(res);
+        return;
+      // Alert error message
+      } else {
+        Alert.alert(res.message);
+        return;
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   render() {
     console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
-    const { username, password, passwordconfirm, address, city, property_name } = this.state;
+    const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
 
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
-        <Text style={styles.text}>Choose Machines</Text>
-        <Picker
-          selectedValue={this.state.selectedMachine}
-          onValueChange={(val) => this.setState({selectedMachine: val})}>
-          <Picker.Item label="1" value="1" />
-          <Picker.Item label="2" value="2" />
-          <Picker.Item label="3" value="3" />
-          <Picker.Item label="4" value="4" />
-          <Picker.Item label="5" value="5" />
-          <Picker.Item label="6" value="6" />
-          <Picker.Item label="General Problem" value="0" />
-        </Picker>
         <Text style={styles.text}>What is the problem?</Text>
         <Picker
           selectedValue={this.state.problem}
           onValueChange={(prob) => this.setState({problem: prob})}>
-          <Picker.Item label="Machine is broken." value="1" />
-          <Picker.Item label="Machine is dirty." value="2" />
+          <Picker.Item label="Machine is broken" value="1" />
+          <Picker.Item label="Machine is dirty" value="2" />
+          <Picker.Item label="Others" value="0" />
         </Picker>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.textArea}
+            onChangeText={ (report) => {this.setState({report})}}
+            placeholder="Would you like to write more detail?"
+            value={ report }
+            autoCapitalize='none'
+            placeholderTextColor='rgba(51,51,51,0.5)'
+            editable={true}
+            multiline={true}
+            autoCorrect={false} />
+        </View>
+        <Button style={styles.btn}
+                textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+                onPress={this.report.bind(this)}>
+          Save
+        </Button>
       </View>
     );
-  },
-  changeMode: function() {
-    const newMode = this.state.mode === Picker.MODE_DIALOG
-        ? Picker.MODE_DROPDOWN
-        : Picker.MODE_DIALOG;
-    this.setState({mode: newMode});
-  },
-
-  onValueChange: function(key: string, value: string) {
-    const newState = {};
-    newState[key] = value;
-    this.setState(newState);
-  },
-});
+  };
+  // changeMode: function() {
+  //   const newMode = this.state.mode === Picker.MODE_DIALOG
+  //       ? Picker.MODE_DROPDOWN
+  //       : Picker.MODE_DIALOG;
+  //   this.setState({mode: newMode});
+  // },
+  //
+  // onValueChange: function(key: string, value: string) {
+  //   const newState = {};
+  //   newState[key] = value;
+  //   this.setState(newState);
+  // },
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -93,17 +118,12 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection:'row',
     borderBottomColor: '#dddddd',
-    // height: 40,
-    // width: 250,
     marginTop: 10,
-    // fontSize: 17,
-    // padding: 10,
   },
   label: {
     justifyContent: "flex-start",
     width: 120,
     fontWeight: 'bold',
-    // marginLeft: 30,
     fontSize: 17,
     padding: 10
   },
@@ -114,8 +134,27 @@ var styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 10,
     marginRight: 10,
-    backgroundColor: '#4AC3C0',
     padding: 10,
     backgroundColor: '#F6F6F6'
-  }
+  },
+  textArea: {
+    alignSelf: 'center',
+    width: 300,
+    height: 200,
+    fontSize: 17,
+    padding: 10,
+    backgroundColor: '#F6F6F6',
+  },
+  btn: {
+    backgroundColor: '#4AC3C0',
+    alignSelf: 'center',
+    borderWidth: 0,
+    margin: 15,
+    width: 300
+  },
+  inputContainer: {
+    justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 20,
+  },
 });

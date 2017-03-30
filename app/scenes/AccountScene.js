@@ -7,6 +7,7 @@ import {
   StyleSheet,
   View,
   TouchableHighlight,
+  Alert,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -22,27 +23,56 @@ export default class AccountScene extends Component {
       password: this.props.password,
       address: this.props.address,
       city: this.props.city,
-      property_name: this.props.property_name
+      property_name: this.props.property_name,
+      old_password:'',
+      new_password:'',
+      confirm_password:'',
+
     }
   };
 
-  saveChange() {
-
+  async saveChange() {
+    if (this.state.password !== this.state.old_password) {
+      Alert.alert('Passwords is not correct');
+      return;
+    }
+    if (this.state.new_password !== this.state.confirm_password) {
+      Alert.alert('Passwords do not match');
+      return;
+    }
+    try {
+      let res = await API.updateUser(username, new_password, address, city);
+      if (res.message && res.message.toUpperCase() === "SUCCESS") {
+        // Store the user data
+        console.log(res);
+        let user = res.user;
+        store.setPassword(user.password);
+        if (address !== '') {
+          store.setAddress(user.address);
+        }
+        return;
+      // Alert error message
+      } else {
+        Alert.alert(res.message);
+        return;
+      }
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   render() {
     console.log('AccountScene', this.props);
     const { navigator } = this.props;
-    const { username, email, password, address, city, property_name } = this.state;
+    const { username, email, password, old_password,
+      new_password, confirm_password, address, city, property_name } = this.state;
 
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' navigator={navigator} />
         <View style={styles.container}>
           <View style={styles.mainContainer}>
-
             <View style={styles.inputContainer}>
-
               <View style={styles.input}>
                 <Text style={styles.label}>Username</Text>
                 <TextInput
@@ -51,6 +81,7 @@ export default class AccountScene extends Component {
                   placeholder={ username }
                   value={ username }
                   autoCapitalize='none'
+                  editable={false}
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />
               </View>
@@ -63,18 +94,43 @@ export default class AccountScene extends Component {
                   placeholder={ email }
                   value={ email }
                   autoCapitalize='none'
+                  editable={false}
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />
               </View>
 
               <View style={styles.input}>
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Old Password</Text>
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={ (password) => {this.setState({password})}}
-                  placeholder={ password }
+                  onChangeText={ (old_password) => {this.setState({old_password})}}
+                  placeholder='Enter your old pass word'
+                  autoCapitalize='none'
+                  placeholderTextColor='rgba(51,51,51,0.5)'
+                  autoCorrect={false} />
+              </View>
 
-                  value={ password }
+              <View style={styles.input}>
+                <Text style={styles.label}>New Password</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={ (new_password) => {this.setState({new_password})}}
+                  placeholder='Enter your new password.'
+                  secureTextEntry
+                  value={ new_password }
+                  autoCapitalize='none'
+                  placeholderTextColor='rgba(51,51,51,0.5)'
+                  autoCorrect={false} />
+              </View>
+
+              <View style={styles.input}>
+                <Text style={styles.label}>Confirm Password</Text>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={ (confirm_password) => {this.setState({confirm_password})}}
+                  placeholder='Confirm your password.'
+                  value={ confirm_password }
+                  secureTextEntry
                   autoCapitalize='none'
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />
@@ -100,19 +156,6 @@ export default class AccountScene extends Component {
                   placeholder={ city }
 
                   value={ city }
-                  autoCapitalize='none'
-                  placeholderTextColor='rgba(51,51,51,0.5)'
-                  autoCorrect={false} />
-              </View>
-
-              <View style={styles.input}>
-                <Text style={styles.label}>Property Name</Text>
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={ (property_name) => {this.setState({property_name})}}
-                  placeholder={ property_name }
-
-                  value={ property_name }
                   autoCapitalize='none'
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />
