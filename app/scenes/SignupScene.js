@@ -166,16 +166,6 @@ export default class SignupScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={city} />
-
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (property_name) => {this.setState({property_name})}}
-                placeholder='property name'
-                autoCapitalize='none'
-                sectionColor='#4AC3C0'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false}
-                value={property_name} />
             </View>
 
             <Button style={styles.btn}
