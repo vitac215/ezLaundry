@@ -7,14 +7,15 @@ const API_URL = {
     'login': server + 'api/login_user/',
     'getMachineData': server + 'api/show_all_user_schedules_type_after_now/',
     'quickReserve': server + 'api/quick_reservation/',
-    'updateUser': server +  '/api/update_user_info/',
-    'report': server + '/api/send_email_to_landlord/',
-    'sendFeedback': server + '/api/send_feedback/',
+    'updateUser': server +  'api/update_user_info/',
+    'report': server + 'api/send_email_to_landlord/',
+    'sendFeedback': server + 'api/send_feedback/',
+    'resendEmail': server + 'api/reverify_email_address/',
 }
 
 const API = {
   signUp: async function(username, email, password, address, city) {
-    console.log('2222222222');
+    console.log('signup API');
     try{
       let response = await fetch(`${API_URL.signUp}`, {
         method: 'POST',
@@ -36,7 +37,25 @@ const API = {
       console.log(err);
     }
   },
-
+  resendEmail: async function(username) {
+    console.log('resendEmail API');
+    try{
+      let response = await fetch(`${API_URL.resendEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+        return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
 
   login: async function(username, password) {
     try{

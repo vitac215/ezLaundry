@@ -93,9 +93,36 @@ export default class LoginScene extends Component {
         return;
       // Alert error messageå
       } else {
+        console.log('login', res.message);
+        Alert.alert(
+          res.message,
+          '',
+          [
+            {text: 'Cancel'},
+            {text: 'Confirm', onPress: () => {
+              this.resendEmail(username)} }
+          ]);
+        return;
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async resendEmail(username) {
+    console.log('resendEmail');
+    try {
+      let res = await API.resendEmail(username);
+      console.log(res);
+      if (res.message && res.message.toUpperCase() === "SUCCESS") {
+        console.log(res);
+        return;
+      // Alert error message
+      } else {
         Alert.alert(res.message);
         return;
       }
+      return;
     } catch(err) {
       console.log(err);
     }
@@ -104,6 +131,7 @@ export default class LoginScene extends Component {
   forgotPassword () {
     const { navigator } = this.props;
     const { username, email } = this.state;
+
     navigator.push ({
       component: ResetPasswordScene,
       passProps: {
