@@ -156,7 +156,7 @@ var SegmentedControl = React.createClass({
   },
 
   handleCountDown: function(newRemainTime, end_time, username) {
-    // TODO: 
+    // TODO:
     console.log("handleCountDown:\t" + end_time);
     const now = moment(new Date()).tz("America/New_York");
     if ( moment(now).isAfter(end_time) ) {
@@ -185,8 +185,7 @@ var SegmentedControl = React.createClass({
     var raw_remainTime;
 
     if (rowData.end_time != null) {
-      // TODO:
-      Convert the end time to readable format
+      // TODO:Convert the end time to readable format
       var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
       // Calculate the remain time in mmss
       raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");

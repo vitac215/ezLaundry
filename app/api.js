@@ -1,4 +1,4 @@
-const server = 'http://128.237.219.34:3000/';
+const server = 'http://128.237.134.80:3000/';
 // ec2-54-165-215-7.compute-1.amazonaws.com/
 
 const API_URL = {

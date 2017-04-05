@@ -46,17 +46,17 @@ export default class LoginScene extends Component {
 
     try {
       // original
-      //const res = await API.login(username, password);
+      const res = await API.login(username, password);
       // change
-      const res = {"message": "SUCCESS",
-                   "user": {"username": "v",
-                            "email": "v@gmail.com",
-                            "password": "v",
-                            "property_name": "Forbes",
-                            "city": 'Pittsburgh',
-                            "address": "forbes"
-                           },
-                  };
+      // const res = {"message": "SUCCESS",
+      //              "user": {"username": "v",
+      //                       "email": "v@gmail.com",
+      //                       "password": "v",
+      //                       "property_name": "Forbes",
+      //                       "city": 'Pittsburgh',
+      //                       "address": "forbes"
+      //                      },
+      //             };
       // end change
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
@@ -100,8 +100,37 @@ export default class LoginScene extends Component {
     }
   }
 
-  forgotPassword () {
+  resetPassword () {
     Alert.alert('An email to reset your password has been sent');
+  }
+  forgotPassword () {
+    <View>
+    <TextInput
+      style={styles.textInput}
+      onChangeText={ (username) => {this.setState({username})}}
+      placeholder='username'
+      autoCapitalize='none'
+      placeholderTextColor='rgba(51,51,51,0.5)'
+      sectionColor='#4AC3C0'
+      autoCorrect={false}
+      value={username} />
+
+      <TextInput
+        style={styles.textInput}
+        onChangeText={ (email) => {this.setState({email})}}
+        placeholder='email'
+        autoCapitalize='none'
+        placeholderTextColor='rgba(51,51,51,0.5)'
+        sectionColor='#4AC3C0'
+        autoCorrect={false}
+        value={email} />
+
+      <Button style={styles.btn}
+              textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
+              onPress={this.resetPassword.bind(this)}>
+        Reset Password
+      </Button>
+      </View>
   }
   render() {
     const { navigator } = this.props;
@@ -126,7 +155,6 @@ export default class LoginScene extends Component {
                 sectionColor='#4AC3C0'
                 autoCorrect={false}
                 value={username} />
-
               <TextInput
                 style={styles.textInput}
                 onChangeText={ (password) => {this.setState({password})}}
@@ -137,7 +165,8 @@ export default class LoginScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={password} />
-                <TouchableOpacity
+
+              <TouchableOpacity
                 onPress={() => Alert.alert(
                   'Do you forget your password?',
                   'We will send you an email for password resetting',
@@ -146,21 +175,18 @@ export default class LoginScene extends Component {
                     {text: 'Reset Password', onPress: () => {
                       this.forgotPassword()} }
                   ]
-                )
-                >
+                )}>
                 <Text style={styles.forget}>forgot password?</Text>
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
-
             <Button style={styles.btn}
                     textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
                     onPress={this.loginAction.bind(this)}>
               Login
             </Button>
           </View>
-
         </View>
-      </View> // include navbar
+      </View>
     );
   }
 }
