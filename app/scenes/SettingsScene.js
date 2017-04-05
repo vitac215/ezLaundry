@@ -60,7 +60,16 @@ var SettingsScene = React.createClass({
 
             <View style={styles.separator}/>
             <TouchableOpacity
-              style={styles.logout}>
+              style={styles.logout}
+              onPress={() => Alert.alert(
+                'Logout',
+                'Would you like to logout?',
+                [
+                  {text: 'Cancel'},
+                  {text: 'Confirm', onPress: () => {
+                    }}
+                ]
+              )}>
               <Text style={styles.text}>Sign Out</Text>
             </TouchableOpacity>
             <View style={styles.separator}/>
