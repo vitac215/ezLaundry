@@ -3,6 +3,7 @@ const server = 'http://128.237.134.80:3000/';
 
 const API_URL = {
     'signUp': server + 'api/add_user/',
+    //'signUp': 'https://google.com',
     'login': server + 'api/login_user/',
     'getMachineData': server + 'api/show_all_user_schedules_type_after_now/',
     'quickReserve': server + 'api/quick_reservation/',
@@ -12,7 +13,8 @@ const API_URL = {
 }
 
 const API = {
-  signUp: async function(username, password, address, city, property_name) {
+  signUp: async function(username, email, password, address, city) {
+    console.log('2222222222');
     try{
       let response = await fetch(`${API_URL.signUp}`, {
         method: 'POST',
@@ -21,10 +23,10 @@ const API = {
         },
         body: JSON.stringify({
           username,
+          email,
           password,
           address,
           city,
-          property_name
         })
       })
       let json = await response.json();

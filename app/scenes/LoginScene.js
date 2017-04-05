@@ -20,15 +20,16 @@ import store from '../store';
 
 import Navbar from '../components/Navbar';
 import MainScene from './MainScene';
+import ResetPasswordScene from './ResetPasswordScene';
 
 export default class LoginScene extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
+      username: this.props.username,
       email: '',
-      password: '',
+      password: this.props.password,
       address: '',
       city: '',
       property_name: ''
@@ -100,37 +101,19 @@ export default class LoginScene extends Component {
     }
   }
 
-  resetPassword () {
-    Alert.alert('An email to reset your password has been sent');
-  }
   forgotPassword () {
-    <View>
-    <TextInput
-      style={styles.textInput}
-      onChangeText={ (username) => {this.setState({username})}}
-      placeholder='username'
-      autoCapitalize='none'
-      placeholderTextColor='rgba(51,51,51,0.5)'
-      sectionColor='#4AC3C0'
-      autoCorrect={false}
-      value={username} />
-
-      <TextInput
-        style={styles.textInput}
-        onChangeText={ (email) => {this.setState({email})}}
-        placeholder='email'
-        autoCapitalize='none'
-        placeholderTextColor='rgba(51,51,51,0.5)'
-        sectionColor='#4AC3C0'
-        autoCorrect={false}
-        value={email} />
-
-      <Button style={styles.btn}
-              textStyle={{fontSize: 18, color: 'white', fontWeight: 'bold'}}
-              onPress={this.resetPassword.bind(this)}>
-        Reset Password
-      </Button>
-      </View>
+    const { navigator } = this.props;
+    const { username, email } = this.state;
+    navigator.push ({
+      component: ResetPasswordScene,
+      passProps: {
+        username: '',
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        property_name: '',}
+    });
   }
   render() {
     const { navigator } = this.props;
