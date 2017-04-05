@@ -58,7 +58,7 @@ var CountDown = React.createClass ({
       //
       // this.setState({time: time});
 
-      if ( !moment(now).isAfter(this.state.end_time) ) {
+      if ( moment(now).isBefore(this.state.end_time) && this.state.displayTime != '0001' ) {
         // var time = this.state.time - 1;
         var time = moment(this.state.time, "mmss").subtract('1', 'seconds');
         var displayTime = moment(time,"mmss").format('mmss');

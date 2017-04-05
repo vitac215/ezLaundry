@@ -12,6 +12,7 @@ import {
 
 import Button from 'apsl-react-native-button';
 import Navbar from '../components/Navbar';
+import API from '../api.js';
 
 export default class FeedbackScene extends Component {
 
@@ -24,14 +25,35 @@ export default class FeedbackScene extends Component {
     }
   };
 
-  sendFeedback() {
+  async sendFeedback() {
     console.log("send feedback");
     if (this.feedback.length > 500 || this.feedback.length < 10) {
       Alert.alert('Your feedback should be greater than 10 and less than 500 words');
     } else {
-      Alert.alert('We have received your feedbacK. Thanks!');
+
     }
-    
+
+    try {
+      let res = await API.sendFeedback(username, this.state.feedback);
+      if (res.message && res.message.toUpperCase() === "SUCCESS") {
+        console.log(res);
+        Alert.alert(
+          'We have received your feedback. Thanks!',
+          [
+            {text: 'OK'}
+          ]
+        )
+        return;
+      // Alert error message
+      } else {
+        Alert.alert(res.message);
+        return;
+      }
+      return;
+    } catch(err) {
+      console.log(err);
+    }
+
   }
 
   render() {

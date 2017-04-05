@@ -37,6 +37,13 @@ export default class SignupScene extends Component {
 
     if (username.length > 20) {
       Alert.alert('Your username cannot be greater than 20');
+    } else if ( username.length <= 0 ) {
+      Alert.alert('Your username should be greater than 0');
+    }
+    if (password.length < 6) {
+      Alert.alert('Your password should be greater than 6');
+    } else if (password.length > 20) {
+      Alert.alert('Your password cannot be greater than 20');
     }
     if (password !== passwordconfirm) {
       Alert.alert('Passwords do not match');

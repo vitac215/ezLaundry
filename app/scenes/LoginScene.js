@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -99,6 +100,9 @@ export default class LoginScene extends Component {
     }
   }
 
+  forgotPassword () {
+    Alert.alert('An email to reset your password has been sent');
+  }
   render() {
     const { navigator } = this.props;
     const { username, password } = this.state;
@@ -133,6 +137,19 @@ export default class LoginScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={password} />
+                <TouchableOpacity
+                onPress={() => Alert.alert(
+                  'Do you forget your password?',
+                  'We will send you an email for password resetting',
+                  [
+                    {text: 'Cancel'},
+                    {text: 'Reset Password', onPress: () => {
+                      this.forgotPassword()} }
+                  ]
+                )
+                >
+                <Text style={styles.forget}>forgot password?</Text>
+                </TouchableOpacity>
             </View>
 
             <Button style={styles.btn}
@@ -165,13 +182,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFADAD',
     alignSelf: 'center',
     borderWidth: 0,
-    margin: 15,
+    margin: 30,
     width: 300
   },
 
   text: {
     color: '#929292',
     alignSelf: 'center'
+  },
+  forget: {
+    alignSelf: 'center',
+    marginTop: 10,
+    textDecorationLine: 'underline',
   },
 
   textInput: {
