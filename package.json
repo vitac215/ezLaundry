@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.0.2",
+    "isemail": "^2.2.1",
     "moment": "^2.17.1",
     "moment-timezone": "^0.5.11",
     "react": "15.4.2",
@@ -24,6 +25,9 @@
     "react-test-renderer": "15.4.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!native-base)/"
+    ]
   }
 }

@@ -26,7 +26,12 @@ export default class FeedbackScene extends Component {
 
   sendFeedback() {
     console.log("send feedback");
-    Alert.alert('We have received your feedbacK. Thanks!');
+    if (this.feedback.length > 500 || this.feedback.length < 10) {
+      Alert.alert('Your feedback should be greater than 10 and less than 500 words');
+    } else {
+      Alert.alert('We have received your feedbacK. Thanks!');
+    }
+    
   }
 
   render() {

@@ -35,6 +35,9 @@ export default class SignupScene extends Component {
       return;
     }
 
+    if (username.length > 20) {
+      Alert.alert('Your username cannot be greater than 20');
+    }
     if (password !== passwordconfirm) {
       Alert.alert('Passwords do not match');
       return;
@@ -44,8 +47,17 @@ export default class SignupScene extends Component {
     try {
       let res = await API.signUp(username, email, password, address, city, property_name);
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
-        // Store the user data
         console.log(res);
+        Alert.alert(
+          'Please confirm your email',
+          'We have sent an email to you, please check your inbox.',
+          [
+            {text: 'OK', onPress: () => {
+              this.renderLaunchScene()
+              }}
+          ]
+        )
+        // Store the user data
         let user = res.user;
         store.setUsername(user.username);
         store.setPassword(user.password);

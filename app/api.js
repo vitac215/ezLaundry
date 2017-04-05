@@ -8,6 +8,7 @@ const API_URL = {
     'quickReserve': server + 'api/quick_reservation/',
     'updateUser': server +  '/api/update_user_info/',
     'report': server + '/api/send_email_to_landlord/',
+    'sendFeedback': server + '/api/send_feedback/',
 }
 
 const API = {
@@ -146,6 +147,25 @@ const API = {
         body: JSON.stringify({
           username,
           report,
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+        return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  sendFeedback: async function(username, text) {
+    try{
+      let response = await fetch(`${API_URL.sendFeedback}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          text,
         })
       })
       let json = await response.json();

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, Navigator } from 'react-native';
+import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, Navigator, Alert } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import AccountScene from './AccountScene.js';
@@ -10,6 +10,7 @@ import MaintainScene from './MaintainScene.js';
 import NotificationsScene from './NotificationsScene.js';
 import FeedbackScene from './FeedbackScene.js';
 import Navbar from '../components/Navbar';
+import LaunchScene from './LaunchScene';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -67,6 +68,7 @@ var SettingsScene = React.createClass({
                 [
                   {text: 'Cancel'},
                   {text: 'Confirm', onPress: () => {
+                    this.renderLaunchScene()
                     }}
                 ]
               )}>
@@ -79,6 +81,20 @@ var SettingsScene = React.createClass({
 
       </View>
   )},
+  renderLaunchScene() {
+    console.log('press logout', this.props);
+    const { navigator } = this.props;
+    navigator.push ({
+      component: LaunchScene,
+      passProps: {
+        username: '',
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        property_name: '',}
+    });
+  },
 
   renderSettingScene(rowData) {
     const { navigator } = this.props;
