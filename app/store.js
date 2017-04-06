@@ -30,6 +30,14 @@ let store = {
     return res;
   },
 
+  async setAddress(address) {
+    await AsyncStorage.setItem('address', address);
+  },
+  async getAddress(address) {
+    let res = await AsyncStorage.getItem('address');
+    return res;
+  },
+
   async removeUser() {
     let keys = ['username', 'password', 'address', 'property_name'];
     await AsyncStorage.multiRemove(keys);

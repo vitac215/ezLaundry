@@ -9,6 +9,7 @@ import API from '../api';
 
 import Navbar from '../components/Navbar';
 import MainScene from './MainScene';
+import LoginScene from './LoginScene';
 
 export default class SignupScene extends Component {
   constructor(props) {
@@ -27,25 +28,45 @@ export default class SignupScene extends Component {
   }
 
   async signupAction() {
+    console.log('sign up');
     const { navigator } = this.props;
-    const { username, password, passwordconfirm, address, city, property_name } = this.state;
+    const { username, email, password, passwordconfirm, address, city} = this.state;
 
-    if (!username || !email || !password || !address || !city || !property_name ) {
+    if (!username || !email || !password || !address || !city) {
       Alert.alert('Please enter all the information');
       return;
     }
 
+    if (username.length > 20) {
+      Alert.alert('Your username cannot be greater than 20');
+    } else if ( username.length <= 0 ) {
+      Alert.alert('Your username should be greater than 0');
+    }
+    if (password.length < 6) {
+      Alert.alert('Your password should be greater than 6');
+    } else if (password.length > 20) {
+      Alert.alert('Your password cannot be greater than 20');
+    }
     if (password !== passwordconfirm) {
       Alert.alert('Passwords do not match');
       return;
     }
-
+    console.log('before query server', this.props);
     // Create a new user
     try {
-      let res = await API.signUp(username, email, password, address, city, property_name);
+      let res = await API.signUp(username, email, password, address, city);
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
-        // Store the user data
         console.log(res);
+        Alert.alert(
+          'Please confirm your email',
+          'We have sent an email to you, please check your inbox.',
+          [
+            {text: 'OK', onPress: () => {
+              this.renderLoginScene()
+              }}
+          ]
+        )
+        // Store the user data
         let user = res.user;
         store.setUsername(user.username);
         store.setPassword(user.password);
@@ -70,7 +91,18 @@ export default class SignupScene extends Component {
     }
   }
 
+  renderLoginScene() {
+    const { navigator } = this.props;
+    const { username, password} = this.state;
+    navigator.push ({
+      component: LoginScene,
+      passProps: {
+        username: username,
+        password: password,
+      }
+    });
 
+  }
   render() {
     const { navigator } = this.props;
     const {username, email, password, passwordconfirm, address, city, property_name} = this.state;
@@ -147,16 +179,6 @@ export default class SignupScene extends Component {
                 placeholderTextColor='rgba(51,51,51,0.5)'
                 autoCorrect={false}
                 value={city} />
-
-              <TextInput
-                style={styles.textInput}
-                onChangeText={ (property_name) => {this.setState({property_name})}}
-                placeholder='property name'
-                autoCapitalize='none'
-                sectionColor='#4AC3C0'
-                placeholderTextColor='rgba(51,51,51,0.5)'
-                autoCorrect={false}
-                value={property_name} />
             </View>
 
             <Button style={styles.btn}

@@ -7,10 +7,12 @@ import {
   StyleSheet,
   View,
   TouchableHighlight,
+  Alert,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
 import Navbar from '../components/Navbar';
+import API from '../api.js';
 
 export default class FeedbackScene extends Component {
 
@@ -23,8 +25,40 @@ export default class FeedbackScene extends Component {
     }
   };
 
-  sendFeedback() {
-    console.log("send feedback");
+  async sendFeedback() {
+    console.log("send feedback", this.props);
+    const { navigator } = this.props;
+    const { username, feedback, email } = this.state;
+    if (feedback.length < 10) {
+      Alert.alert('Your feedback should be greater than 10 words');
+    } else if (feedback.length > 500) {
+      Alert.alert('Your feedback should be less than 500 words');
+    } else {
+      try {
+        let res = await API.sendFeedback(username, feedback);
+        console.log(res);
+        if (res.message && res.message.toUpperCase() === "SUCCESS") {
+          console.log('', res);
+          Alert.alert(
+            'We have received your feedback. Thanks!',
+            [
+              {text: 'OK'}
+            ]
+          )
+          return;
+        // Alert error message
+        } else {
+          Alert.alert(res.message);
+          return;
+        }
+        return;
+      } catch(err) {
+        console.log(err);
+      }
+    }
+
+
+
   }
 
   render() {

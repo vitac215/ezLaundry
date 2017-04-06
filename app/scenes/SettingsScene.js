@@ -2,14 +2,15 @@
 
 import React, { Component } from 'react';
 
-import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, Navigator } from 'react-native';
+import { Text, TextInput, StyleSheet, Image, ListView, View, TouchableOpacity, Navigator, Alert } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
 import AccountScene from './AccountScene.js';
 import MaintainScene from './MaintainScene.js';
 import NotificationsScene from './NotificationsScene.js';
 import FeedbackScene from './FeedbackScene.js';
 import Navbar from '../components/Navbar';
+import LaunchScene from './LaunchScene';
+import API from '../api.js';
 
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -38,9 +39,6 @@ var SettingsScene = React.createClass({
           style={styles.clickContainer}
           onPress={ () => {this.renderSettingScene(rowData)} }>
           <Text style={styles.text}>{rowData}</Text>
-          <View style={styles.rightContainer}>
-            <Icon style={styles.icon} name="ios-arrow-forward-outline" size={20} color="#4F8EF7" />
-          </View>
         </TouchableOpacity>
         <View style={styles.separator}/>
       </View>
@@ -60,7 +58,17 @@ var SettingsScene = React.createClass({
 
             <View style={styles.separator}/>
             <TouchableOpacity
-              style={styles.logout}>
+              style={styles.logout}
+              onPress={() => Alert.alert(
+                'Logout',
+                'Would you like to logout?',
+                [
+                  {text: 'Cancel'},
+                  {text: 'Confirm', onPress: () => {
+                    this.renderLaunchScene()
+                    }}
+                ]
+              )}>
               <Text style={styles.text}>Sign Out</Text>
             </TouchableOpacity>
             <View style={styles.separator}/>
@@ -70,6 +78,20 @@ var SettingsScene = React.createClass({
 
       </View>
   )},
+  renderLaunchScene() {
+    console.log('press logout', this.props);
+    const { navigator } = this.props;
+    navigator.push ({
+      component: LaunchScene,
+      passProps: {
+        username: '',
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        property_name: '',}
+    });
+  },
 
   renderSettingScene(rowData) {
     const { navigator } = this.props;
@@ -121,18 +143,19 @@ var SettingsScene = React.createClass({
         });
         break;
       case FEEDBACK:
-      navigator.push ({
-        component: FeedbackScene,
-        passProps: {
-          username: this.props.username,
-          email: this.props.email,
-          password: this.props.password,
-          address: this.props.address,
-          city: this.props.city,
-          property_name: this.props.property_name,
-          title: rowData,}
-      });
-      break;
+        console.log("feedbackScene", this.props);
+        navigator.push ({
+          component: FeedbackScene,
+          passProps: {
+            username: this.props.username,
+            email: this.props.email,
+            password: this.props.password,
+            address: this.props.address,
+            city: this.props.city,
+            property_name: this.props.property_name,
+            title: rowData,}
+        });
+        break;
     } // end switch
   },
 

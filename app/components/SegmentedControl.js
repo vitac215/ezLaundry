@@ -156,28 +156,28 @@ var SegmentedControl = React.createClass({
   },
 
   handleCountDown: function(newRemainTime, end_time, username) {
-    // TODO: original
-    // console.log("handleCountDown:\t" + end_time);
-    // const now = moment(new Date()).tz("America/New_York");
-    // if ( moment(now).isAfter(end_time) ) {
-    //   console.log("handleCountDown:\t timeout!");
-    //
-    //   if (username === this.state.username) {
-    //     Alert.alert("Your reservation just expired!");
-    //   }
-    //
-    //   this.fetchData();
-    // } else {
-    //   console.log("handleCountDown:\t still waiting");
-    //   return newRemainTime;
-    // }
+    // TODO:
+    console.log("handleCountDown:\t" + end_time);
+    const now = moment(new Date()).tz("America/New_York");
+    if ( moment(now).isAfter(end_time) ) {
+      console.log("handleCountDown:\t timeout!");
 
-    // changed
-    if (newRemainTime === "0000") {
-      this.fetchData(); // to be changed to fetchData
+      if (username === this.state.username) {
+        Alert.alert("Your reservation just expired!");
+      }
+
+      this.fetchData();
     } else {
+      console.log("handleCountDown:\t still waiting");
       return newRemainTime;
     }
+
+    // changed
+    // if (newRemainTime === "0000") {
+    //   this.fetchData(); // to be changed to fetchData
+    // } else {
+    //   return newRemainTime;
+    // }
   },
 
   renderRow(rowData) {
@@ -185,19 +185,18 @@ var SegmentedControl = React.createClass({
     var raw_remainTime;
 
     if (rowData.end_time != null) {
-      // TODO: original
-      // Convert the end time to readable format
-      // var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
-      // // Calculate the remain time in mmss
-      // raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
-      // var remainTime = moment(raw_remainTime).format('mmss');
+      // TODO:Convert the end time to readable format
+      var end_time = moment(rowData.end_time).tz("America/New_York").format('hh:mm A');
+      // Calculate the remain time in mmss
+      raw_remainTime = moment(rowData.end_time).tz("America/New_York") - moment().tz("America/New_York");
+      var remainTime = moment(raw_remainTime).format('mmss');
 
       // changed
-      raw_remainTime = rowData.end_time;
-      var remainTime = moment(raw_remainTime).format('mmss');
-      var min = parseInt(rowData.end_time.substring(0,2));
-      var sec = parseInt(rowData.end_time.substring(2,4));
-      var end_time = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
+      // raw_remainTime = rowData.end_time;
+      // var remainTime = moment(raw_remainTime).format('mmss');
+      // var min = parseInt(rowData.end_time.substring(0,2));
+      // var sec = parseInt(rowData.end_time.substring(2,4));
+      // var end_time = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
       // end change
     } else {
       raw_remainTime = 0;
@@ -212,8 +211,8 @@ var SegmentedControl = React.createClass({
                 <Image style={styles.thumb} source={img} />
                 <View style={styles.textContainer}>
                   <CountDown
-                  // time = {remainTime}   //TODO: original
-                  time = {rowData.end_time}   // changed
+                  time = {remainTime}   //TODO:
+                  // time = {rowData.end_time}   // changed
                   end_time = {rowData.end_time}
                   username = {rowData.username}
                   onCountDown = {

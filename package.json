@@ -8,13 +8,14 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.0.2",
+    "isemail": "^2.2.1",
     "moment": "^2.17.1",
     "moment-timezone": "^0.5.11",
     "react": "15.4.2",
     "react-native": "0.41.2",
     "react-native-notifications": "^1.1.9",
     "react-native-push-notification": "^2.2.1",
-    "react-native-vector-icons": "^4.0.0",
+    "react-native-vector-icons": "^4.0.1",
     "react-timer-mixin": "^0.13.3"
   },
   "devDependencies": {
@@ -24,6 +25,9 @@
     "react-test-renderer": "15.4.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!native-base)/"
+    ]
   }
 }
