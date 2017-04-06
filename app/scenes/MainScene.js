@@ -71,7 +71,7 @@ export default class MainScene extends React.Component {
           onPress={() => {
             this.setState({
               selectedTab: 'Reservation',
-              title: this.props.title,
+              title: 'Reservations',
             });
           }}>
           { this._renderContent(ReserveScene) }

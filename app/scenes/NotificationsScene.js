@@ -48,7 +48,6 @@ export default class NotificationsScene extends Component {
     //     }).done();
   }
 
-
   render() {
     const { navigator } = this.props;
     console.log(this.state);

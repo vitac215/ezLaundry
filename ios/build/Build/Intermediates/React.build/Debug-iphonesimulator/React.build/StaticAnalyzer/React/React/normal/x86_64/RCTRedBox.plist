@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
  <key>clang_version</key>
-<string>Apple LLVM version 8.0.0 (clang-800.0.42.1)</string>
+<string>Apple LLVM version 8.1.0 (clang-802.0.38)</string>
  <key>files</key>
  <array>
   <string>/Users/vitachen/Documents/SP2017/laundry/laundry/node_modules/react-native/React/Modules/RCTRedBox.m</string>
@@ -134,6 +134,103 @@
           <dict>
            <key>line</key><integer>403</integer>
            <key>col</key><integer>1</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+         </array>
+        <key>end</key>
+         <array>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>3</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>4</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+         </array>
+       </dict>
+      </array>
+    </dict>
+    <dict>
+     <key>kind</key><string>control</string>
+     <key>edges</key>
+      <array>
+       <dict>
+        <key>start</key>
+         <array>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>3</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>4</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+         </array>
+        <key>end</key>
+         <array>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>7</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>7</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+         </array>
+       </dict>
+      </array>
+    </dict>
+    <dict>
+     <key>kind</key><string>event</string>
+     <key>location</key>
+     <dict>
+      <key>line</key><integer>405</integer>
+      <key>col</key><integer>7</integer>
+      <key>file</key><integer>0</integer>
+     </dict>
+     <key>ranges</key>
+     <array>
+       <array>
+        <dict>
+         <key>line</key><integer>405</integer>
+         <key>col</key><integer>7</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+        <dict>
+         <key>line</key><integer>405</integer>
+         <key>col</key><integer>66</integer>
+         <key>file</key><integer>0</integer>
+        </dict>
+       </array>
+     </array>
+     <key>depth</key><integer>1</integer>
+     <key>extended_message</key>
+     <string>Assuming the condition is true</string>
+     <key>message</key>
+     <string>Assuming the condition is true</string>
+    </dict>
+    <dict>
+     <key>kind</key><string>control</string>
+     <key>edges</key>
+      <array>
+       <dict>
+        <key>start</key>
+         <array>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>7</integer>
+           <key>file</key><integer>0</integer>
+          </dict>
+          <dict>
+           <key>line</key><integer>405</integer>
+           <key>col</key><integer>7</integer>
            <key>file</key><integer>0</integer>
           </dict>
          </array>

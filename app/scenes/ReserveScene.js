@@ -17,7 +17,7 @@ import Navbar from '../components/Navbar';
 import moment from 'moment';
 import SegmentedControl from '../components/SegmentedControl.js';
 import ReserveConfirmScene from './ReserveConfirmScene.js';
-import ReserveRender from './ReserveRender.js'
+import ReserveRender from './ReserveRender.js';
 
 var ReserveScene = React.createClass({
   getInitialState: function() {
@@ -111,7 +111,7 @@ var ReserveScene = React.createClass({
     console.log("time", reserveTime);
     console.log("reserve props", this.props);
     this.props.navigator.push({
-    component: ReserveConfirmScene,
+    component: ReserveConfirm2Scene,
     passProps: {
       username: this.props.username,
       address: this.props.address,
