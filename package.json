@@ -15,7 +15,7 @@
     "react-native": "0.41.2",
     "react-native-notifications": "^1.1.9",
     "react-native-push-notification": "^2.2.1",
-    "react-native-vector-icons": "^4.0.0",
+    "react-native-vector-icons": "^4.0.1",
     "react-timer-mixin": "^0.13.3"
   },
   "devDependencies": {

@@ -17,6 +17,7 @@ import {
 
 import Navbar from '../components/Navbar';
 import Button from 'apsl-react-native-button';
+import API from '../api';
 
 
 export default class MaintainScene extends Component {
@@ -25,6 +26,7 @@ export default class MaintainScene extends Component {
     super(props);
     this.state = {
       username: this.props.username,
+      email: this.props.email,
       password: this.props.password,
       address: this.props.address,
       selectedMachine: '0',
@@ -35,20 +37,29 @@ export default class MaintainScene extends Component {
     }
   };
   async report() {
-    Alert.alert("Your report is on its way");
-    try {
-      let res = await API.report(username, report);
-      if (res.message && res.message.toUpperCase() === "SUCCESS") {
-        // Store the user data
-        console.log(res);
-        return;
-      // Alert error message
-      } else {
-        Alert.alert(res.message);
-        return;
+
+    console.log('report', this.props);
+    const { navigator } = this.props;
+    const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
+    if (report.length < 10) {
+      Alert.alert('Your report length must be greater than 10');
+    } else if (report.length > 500) {
+      Alert.alert('Your report length must be smaller than 10');
+    } else {
+      try {
+        let res = await API.report(username, report);
+        if (res.message && res.message.toUpperCase() === "SUCCESS") {
+          Alert.alert("Your report is on its way");
+          console.log(res);
+          return;
+        // Alert error message
+        } else {
+          Alert.alert(res.message);
+          return;
+        }
+      } catch(err) {
+        console.log(err);
       }
-    } catch(err) {
-      console.log(err);
     }
   }
 
@@ -56,14 +67,14 @@ export default class MaintainScene extends Component {
     console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
-
+    var problem = '';
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
         <Text style={styles.text}>What is the problem?</Text>
         <Picker
           selectedValue={this.state.problem}
-          onValueChange={(prob) => this.setState({problem: prob})}>
+          onValueChange={(prob) => this.setState({report: prob})}>
           <Picker.Item label="Machine is broken" value="1" />
           <Picker.Item label="Machine is dirty" value="2" />
           <Picker.Item label="Others" value="0" />
@@ -71,7 +82,7 @@ export default class MaintainScene extends Component {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textArea}
-            onChangeText={ (report) => {this.setState({report})}}
+            onChangeText={ (report) => this.setState({report})}
             placeholder="Would you like to write more detail?"
             value={ report }
             autoCapitalize='none'

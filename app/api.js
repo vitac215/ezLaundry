@@ -159,8 +159,9 @@ const API = {
     }
   },
   report: async function(username, report) {
+    console.log('report API', report)
     try{
-      let response = await fetch(`${API_URL.updateUser}`, {
+      let response = await fetch(`${API_URL.report}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

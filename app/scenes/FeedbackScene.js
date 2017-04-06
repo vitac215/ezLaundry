@@ -26,33 +26,38 @@ export default class FeedbackScene extends Component {
   };
 
   async sendFeedback() {
-    console.log("send feedback");
-    if (this.feedback.length > 500 || this.feedback.length < 10) {
-      Alert.alert('Your feedback should be greater than 10 and less than 500 words');
+    console.log("send feedback", this.props);
+    const { navigator } = this.props;
+    const { username, feedback, email } = this.state;
+    if (feedback.length < 10) {
+      Alert.alert('Your feedback should be greater than 10 words');
+    } else if (feedback.length > 500) {
+      Alert.alert('Your feedback should be less than 500 words');
     } else {
-
-    }
-
-    try {
-      let res = await API.sendFeedback(username, this.state.feedback);
-      if (res.message && res.message.toUpperCase() === "SUCCESS") {
+      try {
+        let res = await API.sendFeedback(username, feedback);
         console.log(res);
-        Alert.alert(
-          'We have received your feedback. Thanks!',
-          [
-            {text: 'OK'}
-          ]
-        )
+        if (res.message && res.message.toUpperCase() === "SUCCESS") {
+          console.log('', res);
+          Alert.alert(
+            'We have received your feedback. Thanks!',
+            [
+              {text: 'OK'}
+            ]
+          )
+          return;
+        // Alert error message
+        } else {
+          Alert.alert(res.message);
+          return;
+        }
         return;
-      // Alert error message
-      } else {
-        Alert.alert(res.message);
-        return;
+      } catch(err) {
+        console.log(err);
       }
-      return;
-    } catch(err) {
-      console.log(err);
     }
+
+
 
   }
 
