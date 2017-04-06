@@ -12,6 +12,8 @@ import {
 
 import Button from 'apsl-react-native-button';
 import Navbar from '../components/Navbar';
+import API from '../api';
+import store from '../store';
 
 export default class AccountScene extends Component {
 
@@ -32,10 +34,21 @@ export default class AccountScene extends Component {
   };
 
   async saveChange() {
-    if (this.state.password !== this.state.old_password) {
-      Alert.alert('Passwords is not correct');
-      return;
+    const { navigator } = this.props;
+    const { username, email, password, old_password,
+      new_password, confirm_password, address, city, property_name } = this.state;
+    try {
+      let reponse = await API.checkOldPassword(username, old_password);
+      console.log(reponse);
+      if (reponse.message && reponse.message.toUpperCase() !== "EQUAL") {
+        console.log('input_hashed_password', reponse.hashed_password);
+        console.log('stored password', this.state.password);
+          Alert.alert('Password is not correct');
+      }
+    } catch(err) {
+      console.log(err);
     }
+
     if (this.state.new_password !== this.state.confirm_password) {
       Alert.alert('Passwords do not match');
       return;
@@ -45,11 +58,15 @@ export default class AccountScene extends Component {
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         // Store the user data
         console.log(res);
+
         let user = res.user;
         store.setPassword(user.password);
         if (address !== '') {
-          store.setAddress(user.address);
+          store.setPropertyName(user.property_name);
         }
+        Alert.alert(
+          'Password has been reset'
+        );
         return;
       // Alert error message
       } else {
@@ -60,6 +77,23 @@ export default class AccountScene extends Component {
       console.log(err);
     }
   }
+  // renderSettingScene() {
+  //   const { navigator } = this.props;
+  //   const { username, email, password, old_password,
+  //     new_password, confirm_password, address, city, property_name } = this.state;
+  //     navigator.push({
+  //       name: 'Setting',
+  //       component: SettingScene,
+  //       passProps: {
+  //         username: user.username,
+  //         email: user.email,
+  //         password: user.password,
+  //         address: user.address,
+  //         city: user.city,
+  //         property_name: user.property_name,
+  //       }
+  //     })
+  // }
 
   render() {
     console.log('AccountScene', this.props);
@@ -105,8 +139,10 @@ export default class AccountScene extends Component {
                   style={styles.textInput}
                   onChangeText={ (old_password) => {this.setState({old_password})}}
                   placeholder='Enter your old pass word'
+                  secureTextEntry
                   autoCapitalize='none'
                   placeholderTextColor='rgba(51,51,51,0.5)'
+                  value={ old_password }
                   autoCorrect={false} />
               </View>
 

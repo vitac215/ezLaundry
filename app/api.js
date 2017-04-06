@@ -11,6 +11,8 @@ const API_URL = {
     'report': server + 'api/send_email_to_landlord/',
     'sendFeedback': server + 'api/send_feedback/',
     'resendEmail': server + 'api/reverify_email_address/',
+    'checkOldPassword': server + 'api/check_old_password',
+    'forgetPassword': server + 'api/forget_password/',
 }
 
 const API = {
@@ -77,13 +79,32 @@ const API = {
     }
   },
 
+  forgetPassword: async function(username, email) {
+    try{
+      let response = await fetch(`${API_URL.forgetPassword}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+      return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
 
   getMachineData: async function(username, machine_type) {
     // original
 
-    console.log(API_URL.getMachineData);
-    console.log(username);
-    console.log(machine_type);
+    // console.log(API_URL.getMachineData);
+    // console.log(username);
+    // console.log(machine_type);
     try{
       let response = await fetch(`${API_URL.getMachineData}`, {
         method: 'POST',
@@ -96,7 +117,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json.schedules);
+      //console.log(json.schedules);
       return json.schedules;
     } catch(err) {
       console.log(err);
@@ -188,6 +209,26 @@ const API = {
         body: JSON.stringify({
           username,
           text,
+        })
+      })
+      let json = await response.json();
+      console.log(json);
+        return json;
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  checkOldPassword: async function(username, old_password) {
+    console.log('checkOldPassword API', old_password);
+    try{
+      let response = await fetch(`${API_URL.checkOldPassword}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          old_password,
         })
       })
       let json = await response.json();
