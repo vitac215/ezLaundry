@@ -48,7 +48,8 @@ var SettingsScene = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-
+        <Navbar {...this.props} title={this.props.title} />
+        
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow} />
@@ -63,10 +64,10 @@ var SettingsScene = React.createClass({
                 'Logout',
                 'Would you like to logout?',
                 [
-                  {text: 'Cancel'},
                   {text: 'Confirm', onPress: () => {
                     this.renderLaunchScene()
-                    }}
+                  }},
+                  {text: 'Cancel'},
                 ]
               )}>
               <Text style={styles.text}>Sign Out</Text>

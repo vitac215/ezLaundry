@@ -111,7 +111,7 @@ var ReserveScene = React.createClass({
     console.log("time", reserveTime);
     console.log("reserve props", this.props);
     this.props.navigator.push({
-    component: ReserveConfirm2Scene,
+    component: ReserveConfirmScene,
     passProps: {
       username: this.props.username,
       address: this.props.address,

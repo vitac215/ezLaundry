@@ -99,9 +99,9 @@ export default class LoginScene extends Component {
           res.message,
           '',
           [
-            {text: 'Cancel'},
             {text: 'Confirm', onPress: () => {
-              this.resendEmail(username)} }
+              this.resendEmail(username)} },
+            {text: 'Cancel'},
           ]);
         return;
       }
