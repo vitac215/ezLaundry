@@ -20,7 +20,6 @@ export default class MainScene extends Component {
     super(props);
 
     this.state = {
-      selectedTab: this.props.tab,
       title: this.props.property_name,
     };
   }

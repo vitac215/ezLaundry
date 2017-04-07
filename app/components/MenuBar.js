@@ -19,49 +19,61 @@ var settingsIcon =
 
 
 export default class MenuBar extends Component {
-  <TabBarIOS
-    unselectedTintColor='#565656'
-    tintColor='#2E8A87'
-    barTintColor='#F8F8F8'>
+  constructor() {
+    super();
+    this.state = {
+      selectedTab: this.props.tab,
+      title: this.props.property_name,
+    };
+  }
 
-    <TabBarIOS.Item
-      title="Status"
-      icon={{uri: statusIcon, scale: 3}}
-      selected={this.state.selectedTab === 'Status'}
-      onPress={() => {
-        this.setState({
-          selectedTab: 'Status',
-          title: this.props.property_name
-        });
-      }}>
-      { this._renderContent(StatusScene) }
-    </TabBarIOS.Item>
+  render() {
+    return (
+      <TabBarIOS
+        unselectedTintColor='#565656'
+        tintColor='#2E8A87'
+        barTintColor='#F8F8F8'>
 
-    <TabBarIOS.Item
-      title="Reservation"
-      icon={{uri: reservationIcon, scale: 3}}
-      selected={this.state.selectedTab === 'Reservation'}
-      onPress={() => {
-        this.setState({
-          selectedTab: 'Reservation',
-          title: 'Reservations',
-        });
-      }}>
-      { this._renderContent(ReserveScene) }
-    </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Status"
+          icon={{uri: statusIcon, scale: 3}}
+          selected={this.state.selectedTab === 'Status'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Status',
+              title: this.props.property_name
+            });
+          }}>
+          { this._renderContent(StatusScene) }
+        </TabBarIOS.Item>
 
-    <TabBarIOS.Item
-      title="Settings"
-      icon={{uri: settingsIcon, scale: 3}}
-      selected={this.state.selectedTab === 'Settings'}
-      onPress={() => {
-        this.setState({
-          selectedTab: 'Settings',
-          title: 'Settings'
-        });
-      }}>
-      { this._renderContent(SettingsScene) }
-    </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Reservation"
+          icon={{uri: reservationIcon, scale: 3}}
+          selected={this.state.selectedTab === 'Reservation'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Reservation',
+              title: 'Reservations',
+            });
+          }}>
+          { this._renderContent(ReserveScene) }
+        </TabBarIOS.Item>
 
-  </TabBarIOS>
+        <TabBarIOS.Item
+          title="Settings"
+          icon={{uri: settingsIcon, scale: 3}}
+          selected={this.state.selectedTab === 'Settings'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'Settings',
+              title: 'Settings'
+            });
+          }}>
+          { this._renderContent(SettingsScene) }
+        </TabBarIOS.Item>
+
+      </TabBarIOS>
+    )
+  }
 }
