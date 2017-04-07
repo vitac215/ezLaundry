@@ -101,36 +101,36 @@ const API = {
 
   getMachineData: async function(username, machine_type) {
     // original
-
-    // console.log(API_URL.getMachineData);
-    // console.log(username);
-    // console.log(machine_type);
-    try{
-      let response = await fetch(`${API_URL.getMachineData}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          machine_type
-        })
-      })
-      let json = await response.json();
-      //console.log(json.schedules);
-      return json.schedules;
-    } catch(err) {
-      console.log(err);
-    }
+    //
+    // // console.log(API_URL.getMachineData);
+    // // console.log(username);
+    // // console.log(machine_type);
+    // try{
+    //   let response = await fetch(`${API_URL.getMachineData}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_type
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   //console.log(json.schedules);
+    //   return json.schedules;
+    // } catch(err) {
+    //   console.log(err);
+    // }
 
     // change
-    // let json = [
-    //              {'user_name': "v", 'end_time': "0005"},  // current time + 1
-    //              {'user_name': "v", 'end_time': "0010"},
-    //              {'user_name': "v", 'end_time': "0003"},
-    //              {'user_name': "v", 'end_time': "0000"}
-    //            ]
-    // return json;
+    let json = [
+                 {'user_name': "v", 'end_time': "0005"},  // current time + 1
+                 {'user_name': "v", 'end_time': "0010"},
+                 {'user_name': "v", 'end_time': "0003"},
+                 {'user_name': "v", 'end_time': "0000"}
+               ]
+    return json;
     // end change
 
   },

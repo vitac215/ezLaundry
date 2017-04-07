@@ -27,8 +27,7 @@ export default class MenuBar extends Component {
     super(props);
 
     this.state = {
-      selectedTab: this.props.tab,
-      // selectedTab: '',
+      bottomTab: this.props.bottomTab,
       title: this.props.property_name,
     };
   }
@@ -53,10 +52,10 @@ export default class MenuBar extends Component {
         <TabBarIOS.Item
           title="Status"
           icon={{uri: statusIcon, scale: 3}}
-          selected={this.state.selectedTab === 'Status'}
+          selected={this.state.bottomTab === 'Status'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Status',
+              bottomTab: 'Status',
               title: this.props.property_name
             });
           }}>
@@ -66,10 +65,10 @@ export default class MenuBar extends Component {
         <TabBarIOS.Item
           title="Reservation"
           icon={{uri: reservationIcon, scale: 3}}
-          selected={this.state.selectedTab === 'Reservation'}
+          selected={this.state.bottomTab === 'Reservation'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Reservation',
+              bottomTab: 'Reservation',
               title: 'Reservations',
             });
           }}>
@@ -79,10 +78,10 @@ export default class MenuBar extends Component {
         <TabBarIOS.Item
           title="Settings"
           icon={{uri: settingsIcon, scale: 3}}
-          selected={this.state.selectedTab === 'Settings'}
+          selected={this.state.bottomTab === 'Settings'}
           onPress={() => {
             this.setState({
-              selectedTab: 'Settings',
+              bottomTab: 'Settings',
               title: 'Settings'
             });
           }}>

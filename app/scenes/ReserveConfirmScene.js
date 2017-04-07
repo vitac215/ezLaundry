@@ -90,6 +90,7 @@ var ReserveConfirmScene = React.createClass({
       </View>
     )
   },
+
   render() {
     console.log('initial state', this.props.reserve_time);
     // var reserved = this.props.reserved;
@@ -105,6 +106,7 @@ var ReserveConfirmScene = React.createClass({
     }
 
   },
+
   renderReserved: function() {
     console.log("render reserved");
     return (

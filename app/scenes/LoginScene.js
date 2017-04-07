@@ -88,7 +88,7 @@ export default class LoginScene extends Component {
             address: user.address,
             city: user.city,
             property_name: user.property_name,
-            tab: 'Status',
+            bottomTab: 'Status',
           }
         })
         return;

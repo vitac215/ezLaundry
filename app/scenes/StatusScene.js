@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, StyleSheet, Image, ScrollView, ListView, View } from 'react-native';
 
 import Navbar from '../components/Navbar';
-import SegmentedControl from '../components/SegmentedControl';
+import SegmentedControlContainer from '../containers/SegmentedControlContainer';
 
 export default class StatusScene extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class StatusScene extends Component {
     return (
       <View style={styles.container}>
         <Navbar {...this.props} title={this.props.title} />
-        <SegmentedControl {...this.props}/>
+        <SegmentedControlContainer {...this.props}/>
       </View>
     );
   }
