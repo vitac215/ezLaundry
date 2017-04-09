@@ -124,13 +124,14 @@ const API = {
     // }
 
     // change
+    console.log("API: getMachineData");
     let json = [
                  {'user_name': "v", 'end_time': "0005"},  // current time + 1
                  {'user_name': "v", 'end_time': "0010"},
                  {'user_name': "v", 'end_time': "0003"},
                  {'user_name': "v", 'end_time': "0000"}
                ]
-    return json;
+    return await json;
     // end change
 
   },

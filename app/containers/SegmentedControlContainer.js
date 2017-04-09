@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import SegmentedControl from '../components/SegmentedControl';
+import UTL from '../utilities';
 
 export default class SegmentedControlContainer extends Component {
   constructor(props) {
@@ -20,52 +21,53 @@ export default class SegmentedControlContainer extends Component {
       values: ['Washing', 'Dryer'],
       selectedTab: 'Washing',
       bottomTab: this.props.bottomTab,
-      dataSouce: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
-    }
-}
-
-  componentDidMount() {
-    console.log("SegmentedControlContainer didmount");
-    this.fetchData(this.state.username, this.state.selectedTab);
-    // Fetch data every 5 sec
-    var timer = setInterval(() => this.fetchData(this.state.username, this.state.selectedTab), 5000);
-    if (this.state.bottomTab === "Settings") {
-      clearInterval(timer);
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
     }
   };
 
-  async fetchData(username, selectedTab) {
-    API.getMachineData(username, selectedTab)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(res),
-        });
-      })
-      .done();
+  componentDidMount() {
+    console.log("SegmentedControlContainer didmount");
+    UTL.fetchData(this.props.username, this.props.selectedTab).done((res) => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(res),
+      });
+      // Fetch data every 5 sec
+      var timer = setInterval(() => UTL.fetchData(this.props.username, this.props.selectedTab), 5000);
+      if (this.state.bottomTab === "Settings") {
+        clearInterval(timer);
+      }
+    });
   };
 
   render() {
     console.log("SegmentedControlContainer", this.props);
-    return (
-      <View style={styles.container}>
-        <View style={styles.scContainer}>
-          <SegmentedControlIOS
-            style={styles.segmentedControl}
-            tintColor='#B0FFFE'
-            values={this.state.values}
-            selectedIndex={0}
-            onValueChange={(val)=> {
-              this.setState({
-                selectedTab: val
-              })
-            }}/>
+    console.log("SegmentedControlContainer", this.state.dataSource);
+    if (!this.state.dataSource) {
+      return (
+        <View><Text>Loading</Text></View>
+      )
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          <View style={styles.scContainer}>
+            <SegmentedControlIOS
+              style={styles.segmentedControl}
+              tintColor='#B0FFFE'
+              values={this.state.values}
+              selectedIndex={0}
+              onValueChange={(val)=> {
+                this.setState({
+                  selectedTab: val
+                })
+              }}/>
+          </View>
+          <ScrollView style={styles.listContainer}>
+            <SegmentedControl {...this.props} {...this.state} />
+          </ScrollView>
         </View>
-        <ScrollView style={styles.listContainer}>
-          <SegmentedControl {...this.props} {...this.state} />
-        </ScrollView>
-      </View>
-    );
+      );
+    }
   };
 }
 

@@ -180,12 +180,12 @@ export default class LoginScene extends Component {
 
               <TouchableOpacity
                 onPress={() => Alert.alert(
-                  'Do you forget your password?',
-                  'We will send you an email for password resetting',
+                  'Forgot your password?',
+                  'An email will be sent to your registered email address for password resetting',
                   [
-                    {text: 'Cancel'},
                     {text: 'Reset Password', onPress: () => {
-                      this.forgotPassword()} }
+                      this.forgotPassword()} },
+                    {text: 'Cancel'},
                   ]
                 )}>
                 <Text style={styles.forget}>forgot password?</Text>
