@@ -5,6 +5,7 @@ import {
   View,
   ListView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 export default class TouchableRowItem extends Component {
@@ -19,7 +20,18 @@ export default class TouchableRowItem extends Component {
         <View style={styles.row}>
 
           <View style={styles.timeContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+                Alert.alert(
+                  'Reserve a ' + this.props.selectedTab + ' machine at ' + rowData.slot +'?',
+                  'Please note that your reservation will be cancelled if you are late for 10 minutes',
+                  [
+                    {text: 'Confirm', onPress: (reserveTime) => {
+                      var reserveTime = rowData.slot;
+                      this.reservationConfirm(reserveTime);} },   // TODO: pass time to api
+                    {text: 'Cancel'},
+                  ]
+                );
+              }}>
               <Text style={styles.text}>
                 {rowData.slot}
               </Text>
@@ -30,11 +42,27 @@ export default class TouchableRowItem extends Component {
 
         <View style={styles.separator} />
       </View>
-
-
     )
-  }
-}
+  } // end of render
+
+  // reservationConfirm(reserveTime) {
+  //   console.log("time", reserveTime);
+  //   console.log("reserve props", this.props);
+  //   var {username, selectedTab} = this.props;
+  //   this.props.navigator.push({
+  //   component: ReserveConfirmScene,
+  //   passProps: {
+  //     username: username,
+  //     reserve_time: reserveTime,
+  //     machine_type: selectedTab,
+  //     title: "Your Reservation",
+  //     bottomTab: 'Reservation',
+  //     reserved: true,
+  //   }
+  //   });
+  // }
+  
+} // end of class
 
 var styles = StyleSheet.create({
   container: {

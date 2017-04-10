@@ -14,7 +14,6 @@ export default class UnTouchableRowItem extends Component {
   render() {
     var {rowData} = this.props;
     return (
-
       <View>
         <View style={[styles.row, styles.untouchable]}>
           <View style={styles.timeContainer}>
@@ -29,9 +28,6 @@ export default class UnTouchableRowItem extends Component {
 
         <View style={styles.separator} />
       </View>
-
-
-
     )
   }
 }
