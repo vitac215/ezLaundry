@@ -45,23 +45,23 @@ export default class TouchableRowItem extends Component {
     )
   } // end of render
 
-  // reservationConfirm(reserveTime) {
-  //   console.log("time", reserveTime);
-  //   console.log("reserve props", this.props);
-  //   var {username, selectedTab} = this.props;
-  //   this.props.navigator.push({
-  //   component: ReserveConfirmScene,
-  //   passProps: {
-  //     username: username,
-  //     reserve_time: reserveTime,
-  //     machine_type: selectedTab,
-  //     title: "Your Reservation",
-  //     bottomTab: 'Reservation',
-  //     reserved: true,
-  //   }
-  //   });
-  // }
-  
+  reservationConfirm(reserveTime) {
+    console.log("time", reserveTime);
+    console.log("reserve props", this.props);
+    var {username, selectedTab} = this.props;
+    this.props.navigator.push({
+    component: ReserveConfirmScene,
+    passProps: {
+      username: username,
+      reserve_time: reserveTime,
+      machine_type: selectedTab,
+      title: "Your Reservation",
+      bottomTab: 'Reservation',
+      reserved: true,
+    }
+    });
+  }
+
 } // end of class
 
 var styles = StyleSheet.create({

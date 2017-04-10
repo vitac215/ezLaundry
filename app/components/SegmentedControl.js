@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 import ListViewStatusContainer from '../containers/ListViewStatusContainer';
 import ListViewReservationContainer from '../containers/ListViewReservationContainer';
+import ListViewResConfirmContainer from '../containers/ListViewResConfirmContainer';
 
 export default class SegmentedControl extends Component {
   constructor(props) {
@@ -21,15 +22,23 @@ export default class SegmentedControl extends Component {
               <ListViewStatusContainer {...this.props} />
             </View>
           );
-        break;
+
       case 'Reservation':
+        if (this.props.title === "Reservation") {
           return (
             <View>
               <ListViewReservationContainer {...this.props} />
             </View>
           );
-        break;
-    }
+        } else {
+          return (
+            <View>
+              <ListViewResConfirmContainer {...this.props} />
+            </View>
+          );
+        } // end of if
+
+    } // end of switch
   }
 
 }

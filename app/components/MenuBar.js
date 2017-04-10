@@ -68,7 +68,7 @@ export default class MenuBar extends Component {
           onPress={() => {
             this.setState({
               bottomTab: 'Reservation',
-              title: 'Reservations',
+              title: 'Reservation',
             });
           }}>
           { this._renderContent(StatResScene) }
