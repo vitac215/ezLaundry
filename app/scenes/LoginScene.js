@@ -55,7 +55,7 @@ export default class LoginScene extends Component {
                             "password": "v",
                             "property_name": "Forbes",
                             "city": 'Pittsburgh',
-                            "address": "forbes"
+                            "address": "forbes",
                            },
                   };
       // end change

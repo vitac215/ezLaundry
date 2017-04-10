@@ -8,8 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import StatusScene from '../scenes/StatusScene';
-import ReserveScene from '../scenes//ReserveScene';
+import StatResScene from '../scenes/StatResScene';
 import SettingsScene from '../scenes//SettingsScene';
 
 var statusIcon =
@@ -59,7 +58,7 @@ export default class MenuBar extends Component {
               title: this.props.property_name
             });
           }}>
-          { this._renderContent(StatusScene) }
+          { this._renderContent(StatResScene) }
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -72,7 +71,7 @@ export default class MenuBar extends Component {
               title: 'Reservations',
             });
           }}>
-          { this._renderContent(ReserveScene) }
+          { this._renderContent(StatResScene) }
         </TabBarIOS.Item>
 
         <TabBarIOS.Item

@@ -1,3 +1,5 @@
+import UTL from './utilities';
+
 const server = 'http://128.237.134.80:3000/';
 // ec2-54-165-215-7.compute-1.amazonaws.com/
 
@@ -13,6 +15,7 @@ const API_URL = {
     'resendEmail': server + 'api/reverify_email_address/',
     'checkOldPassword': server + 'api/check_old_password',
     'forgetPassword': server + 'api/forget_password/',
+    'getResSchedule': server + '',
 }
 
 const API = {
@@ -200,6 +203,7 @@ const API = {
       console.log(err);
     }
   },
+
   sendFeedback: async function(username, text) {
     try{
       let response = await fetch(`${API_URL.sendFeedback}`, {
@@ -219,6 +223,7 @@ const API = {
       console.log(err);
     }
   },
+
   checkOldPassword: async function(username, old_password) {
     console.log('checkOldPassword API', old_password);
     try{
@@ -239,6 +244,46 @@ const API = {
       console.log(err);
     }
   },
+
+  getResSchedule: async function(username, machine_type, date) {
+    console.log('getResSchedule');
+    // try {
+    //   let response = await fetch(`${API_URL.getResSchedule}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_type,
+    //       date,
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   console.log(json);
+    //   return json;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+
+      // change
+      console.log("API: getResSchedule");
+      // res_time: the start time all the machines are not available, date object
+      let json = [
+                   {'res_time': new Date("October 13, 2014 10:30:00")},
+                   {'res_time': new Date("October 13, 2014 11:30:00")},
+                   {'res_time': new Date("October 13, 2014 12:30:00")},
+                   {'res_time': new Date("October 13, 2014 13:30:00")},
+                   {'res_time': new Date("October 13, 2014 16:30:00")}
+                 ]
+      json = UTL.processResData(json, machine_type);
+      return await json;
+      // end change
+
+
+
+
+  }
 
 }
 

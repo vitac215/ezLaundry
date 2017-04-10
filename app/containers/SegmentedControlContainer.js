@@ -27,12 +27,13 @@ export default class SegmentedControlContainer extends Component {
 
   componentDidMount() {
     console.log("SegmentedControlContainer didmount");
-    UTL.fetchData(this.props.username, this.props.selectedTab).done((res) => {
+    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab).done((res) => {
+      console.log(res);
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
       });
       // Fetch data every 5 sec
-      var timer = setInterval(() => UTL.fetchData(this.props.username, this.props.selectedTab), 5000);
+      var timer = setInterval(() => UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab), 5000);
       if (this.state.bottomTab === "Settings") {
         clearInterval(timer);
       }
