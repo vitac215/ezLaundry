@@ -4,10 +4,9 @@ import {
   Text,
   View,
   ListView,
-  TouchableOpacity,
 } from 'react-native';
 
-export default class TouchableRowItem extends Component {
+export default class UnTouchableRowItem extends Component {
   constructor(props) {
     super(props);
   }
@@ -15,21 +14,22 @@ export default class TouchableRowItem extends Component {
   render() {
     var {rowData} = this.props;
     return (
-      <View>
-        <View style={styles.row}>
 
+      <View>
+        <View style={[styles.row, styles.untouchable]}>
           <View style={styles.timeContainer}>
-            <TouchableOpacity>
+
+            <View>
               <Text style={styles.text}>
                 {rowData.slot}
               </Text>
-            </TouchableOpacity>
-
+            </View>
           </View>
         </View>
 
         <View style={styles.separator} />
       </View>
+
 
 
     )
