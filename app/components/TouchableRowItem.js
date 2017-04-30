@@ -49,19 +49,21 @@ export default class TouchableRowItem extends Component {
   reservationConfirm(reserveTime) {
     console.log("time", reserveTime);
     console.log("reserve props", this.props);
-    var {username, selectedTab} = this.props;
-    this.props.navigator.push({
-    component: SegmentedControl,
-    passProps: {
-      username: username,
-      reserve_time: reserveTime,
-      machine_type: selectedTab,
-      title: "Reservation",
-      bottomTab: 'Reservation',
-      reserved: true,
-    }
-    });
-    //return <SegmentedControl {...this.props} title={'Your Reservation'} />
+    // var {username, selectedTab} = this.props;
+    // this.props.navigator.push({
+    // component: SegmentedControl,
+    // passProps: {
+    //   username: username,
+    //   reserve_time: reserveTime,
+    //   machine_type: selectedTab,
+    //   title: "Reservation",
+    //   bottomTab: 'Reservation',
+    //   reserved: true,
+    // }
+    // });
+
+    // TODO: how to reder to another scene in Alert
+    return <SegmentedControl {...this.props} title={'Your Reservation'} />
   }
 
 } // end of class

@@ -49,7 +49,7 @@ export default class ListViewResConfirmContainer extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
           <ListView
-            dataSource = this.state.dataSource.cloneWithRows(res)
+            dataSource = {this.state.dataSource.cloneWithRows(res)}
             renderRow = {this.renderRow.bind(this)} // auto bind
           />
         </ScrollView>
