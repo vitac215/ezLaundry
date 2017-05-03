@@ -270,17 +270,15 @@ const API = {
       console.log("API: getResSchedule");
       // res_time: the start time all the machines are not available, date object
       let json = [
-                   {'res_time': new Date("October 13, 2014 10:30:00")},
-                   {'res_time': new Date("October 13, 2014 11:30:00")},
-                   {'res_time': new Date("October 13, 2014 12:30:00")},
-                   {'res_time': new Date("October 13, 2014 13:30:00")},
-                   {'res_time': new Date("October 13, 2014 16:30:00")}
+                   {'username': 'v', 'res_time': new Date("October 13, 2014 10:30:00")},
+                   {'username': 'x', 'res_time': new Date("October 13, 2014 11:30:00")},
+                   {'username': 'y', 'res_time': new Date("October 13, 2014 12:30:00")},
+                   {'username': 'z', 'res_time': new Date("October 13, 2014 13:30:00")},
+                   {'username': 'c', 'res_time': new Date("October 13, 2014 16:30:00")}
                  ]
       json = UTL.processResData(json, machine_type);
       return await json;
       // end change
-
-
 
 
   }

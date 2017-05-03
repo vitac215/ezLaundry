@@ -56,7 +56,6 @@ export default class ListViewReservationContainer extends Component {
     );
 
   } // end of renderRow
-
 }
 
 
