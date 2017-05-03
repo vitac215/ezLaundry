@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>LastAccessedDate</key>
+<<<<<<< HEAD
 	<date>2017-04-30T13:47:04Z</date>
+=======
+	<date>2017-05-03T17:15:42Z</date>
+>>>>>>> 43195d2e7fb75b97a2b7edd889667e95d5404dda
 	<key>WorkspacePath</key>
 	<string>/Users/xinwang/Desktop/laundry/ios/ezLaundry.xcodeproj</string>
 </dict>
