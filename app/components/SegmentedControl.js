@@ -14,7 +14,7 @@ export default class SegmentedControl extends Component {
   }
 
   render() {
-    console.log("SegmentedControl", this.props);
+    console.log("SegmentedControl props", this.props);
     switch(this.props.bottomTab) {
       case 'Status':
           return (
@@ -24,7 +24,6 @@ export default class SegmentedControl extends Component {
           );
 
       case 'Reservation':
-        console.log(this.props);
         if (this.props.title === "Reservation") {
           return (
             <View>

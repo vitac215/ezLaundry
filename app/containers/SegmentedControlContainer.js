@@ -15,6 +15,7 @@ import UTL from '../utilities';
 
 export default class SegmentedControlContainer extends Component {
   constructor(props) {
+    console.log("SegmentedControlContainer props", props);
     super(props);
 
     this.state = {
@@ -26,7 +27,7 @@ export default class SegmentedControlContainer extends Component {
   };
 
 
-  componentDidMount() {
+  componentWillMount() {
     console.log("SegmentedControlContainer didmount");
     UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab).done((res) => {
       console.log(res);
@@ -41,13 +42,9 @@ export default class SegmentedControlContainer extends Component {
     });
   };
 
-  componentWillUnmount() {
-
-  };
-
   render() {
-    console.log("SegmentedControlContainer", this.props);
-    console.log("SegmentedControlContainer", this.state.dataSource);
+    console.log("SegmentedControlContainer props", this.props);
+    console.log("SegmentedControlContainer datasource", this.state.dataSource);
     if (!this.state.dataSource) {
       return (
         <View><Text>Loading</Text></View>

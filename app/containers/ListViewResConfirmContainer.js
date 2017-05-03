@@ -22,7 +22,7 @@ import ResConfirmScene from '../scenes/ResConfirmScene';
 
 export default class ListViewResConfirmContainer extends Component {
   constructor(props) {
-    console.log(props);
+    console.log("ListViewResConfirmContainer", props);
     super(props);
 
     this.state = {
@@ -31,35 +31,26 @@ export default class ListViewResConfirmContainer extends Component {
   };
 
   render() {
-    <ScrollView style={styles.listContainer}>
+    console.log("here at ListViewResConfirmContainer");
+    return (
       <View>
-        <ListView
-          dataSource = {this.props.dataSource}
-          renderRow = {this.renderRow} // auto bind
-        />
-      </View>
-    </ScrollView>
 
-    // return (
-    //   <View>
-    //
-    //
-    //     <View style={styles.container}>
-    //       <ScrollView style={styles.listContainer}>
-    //         <ListView
-    //           dataSource = {this.state.dataSource}
-    //           renderRow = {this.renderRow.bind(this)} // auto bind
-    //         />
-    //       </ScrollView>
-    //     </View>
-    //
-    //   </View>
-    //
-    // );
+        <View style={styles.container}>
+          <ScrollView style={styles.listContainer}>
+            <ListView
+              dataSource = {this.state.dataSource}
+              renderRow = {this.renderRow} // auto bind
+            />
+          </ScrollView>
+        </View>
+
+      </View>
+
+    );
   };
 
   renderRow(rowData) {
-    console.log(rowData);
+    console.log("renderRow data", rowData);
 
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
     var raw_remainTime = rowData.end_time;
