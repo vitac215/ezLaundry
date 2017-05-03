@@ -22,7 +22,7 @@ import API from '../api';
 import moment from 'moment';
 import Button from 'apsl-react-native-button';
 import MainScene from './MainScene';
-import StatusScene from './StatusScene';
+import StatusResScene from './StatusResScene';
 import ReserveScene from './ReserveScene';
 import SettingsScene from './SettingsScene';
 

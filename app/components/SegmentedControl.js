@@ -24,6 +24,7 @@ export default class SegmentedControl extends Component {
           );
 
       case 'Reservation':
+        console.log(this.props);
         if (this.props.title === "Reservation") {
           return (
             <View>
@@ -31,6 +32,7 @@ export default class SegmentedControl extends Component {
             </View>
           );
         } else {
+          console.log("enter ListViewResConfirmContainer");
           return (
             <View>
               <ListViewResConfirmContainer {...this.props} />

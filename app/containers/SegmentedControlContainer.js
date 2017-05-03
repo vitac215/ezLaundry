@@ -25,6 +25,7 @@ export default class SegmentedControlContainer extends Component {
     }
   };
 
+
   componentDidMount() {
     console.log("SegmentedControlContainer didmount");
     UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab).done((res) => {
@@ -32,12 +33,16 @@ export default class SegmentedControlContainer extends Component {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
       });
-      // Fetch data every 5 sec
-      var timer = setInterval(() => UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab), 5000);
-      if (this.state.bottomTab === "Settings") {
-        clearInterval(timer);
-      }
+      // // Fetch data every 5 sec
+      // var timer = setInterval(() => UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab), 5000);
+      // if (this.state.bottomTab === "Settings") {
+      //   clearInterval(timer);
+      // }
     });
+  };
+
+  componentWillUnmount() {
+
   };
 
   render() {

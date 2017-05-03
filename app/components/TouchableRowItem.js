@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import SegmentedControlContainer from '../containers/SegmentedControlContainer';
+import MainScene from '../scenes/MainScene';
 
 export default class TouchableRowItem extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ export default class TouchableRowItem extends Component {
     console.log("reserve props", this.props);
     var {username, selectedTab} = this.props;
     this.props.navigator.push({
-      component: SegmentedControlContainer,
+      component: MainScene,
       passProps: {
         username: username,
         selectedTab: this.props.selectedTab,

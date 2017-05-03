@@ -7,13 +7,12 @@ import { Text, TextInput, StyleSheet, Image, ScrollView, ListView, View } from '
 import Navbar from '../components/Navbar';
 import SegmentedControlContainer from '../containers/SegmentedControlContainer';
 
-export default class StatusScene extends Component {
+export default class StatusResScene extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Navbar {...this.props} title={this.props.title} />
