@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import SegmentedControl from './SegmentedControl'
+import SegmentedControlContainer from '../containers/SegmentedControlContainer';
 
 export default class TouchableRowItem extends Component {
   constructor(props) {
@@ -49,21 +49,26 @@ export default class TouchableRowItem extends Component {
   reservationConfirm(reserveTime) {
     console.log("time", reserveTime);
     console.log("reserve props", this.props);
-    // var {username, selectedTab} = this.props;
-    // this.props.navigator.push({
-    // component: SegmentedControl,
-    // passProps: {
-    //   username: username,
-    //   reserve_time: reserveTime,
-    //   machine_type: selectedTab,
-    //   title: "Reservation",
-    //   bottomTab: 'Reservation',
-    //   reserved: true,
-    // }
-    // });
+    var {username, selectedTab} = this.props;
+    this.props.navigator.push({
+      component: SegmentedControlContainer,
+      passProps: {
+        username: username,
+        selectedTab: this.props.selectedTab,
+        bottomTab: 'Reservation',
+        title: 'Your Reservation',
+        reserveTime: reserveTime,
+        machineType: this.props.selectedTab,
+        // reserve_time: reserveTime,
+        // machine_type: selectedTab,
+        // title: "Reservation",
+        // bottomTab: 'Reservation',
+        // reserved: true,
+      }
+    });
 
-    // TODO: how to reder to another scene in Alert
-    return <SegmentedControl {...this.props} title={'Your Reservation'} />
+    // // TODO: how to reder to another scene in Alert
+    // return <SegmentedControl {...this.props} title={'Your Reservation'} />
   }
 
 } // end of class

@@ -136,7 +136,7 @@ export default class ListViewStatusContainer extends Component {
         Alert.alert("Your reservation just expired!");
       }
 
-      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab).done((res) => {
+      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, this.props.title).done((res) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(res),
         });

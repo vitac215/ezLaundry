@@ -15,7 +15,7 @@ const API_URL = {
     'resendEmail': server + 'api/reverify_email_address/',
     'checkOldPassword': server + 'api/check_old_password',
     'forgetPassword': server + 'api/forget_password/',
-    'getResSchedule': server + '',
+    'getAllResSchedule': server + '',
 }
 
 const API = {
@@ -245,6 +245,43 @@ const API = {
     }
   },
 
+  getAllResSchedule: async function(username, machine_type, date) {
+    // username not required?
+    console.log('getAllResSchedule');
+    // try {
+    //   let response = await fetch(`${API_URL.getAllResSchedule}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_type,
+    //       date,
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   console.log(json);
+    //   return json;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+
+      // change
+      console.log("API: getAllResSchedule");
+      // res_time: the start time all the machines are not available, date object
+      let json = [
+                   {'username': 'v', 'res_time': new Date("October 13, 2014 10:30:00")},
+                   {'username': 'x', 'res_time': new Date("October 13, 2014 11:30:00")},
+                   {'username': 'y', 'res_time': new Date("October 13, 2014 12:30:00")},
+                   {'username': 'z', 'res_time': new Date("October 13, 2014 13:30:00")},
+                   {'username': 'c', 'res_time': new Date("October 13, 2014 16:30:00")}
+                 ]
+      json = UTL.processResData(json, machine_type);
+      return await json;
+      // end change
+  },
+
   getResSchedule: async function(username, machine_type, date) {
     console.log('getResSchedule');
     // try {
@@ -271,17 +308,13 @@ const API = {
       // res_time: the start time all the machines are not available, date object
       let json = [
                    {'username': 'v', 'res_time': new Date("October 13, 2014 10:30:00")},
-                   {'username': 'x', 'res_time': new Date("October 13, 2014 11:30:00")},
-                   {'username': 'y', 'res_time': new Date("October 13, 2014 12:30:00")},
-                   {'username': 'z', 'res_time': new Date("October 13, 2014 13:30:00")},
-                   {'username': 'c', 'res_time': new Date("October 13, 2014 16:30:00")}
                  ]
       json = UTL.processResData(json, machine_type);
       return await json;
       // end change
+  },
 
 
-  }
 
 }
 

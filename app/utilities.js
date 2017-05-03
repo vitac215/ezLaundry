@@ -4,7 +4,7 @@ import API from './api';
 
 
 const UTIL = {
-  fetchData: async function(username, selectedTab, bottomTab) {
+  fetchData: async function(username, selectedTab, bottomTab, title) {
     console.log("fetchdata");
 
     switch (bottomTab) {
@@ -15,11 +15,22 @@ const UTIL = {
             return res; // !!! probably closure
           });
       case 'Reservation':
-        return await API.getResSchedule(username, selectedTab, new Date())
-          .then((res) => {
-            console.log(res);
-            return res;
-          });
+        if (title === "Reservation") {
+          console.log("fetch all res schedule");
+          return await API.getAllResSchedule(username, selectedTab, new Date())
+            .then((res) => {
+              console.log(res);
+              return res;
+            });
+        } else {
+          console.log("fetch res schedule");
+          return await API.getResSchedule(username, selectedTab, new Date())
+            .then((res) => {
+              console.log(res);
+              return res;
+            });
+        }
+
     };
   },
 
@@ -67,6 +78,7 @@ const UTIL = {
     console.log(schedule);
     return schedule;
   },
+
 }; // end of UTIL
 
 export default UTIL;

@@ -21,26 +21,12 @@ import ResConfirmScene from '../scenes/ResConfirmScene';
 
 export default class ListViewResConfirmContainer extends Component {
   constructor(props) {
+    console.log(props);
     super(props);
 
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
+      dataSource: this.props.dataSource,
     }
-  };
-
-  componentDidMount() {
-    console.log("ListViewResConfirmContainer didmount");
-    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab).done((res) => {
-      console.log(res);
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(res),
-      });
-      // Fetch data every 5 sec
-      var timer = setInterval(() => UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab), 5000);
-      if (this.state.bottomTab === "Settings") {
-        clearInterval(timer);
-      }
-    });
   };
 
   render() {
@@ -49,7 +35,7 @@ export default class ListViewResConfirmContainer extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
           <ListView
-            dataSource = {this.state.dataSource.cloneWithRows(res)}
+            dataSource = {this.state.dataSource}
             renderRow = {this.renderRow.bind(this)} // auto bind
           />
         </ScrollView>
@@ -60,7 +46,6 @@ export default class ListViewResConfirmContainer extends Component {
   renderRow(rowData) {
     console.log(rowData);
 
-    // TODO: ResConfirmScene, fetchData API
     return (
       <View>
           <ResConfirmScene {...this.props} dataSource={this.state.dataSource}/>
