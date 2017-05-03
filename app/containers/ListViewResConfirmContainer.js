@@ -50,6 +50,7 @@ export default class ListViewResConfirmContainer extends Component {
   };
 
   renderRow(rowData) {
+    // TODO: check if data is received
     console.log("renderRow data", rowData);
 
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
