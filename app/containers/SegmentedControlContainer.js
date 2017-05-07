@@ -24,7 +24,6 @@ export default class SegmentedControlContainer extends Component {
       selectedTab: 'Washing',
       bottomTab: this.props.bottomTab,
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
-      hasRes: false,
       titleToPass: 'Reservation',
     }
   };
@@ -33,24 +32,26 @@ export default class SegmentedControlContainer extends Component {
   componentWillMount() {
     console.log("SegmentedControlContainer didmount");
     console.log("SegmentedControlContainer props", this.props);
-
     // check the server if this person has a reservation
-    API.checkRes(this.props.username, this.state.selectedTab).done((res) => {
-      this.setState({
-        hasRes: res,
-      });
-      if (res) {
+    API.getResSchedule(this.props.username, this.state.selectedTab).done((res) => {
+      // TODO: check the data format
+      console.log('SegmentedControlContainer titleToPass res', res);
+      if (res.length >= 1) {
         this.setState({
           titleToPass: 'Your Reservation',
         });
       } else {
         this.setState({
           titleToPass: 'Reservation',
-        })
+        });
       }
+      this.callUTLfetchData();
     });
+    console.log('SegmentedControlContainer titleToPass', this.state.titleToPass);
+  };
 
 
+  callUTLfetchData() {
     UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
       console.log(res);
       this.setState({
@@ -63,7 +64,8 @@ export default class SegmentedControlContainer extends Component {
       // }
     });
     console.log("segementedcontrol ds",this.props.dataSource);
-  };
+  }
+
 
   render() {
     console.log("SegmentedControlContainer props", this.props);
