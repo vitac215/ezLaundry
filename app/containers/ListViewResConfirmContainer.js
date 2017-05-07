@@ -18,7 +18,6 @@ import UTL from '../utilities';
 
 import TouchableRowItem from '../components/TouchableRowItem';
 import UnTouchableRowItem from '../components/UnTouchableRowItem';
-import ResConfirmScene from '../scenes/ResConfirmScene';
 
 export default class ListViewResConfirmContainer extends Component {
   constructor(props) {
