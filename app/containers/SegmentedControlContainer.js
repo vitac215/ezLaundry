@@ -29,7 +29,8 @@ export default class SegmentedControlContainer extends Component {
 
   componentWillMount() {
     console.log("SegmentedControlContainer didmount");
-    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab).done((res) => {
+    console.log("SegmentedControlContainer props", this.props);
+    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.props.title).done((res) => {
       console.log(res);
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
@@ -40,6 +41,7 @@ export default class SegmentedControlContainer extends Component {
       //   clearInterval(timer);
       // }
     });
+    console.log("segementedcontrol ds",this.props.dataSource);
   };
 
   render() {

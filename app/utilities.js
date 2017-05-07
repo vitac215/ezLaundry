@@ -2,7 +2,6 @@ import moment from 'moment';
 
 import API from './api';
 
-
 const UTIL = {
   fetchData: async function(username, selectedTab, bottomTab, title) {
     console.log("fetchdata");
@@ -15,6 +14,7 @@ const UTIL = {
             return res; // !!! probably closure
           });
       case 'Reservation':
+        console.log('UTL title', title);
         if (title === "Reservation") {
           console.log("fetch all res schedule");
           return await API.getAllResSchedule(username, selectedTab, new Date())
@@ -26,7 +26,7 @@ const UTIL = {
           console.log("fetch res schedule");
           return await API.getResSchedule(username, selectedTab, new Date())
             .then((res) => {
-              console.log(res);
+              console.log('fetch res schedule result', res);
               return res;
             });
         }

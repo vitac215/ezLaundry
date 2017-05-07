@@ -28,6 +28,7 @@ export default class ListViewStatusContainer extends Component {
 
   render() {
     console.log(this.props);
+    console.log('status ds',this.props.dataSource);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>

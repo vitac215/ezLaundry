@@ -29,6 +29,7 @@ export default class ListViewReservationContainer extends Component {
 
   render() {
     console.log(this.props);
+    console.log('res ds', this.props.dataSource);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
@@ -42,7 +43,7 @@ export default class ListViewReservationContainer extends Component {
   };
 
   renderRow(rowData) {
-    console.log(rowData);
+    console.log('res renderrow data',rowData);
 
     return (
       <View>

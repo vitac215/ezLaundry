@@ -306,10 +306,10 @@ const API = {
       // change
       console.log("API: getResSchedule");
       // res_time: the start time all the machines are not available, date object
+      // TODO: check data format
       let json = [
-                   {'username': 'v', 'res_time': new Date("October 13, 2014 10:30:00")},
+                   {'username': 'v', 'reserve_time': new Date("May 7, 2017 10:30:00"), 'display_id': 1, 'access_code': 1011},
                  ]
-      json = UTL.processResData(json, machine_type);
       return await json;
       // end change
   },

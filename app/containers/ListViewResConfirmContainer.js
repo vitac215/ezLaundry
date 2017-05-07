@@ -32,14 +32,18 @@ export default class ListViewResConfirmContainer extends Component {
 
   render() {
     console.log("here at ListViewResConfirmContainer");
+    console.log(this.props);
+    console.log('resconfirm ds',this.props.dataSource);
+
     return (
       <View>
 
         <View style={styles.container}>
           <ScrollView style={styles.listContainer}>
             <ListView
-              dataSource = {this.state.dataSource}
-              renderRow = {this.renderRow} // auto bind
+              dataSource = {this.props.dataSource}
+              renderRow = {this.renderRow.bind(this)}
+              // renderRow = {console.log("resconfirm renderrow this", this)} // auto bind
             />
           </ScrollView>
         </View>
@@ -50,15 +54,19 @@ export default class ListViewResConfirmContainer extends Component {
   };
 
   renderRow(rowData) {
-    // TODO: check if data is received
+    console.log('renderRow props', this.props):
     console.log("renderRow data", rowData);
+
+    // rowData: reserve_time, display_id, access_code
 
     var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
     var raw_remainTime = rowData.end_time;
     var predict_time = moment().add(10, 'minutes').format('hh:mm A');
     var expire_time = moment(this.props.reserve_time, "hh:mm A").add(10, 'minutes').format('hh:mm A');
+    console.log('raw_remainTime: ', raw_remainTime);
+    console.log('expire_time: ', expire_time);
 
-    if (raw_remainTime === "0000") {
+    // if (raw_remainTime === "0000") {
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -69,7 +77,7 @@ export default class ListViewResConfirmContainer extends Component {
                 <View style={[styles.textContainer, styles.centerContainer]}>
                 <Text style={[styles.text]}>{this.state.selectedTab}</Text>
                   <Text style={[styles.text, styles.available]}>EXPIRED: {expire_time}</Text>
-                  <Text style={[styles.text]}>Access code: 1001</Text>
+                  <Text style={[styles.text]}>Access code: {rowData.access_code ? rowData.access_code : 1011}</Text>
                   <Button style={styles.btn}
                           textStyle={{fontSize: 10, color: '#4AC3C0'}}
                           onPress={() => {
@@ -85,9 +93,9 @@ export default class ListViewResConfirmContainer extends Component {
             <View style={styles.separator}/>
           </View>
       )
-    } else {
-      return null;
-    };
+    // } else {
+    //   return null;
+    // };
   }; // end of renderRow
 }
 
