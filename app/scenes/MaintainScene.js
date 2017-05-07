@@ -25,14 +25,8 @@ export default class MaintainScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.username,
-      email: this.props.email,
-      password: this.props.password,
-      address: this.props.address,
       selectedMachine: '0',
       problem: '',
-      city: this.props.city,
-      property_name: this.props.property_name,
       report:'',
     }
   };
