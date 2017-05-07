@@ -18,6 +18,7 @@ import UTL from '../utilities';
 
 import TouchableRowItem from '../components/TouchableRowItem';
 import UnTouchableRowItem from '../components/UnTouchableRowItem';
+import MainScene from '../scenes/MainScene';
 
 export default class ListViewResConfirmContainer extends Component {
   constructor(props) {
@@ -76,11 +77,7 @@ export default class ListViewResConfirmContainer extends Component {
                   <Text style={[styles.text]}>Access code: {rowData.access_code ? rowData.access_code : 1011}</Text>
                   <TouchableOpacity
                           style={styles.btn}
-                          onPress={() => {
-                            this.setState({
-                              reserved: false,
-                            });
-                          }}>
+                          onPress={this.cancelRes.bind(this)}>
                     <Text style={{fontSize: 15, color: '#4AC3C0'}}>CANCEL</Text>
                   </TouchableOpacity>
                 </View>
@@ -92,6 +89,23 @@ export default class ListViewResConfirmContainer extends Component {
       return null;
     };
   }; // end of renderRow
+
+  cancelRes() {
+    this.setState({
+      reserved: false,
+    });
+    this.props.navigator.push({
+      component: MainScene,
+      passProps: {
+        username: this.props.username,
+        // TODO: if server finishes API (getResSchedule, getAllResSchedule, cancelRes), uncomment the following 2
+        // selectedTab: this.props.selectedTab,
+        // bottomTab: 'Reservation',
+        bottomTab: 'Status',
+        title: 'Reservation',
+      }
+    });
+  }; // cencelRes
 }
 
 
