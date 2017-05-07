@@ -27,6 +27,7 @@ export default class ListViewResConfirmContainer extends Component {
 
     this.state = {
       dataSource: this.props.dataSource,
+      reserved: true,
     }
   };
 
@@ -54,19 +55,15 @@ export default class ListViewResConfirmContainer extends Component {
   };
 
   renderRow(rowData) {
-    console.log('renderRow props', this.props):
+    // rowData: reserve_time, display_id, access_code
+    console.log('renderRow props', this.props);
     console.log("renderRow data", rowData);
 
-    // rowData: reserve_time, display_id, access_code
+    var img = this.props.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
+    // var expire_time = moment(rowData.reserve_time, "hh:mm A").add(10, 'minutes').format('hh:mm A');
+    var reserve_time = moment(rowData.reserve_time, "hh:mm A").format('hh:mm A');
 
-    var img = this.state.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
-    var raw_remainTime = rowData.end_time;
-    var predict_time = moment().add(10, 'minutes').format('hh:mm A');
-    var expire_time = moment(this.props.reserve_time, "hh:mm A").add(10, 'minutes').format('hh:mm A');
-    console.log('raw_remainTime: ', raw_remainTime);
-    console.log('expire_time: ', expire_time);
-
-    // if (raw_remainTime === "0000") {
+    if (this.state.reserved === true) {
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -76,26 +73,25 @@ export default class ListViewResConfirmContainer extends Component {
                 <Image style={styles.thumb} source={img} />
                 <View style={[styles.textContainer, styles.centerContainer]}>
                 <Text style={[styles.text]}>{this.state.selectedTab}</Text>
-                  <Text style={[styles.text, styles.available]}>EXPIRED: {expire_time}</Text>
+                  <Text style={[styles.text, styles.available]}>{reserve_time}</Text>
                   <Text style={[styles.text]}>Access code: {rowData.access_code ? rowData.access_code : 1011}</Text>
-                  <Button style={styles.btn}
-                          textStyle={{fontSize: 10, color: '#4AC3C0'}}
+                  <TouchableOpacity
+                          style={styles.btn}
                           onPress={() => {
                             this.setState({
                               reserved: false,
                             });
-                            this.renderUnreserved;
                           }}>
-                    Cancel
-                  </Button>
+                    <Text style={{fontSize: 15, color: '#4AC3C0'}}>CANCEL</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.separator}/>
           </View>
       )
-    // } else {
-    //   return null;
-    // };
+    } else {
+      return null;
+    };
   }; // end of renderRow
 }
 
@@ -185,13 +181,11 @@ var styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: 'white',
-    alignSelf: 'flex-end',
-    borderWidth: 0,
-    margin: 15,
-    width: 60,
+    borderRadius: 5,
+    marginTop: 15,
     borderColor: '#4AC3C0',
     borderWidth: 0.5,
-    height: 30,
+    padding: 8,
   },
   imageText: {
     alignSelf: 'flex-start',
