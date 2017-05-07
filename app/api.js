@@ -16,6 +16,7 @@ const API_URL = {
     'checkOldPassword': server + 'api/check_old_password',
     'forgetPassword': server + 'api/forget_password/',
     'getAllResSchedule': server + '',
+    'checkRes': server + '',
 }
 
 const API = {
@@ -314,7 +315,28 @@ const API = {
       // end change
   },
 
-
+  checkRes: async function(username, machine_type, date) {
+    // try {
+    //   let response = await fetch(`${API_URL.checkRes}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_type,
+    //       date,
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   console.log(json);
+    //   return json;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+    let json = true;
+    return await json;
+  }
 
 }
 

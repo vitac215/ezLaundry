@@ -12,6 +12,7 @@ import {
 
 import SegmentedControl from '../components/SegmentedControl';
 import UTL from '../utilities';
+import API from '../api';
 
 export default class SegmentedControlContainer extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ export default class SegmentedControlContainer extends Component {
       selectedTab: 'Washing',
       bottomTab: this.props.bottomTab,
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
+      hasRes: false,
+      titleToPass: 'Reservation',
     }
   };
 
@@ -30,7 +33,25 @@ export default class SegmentedControlContainer extends Component {
   componentWillMount() {
     console.log("SegmentedControlContainer didmount");
     console.log("SegmentedControlContainer props", this.props);
-    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.props.title).done((res) => {
+
+    // check the server if this person has a reservation
+    API.checkRes(this.props.username, this.state.selectedTab).done((res) => {
+      this.setState({
+        hasRes: res,
+      });
+      if (res) {
+        this.setState({
+          titleToPass: 'Your Reservation',
+        });
+      } else {
+        this.setState({
+          titleToPass: 'Reservation',
+        })
+      }
+    });
+
+
+    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
       console.log(res);
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
@@ -47,6 +68,8 @@ export default class SegmentedControlContainer extends Component {
   render() {
     console.log("SegmentedControlContainer props", this.props);
     console.log("SegmentedControlContainer datasource", this.state.dataSource);
+
+
     if (!this.state.dataSource) {
       return (
         <View><Text>Loading</Text></View>
@@ -68,7 +91,7 @@ export default class SegmentedControlContainer extends Component {
               }}/>
           </View>
           <ScrollView style={styles.listContainer}>
-            <SegmentedControl {...this.props} {...this.state} />
+            <SegmentedControl {...this.props} {...this.state} title={this.state.titleToPass}/>
           </ScrollView>
         </View>
       );

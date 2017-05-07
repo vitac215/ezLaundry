@@ -34,7 +34,6 @@ const UTIL = {
     };
   },
 
-
   processResData: function(data, machine_type) {
     console.log("processResData");
 
