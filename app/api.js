@@ -305,9 +305,10 @@ const API = {
       // change
       console.log("API: getResSchedule");
       // res_time: the start time all the machines are not available, date object
-      // TODO: check data format
+      // TODO: need to get a reserve_time
+      reserve_time = 'May 9, 2017 10:30:00';
       let json = [
-                   {'username': 'v', 'reserve_time': new Date("May 7, 2017 10:30:00"), 'display_id': 1, 'access_code': 1011},
+                   {'username': 'v', 'reserve_time': new Date(reserve_time), 'display_id': 1, 'access_code': 1011},
                  ]
       return await json;
       // end change

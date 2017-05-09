@@ -44,7 +44,6 @@ export default class ListViewResConfirmContainer extends Component {
             <ListView
               dataSource = {this.props.dataSource}
               renderRow = {this.renderRow.bind(this)}
-              // renderRow = {console.log("resconfirm renderrow this", this)} // auto bind
             />
           </ScrollView>
         </View>

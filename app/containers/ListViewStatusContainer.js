@@ -16,6 +16,8 @@ import moment from 'moment-timezone';
 
 import UTL from '../utilities';
 import CountDown from '../components/CountDown';
+import ListViewResConfirmContainer from '../containers/ListViewResConfirmContainer';
+import API from '../api';
 
 export default class ListViewStatusContainer extends Component {
   constructor(props) {
@@ -182,14 +184,14 @@ export default class ListViewStatusContainer extends Component {
       // Update the DS state - fetch the data again
       console.log("quick reserve success feftch data");
 
-      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab).done((res) => {
+      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(res),
         });
       });
 
       this.props.navigator.push({
-      component: ReserveConfirmScene,
+      component: ListViewResConfirmContainer,
       passProps: {
         username: this.props.username,
         reserve_time: moment().format("hh:mm A"),

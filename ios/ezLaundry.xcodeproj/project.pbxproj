@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -16,7 +17,6 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -37,22 +37,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* ezLaundryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ezLaundryTests.m */; };
 		337EC0EEABBD455DAF9E8F40 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88E84F6FE4904DA5B08AA9F9 /* Ionicons.ttf */; };
 		4087DDBB350244C8A9961212 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC01E5A7AF26495494671C1E /* SimpleLineIcons.ttf */; };
-		46BAB76F78C04ECCA0D50B81 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8606C48E95F34221B65D6942 /* Entypo.ttf */; };
 		582D3461C37E4DB08D50C268 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 403F3E162AB84944ABC6D7BE /* Octicons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		601E6FFE3F29407C960D9310 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA6CB71DDCC34161864D32B3 /* libRNVectorIcons.a */; };
 		799F912A27CE4F98A74423CA /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F59F1E2D4DB4A2F82317DBD /* Foundation.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		B275AABB1E95B32D00D33552 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB11E95B32D00D33552 /* Entypo.ttf */; };
-		B275AABC1E95B32D00D33552 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB21E95B32D00D33552 /* EvilIcons.ttf */; };
-		B275AABD1E95B32D00D33552 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB31E95B32D00D33552 /* FontAwesome.ttf */; };
-		B275AABE1E95B32D00D33552 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB41E95B32D00D33552 /* Foundation.ttf */; };
-		B275AABF1E95B32D00D33552 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB51E95B32D00D33552 /* Ionicons.ttf */; };
-		B275AAC01E95B32D00D33552 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB61E95B32D00D33552 /* MaterialCommunityIcons.ttf */; };
-		B275AAC11E95B32D00D33552 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB71E95B32D00D33552 /* MaterialIcons.ttf */; };
-		B275AAC21E95B32D00D33552 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB81E95B32D00D33552 /* Octicons.ttf */; };
-		B275AAC31E95B32D00D33552 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AAB91E95B32D00D33552 /* SimpleLineIcons.ttf */; };
-		B275AAC41E95B32D00D33552 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B275AABA1E95B32D00D33552 /* Zocial.ttf */; };
 		D0994431D3B34A899F3B5D37 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5789DF3D2C64616BCE8F381 /* MaterialIcons.ttf */; };
 		D18B045061634B489A927D95 /* libRNNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C08CE169440078DFF30A8 /* libRNNotifications.a */; };
 		D431C0D7EAAB4AFE8A1ED76E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03E4B56ABB82414081093D03 /* FontAwesome.ttf */; };
@@ -685,7 +674,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = S2L79EXCKP;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = S2L79EXCKP;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -978,26 +971,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				B275AABE1E95B32D00D33552 /* Foundation.ttf in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				46BAB76F78C04ECCA0D50B81 /* Entypo.ttf in Resources */,
-				B275AAC11E95B32D00D33552 /* MaterialIcons.ttf in Resources */,
-				B275AAC31E95B32D00D33552 /* SimpleLineIcons.ttf in Resources */,
-				B275AAC41E95B32D00D33552 /* Zocial.ttf in Resources */,
-				B275AABF1E95B32D00D33552 /* Ionicons.ttf in Resources */,
-				B275AABC1E95B32D00D33552 /* EvilIcons.ttf in Resources */,
 				EE864978C0474391A0886D1D /* EvilIcons.ttf in Resources */,
 				D431C0D7EAAB4AFE8A1ED76E /* FontAwesome.ttf in Resources */,
 				799F912A27CE4F98A74423CA /* Foundation.ttf in Resources */,
-				B275AAC21E95B32D00D33552 /* Octicons.ttf in Resources */,
 				337EC0EEABBD455DAF9E8F40 /* Ionicons.ttf in Resources */,
-				B275AABB1E95B32D00D33552 /* Entypo.ttf in Resources */,
 				1411C61D228141C292D51488 /* MaterialCommunityIcons.ttf in Resources */,
 				D0994431D3B34A899F3B5D37 /* MaterialIcons.ttf in Resources */,
-				B275AABD1E95B32D00D33552 /* FontAwesome.ttf in Resources */,
 				582D3461C37E4DB08D50C268 /* Octicons.ttf in Resources */,
 				4087DDBB350244C8A9961212 /* SimpleLineIcons.ttf in Resources */,
-				B275AAC01E95B32D00D33552 /* MaterialCommunityIcons.ttf in Resources */,
 				240D3D8FEF3442DEAD5BDFAF /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,6 +1098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = S2L79EXCKP;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1143,6 +1125,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = S2L79EXCKP;
 				INFOPLIST_FILE = ezLaundryTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1166,6 +1149,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = S2L79EXCKP;
 				INFOPLIST_FILE = ezLaundry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1183,6 +1167,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S2L79EXCKP;
 				INFOPLIST_FILE = ezLaundry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
