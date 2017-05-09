@@ -102,7 +102,7 @@ export default class ListViewResConfirmContainer extends Component {
         // selectedTab: this.props.selectedTab,
         // bottomTab: 'Reservation',
         bottomTab: 'Status',
-        title: 'Reservation',
+        title: this.props.property_name,
       }
     });
   }; // cencelRes
