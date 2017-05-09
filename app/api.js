@@ -1,11 +1,9 @@
 import UTL from './utilities';
 
-const server = 'http://128.237.134.80:3000/';
-// ec2-54-165-215-7.compute-1.amazonaws.com/
+const server = 'http://ec2-34-201-14-244.compute-1.amazonaws.com:3000/';
 
 const API_URL = {
     'signUp': server + 'api/add_user/',
-    //'signUp': 'https://google.com',
     'login': server + 'api/login_user/',
     'getMachineData': server + 'api/show_all_user_schedules_type_after_now/',
     'quickReserve': server + 'api/quick_reservation/',
@@ -105,37 +103,37 @@ const API = {
 
   getMachineData: async function(username, machine_type) {
     // original
-    //
-    // // console.log(API_URL.getMachineData);
-    // // console.log(username);
-    // // console.log(machine_type);
-    // try{
-    //   let response = await fetch(`${API_URL.getMachineData}`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       machine_type
-    //     })
-    //   })
-    //   let json = await response.json();
-    //   //console.log(json.schedules);
-    //   return json.schedules;
-    // } catch(err) {
-    //   console.log(err);
-    // }
 
-    // change
-    console.log("API: getMachineData");
-    let json = [
-                 {'user_name': "v", 'end_time': "0005"},  // current time + 1
-                 {'user_name': "v", 'end_time': "0010"},
-                 {'user_name': "v", 'end_time': "0003"},
-                 {'user_name': "v", 'end_time': "0000"}
-               ]
-    return await json;
+    // console.log(API_URL.getMachineData);
+    // console.log(username);
+    // console.log(machine_type);
+    try{
+      let response = await fetch(`${API_URL.getMachineData}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          machine_type
+        })
+      })
+      let json = await response.json();
+      //console.log(json.schedules);
+      return json.schedules;
+    } catch(err) {
+      console.log(err);
+    }
+
+    // NOTE: change
+    // console.log("API: getMachineData");
+    // let json = [
+    //              {'user_name': "v", 'end_time': "0005"},  // current time + 1
+    //              {'user_name': "v", 'end_time': "0010"},
+    //              {'user_name': "v", 'end_time': "0003"},
+    //              {'user_name': "v", 'end_time': "0000"}
+    //            ]
+    // return await json;
     // end change
 
   },
