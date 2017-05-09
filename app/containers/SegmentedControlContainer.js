@@ -47,7 +47,7 @@ export default class SegmentedControlContainer extends Component {
       }
       this.callUTLfetchData();
     });
-    console.log('SegmentedControlContainer titleToPass', this.state.titleToPass);
+    console.log('SegmentedControlContainer titleToPass:', this.state.titleToPass);
   };
 
 

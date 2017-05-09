@@ -13,7 +13,6 @@ import MenuBar from '../components/MenuBar';
 export default class MainScene extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   render() {

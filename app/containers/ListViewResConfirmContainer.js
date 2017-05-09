@@ -24,7 +24,7 @@ export default class ListViewResConfirmContainer extends Component {
   constructor(props) {
     console.log("ListViewResConfirmContainer", props);
     super(props);
-
+    //TODO: how to set reserved state
     this.state = {
       dataSource: this.props.dataSource,
       reserved: true,
@@ -93,6 +93,7 @@ export default class ListViewResConfirmContainer extends Component {
     this.setState({
       reserved: false,
     });
+    console.log('cancel', this.props);
     this.props.navigator.push({
       component: MainScene,
       passProps: {
