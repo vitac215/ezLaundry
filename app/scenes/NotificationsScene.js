@@ -26,27 +26,73 @@ export default class NotificationsScene extends Component {
 
   componentDidMount() {
     // let done = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
-    AsyncStorage.getItem("done").then((res) => {
+
+    AsyncStorage.getItem("Washing").then((value) => {
+            console.log(value);
+            if (value === "true") {
+              value = true;
+            } else {
+              value = false;
+            }
             this.setState({
-              remindDone: (res === null) ? false : Boolean(res),
+              remindWashingAvailable: value,
+            });
+            console.log(this.state);
+        }).done();
+
+    AsyncStorage.getItem("Dryer").then((value) => {
+            console.log(value);
+            if (value === "true") {
+              value = true;
+            } else {
+              value = false;
+            }
+            this.setState({
+              remindDryerAvailable: value,
+            });
+            console.log(this.state);
+        }).done();
+
+    AsyncStorage.getItem("Laundry").then((value) => {
+            console.log(value);
+            if (value === "true") {
+              value = true;
+            } else {
+              value = false;
+            }
+            this.setState({
+              remindDone: value,
             });
             console.log(this.state);
         }).done();
   }
 
-  saveNoti(value, type) {
-    console.log(type);
+  saveNoti(key, value) {
+    console.log(key);
     console.log(value);
-    AsyncStorage.setItem(type, JSON.stringify(value));
-    this.setState({remindDone: value});
-    // AsyncStorage.getItem("done").then((res) => {
-    //         console.log(res);
-    //         this.setState({remindDone: value});
-    //         AsyncStorage.getAllKeys((keys) => {
-    //           console.log(keys);
-    //         });
-    //     }).done();
+    AsyncStorage.setItem(key, JSON.stringify(value));
+    switch (key) {
+      case "Washing":
+        this.setState({
+          remindWashingAvailable: value,
+        });
+        break;
+      case "Dryer":
+        this.setState({
+          remindDryerAvailable: value,
+        });
+        break;
+
+      case "Laundry":
+        this.setState({
+          remindDone: value,
+        });
+        break;
+      default:
+        break;
+    }
   }
+
 
   render() {
     const { navigator } = this.props;
@@ -64,8 +110,7 @@ export default class NotificationsScene extends Component {
                 value={this.state.remindWashingAvailable}
                 onValueChange={
                   (value) => {
-                    this.setState({remindWashingAvailable: value});
-                    // store.setRemindDone(value);
+                    this.saveNoti("Washing", value);
                   }
                 }/>
             </View>
@@ -76,7 +121,11 @@ export default class NotificationsScene extends Component {
               <Switch
                 style={styles.switch}
                 value={this.state.remindDryerAvailable}
-                onValueChange={(value) => this.setState({remindDryerAvailable: value})} />
+                onValueChange={
+                  (value) => {
+                    this.saveNoti("Dryer", value);
+                  }
+                }/>
             </View>
             <View style={styles.separator}/>
 
@@ -88,7 +137,7 @@ export default class NotificationsScene extends Component {
                 value={this.state.remindDone}
                 onValueChange={
                   (value) => {
-                    this.saveNoti(value, "done");
+                    this.saveNoti("Laundry", value);
                   }
                 }/>
             </View>
