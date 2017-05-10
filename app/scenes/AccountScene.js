@@ -20,86 +20,85 @@ export default class AccountScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.username,
-      email: this.props.email,
-      password: this.props.password,
-      address: this.props.address,
-      city: this.props.city,
-      property_name: this.props.property_name,
       old_password:'',
       new_password:'',
       confirm_password:'',
-
+      new_address:'',
+      new_city: '',
     }
   };
 
   async saveChange() {
     const { navigator } = this.props;
-    const { username, email, password, old_password,
-      new_password, confirm_password, address, city, property_name } = this.state;
+    const { username, email, password, address, city, property_name } = this.props;
+    const { old_password, new_password, confirm_password, new_address, new_city } = this.state;
+    // console.log("old password", old_password == '');  // true;
     try {
-      let reponse = await API.checkOldPassword(username, old_password);
-      console.log(reponse);
-      if (reponse.message && reponse.message.toUpperCase() !== "EQUAL") {
-        console.log('input_hashed_password', reponse.hashed_password);
-        console.log('stored password', this.state.password);
-          Alert.alert('Password is not correct');
-      }
-    } catch(err) {
-      console.log(err);
-    }
-
-    if (this.state.new_password !== this.state.confirm_password) {
-      Alert.alert('Passwords do not match');
-      return;
-    }
-    try {
-      let res = await API.updateUser(username, new_password, address, city);
-      if (res.message && res.message.toUpperCase() === "SUCCESS") {
-        // Store the user data
-        console.log(res);
-
-        let user = res.user;
-        store.setPassword(user.password);
-        if (address !== '') {
-          store.setPropertyName(user.property_name);
-        }
-        Alert.alert(
-          'Password has been reset'
-        );
-        return;
-      // Alert error message
+      if (old_password == '') {
+        Alert.alert('Please enter your password.');
       } else {
-        Alert.alert(res.message);
-        return;
+        let response = await API.checkOldPassword(username, old_password);
+        if (response.message != 'EQUAL') {
+          Alert.alert('Your password is not correct');
+          return;
+        }
+        if (new_password != '') {
+          if (this.state.new_password !== this.state.confirm_password) {
+            Alert.alert('Passwords do not match');
+            return;
+          }
+        } else if (new_address == '') {
+            Alert.alert('Hi, seems you have nothing to update :)');
+            return;
+        }
+        if (new_password == '') {
+          this.setState({
+            new_password: old_password,
+          });
+          console.log("old_password", old_password);
+          console.log("new_password", new_password);
+        }
+        let res = await API.updateUser(username, new_password, new_address, new_city);
+        if (res.message && res.message.toUpperCase() === "SUCCESS") {
+          // Store the user data
+          console.log(res);
+          let user = res.user;
+          store.setPassword(user.password);
+          if (address != null) {
+            store.setPropertyName(user.property_name);
+          }
+          Alert.alert(
+            'Your account info has been reset!'
+          );
+          return;
+        // Alert error message
+        } else {
+          Alert.alert(res.message);
+          return;
+        }
       }
+      // console.log(response);
+      // if (response.message && response.message.toUpperCase() !== "EQUAL") {
+      //   console.log('input_hashed_password', response.hashed_password);
+      //   console.log('stored password', this.props.password);
+      //     Alert.alert('Password is not correct');
+      // }
     } catch(err) {
       console.log(err);
     }
+    // try {
+    //   let res = await API.updateUser(username, new_password, address, city);
+    //
+    // } catch(err) {
+    //   console.log(err);
+    // }
   }
-  // renderSettingScene() {
-  //   const { navigator } = this.props;
-  //   const { username, email, password, old_password,
-  //     new_password, confirm_password, address, city, property_name } = this.state;
-  //     navigator.push({
-  //       name: 'Setting',
-  //       component: SettingScene,
-  //       passProps: {
-  //         username: user.username,
-  //         email: user.email,
-  //         password: user.password,
-  //         address: user.address,
-  //         city: user.city,
-  //         property_name: user.property_name,
-  //       }
-  //     })
-  // }
 
   render() {
-    console.log('AccountScene', this.props);
+    // console.log('AccountScene', this.props);
     const { navigator } = this.props;
-    const { username, email, password, old_password,
-      new_password, confirm_password, address, city, property_name } = this.state;
+    const { username, email, password, address, city, property_name } = this.props;
+    const { old_password, new_password, confirm_password, new_address, new_city } = this.state;
 
     return (
       <View style={styles.container}>
@@ -111,7 +110,6 @@ export default class AccountScene extends Component {
                 <Text style={styles.label}>Username</Text>
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={ (username) => {this.setState({username})}}
                   placeholder={ username }
                   value={ username }
                   autoCapitalize='none'
@@ -176,9 +174,9 @@ export default class AccountScene extends Component {
                 <Text style={styles.label}>Address</Text>
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={ (address) => {this.setState({address})}}
-                  placeholder={ address }
-                  value={ address }
+                  onChangeText={ (new_address) => {this.setState({new_address})}}
+                  placeholder={ new_address }
+                  value={ new_address }
                   autoCapitalize='none'
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />
@@ -188,10 +186,9 @@ export default class AccountScene extends Component {
                 <Text style={styles.label}>City</Text>
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={ (city) => {this.setState({city})}}
-                  placeholder={ city }
-
-                  value={ city }
+                  onChangeText={ (new_city) => {this.setState({new_city})}}
+                  placeholder={ new_city }
+                  value={ new_city }
                   autoCapitalize='none'
                   placeholderTextColor='rgba(51,51,51,0.5)'
                   autoCorrect={false} />

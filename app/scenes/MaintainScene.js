@@ -42,7 +42,7 @@ export default class MaintainScene extends Component {
       Alert.alert('Your report length must be smaller than 10');
     } else {
       try {
-        let res = await API.report(username, this.state.selected1 + " " + report);
+        let res = await API.report(this.props.username, this.state.selected1 + " " + report);
         if (res.message && res.message.toUpperCase() === "SUCCESS") {
           Alert.alert("Your report is on its way");
           console.log(res);
@@ -59,11 +59,10 @@ export default class MaintainScene extends Component {
   }
 
   render() {
-    console.log('Maintain Scene', this.props);
+    // console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
     const label = ["Machine is broken", "Machine is dirty", "Others"];
-    console.log("lable[0] ", label[0]);
     var problem = '';
     return (
       <View style={styles.container}>
@@ -104,8 +103,6 @@ export default class MaintainScene extends Component {
   // },
   //
   onValueChange (key, value) {
-    console.log("onValueChange key", key);
-    console.log("onValueChange value", value);
     const newState = {};
     newState[key] = value;
     this.setState(newState);

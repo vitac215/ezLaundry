@@ -47,8 +47,8 @@ export default class ListViewStatusContainer extends Component {
   }
 
   render() {
-    // console.log(this.props);
-    console.log("state ds", this.state.dataSource === this.props.dataSource);
+    console.log(this.props);
+    // console.log("state ds", this.state.dataSource === this.props.dataSource);
     // console.log("props ds", );
     console.log('status props',this.props);
     return (

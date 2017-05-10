@@ -163,6 +163,7 @@ const API = {
   },
   updateUser: async function(username, new_password, address, city) {
     try{
+      console.log("new_password", new_password);
       let response = await fetch(`${API_URL.updateUser}`, {
         method: 'POST',
         headers: {
@@ -183,7 +184,8 @@ const API = {
     }
   },
   report: async function(username, report) {
-    console.log('report API', report)
+    console.log('report API', report);
+    console.log('username', username);
     try{
       let response = await fetch(`${API_URL.report}`, {
         method: 'POST',
@@ -196,7 +198,7 @@ const API = {
         })
       })
       let json = await response.json();
-      // console.log(json);
+      console.log(json);
         return json;
     } catch(err) {
       console.log(err);

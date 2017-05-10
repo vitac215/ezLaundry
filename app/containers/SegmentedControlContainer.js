@@ -68,7 +68,7 @@ export default class SegmentedControlContainer extends Component {
 
 
   render() {
-    // console.log("SegmentedControlContainer props", this.props);
+    console.log("SegmentedControlContainer props", this.props);
     // console.log("SegmentedControlContainer datasource", this.state.dataSource);
 
 

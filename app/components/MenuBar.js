@@ -35,7 +35,7 @@ export default class MenuBar extends Component {
 
   _renderContent = (component) => {
     var Component = component;
-    // console.log('props', {...this.props});
+    console.log('props', {...this.props});
     // console.log('state', {...this.state});
     let titleToPass;
     if (this.state.title === undefined) {
