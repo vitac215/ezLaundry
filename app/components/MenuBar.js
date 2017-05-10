@@ -35,15 +35,15 @@ export default class MenuBar extends Component {
 
   _renderContent = (component) => {
     var Component = component;
-    console.log('props', {...this.props});
-    console.log('state', {...this.state});
+    // console.log('props', {...this.props});
+    // console.log('state', {...this.state});
     let titleToPass;
     if (this.state.title === undefined) {
       titleToPass = this.props.title;
     } else {
       titleToPass = this.state.title
     }
-    console.log("prop title to child", titleToPass);
+    // console.log("prop title to child", titleToPass);
     return (
       <View style={styles.tabContent}>
         <Component {...this.props} {...this.state} title={titleToPass} />

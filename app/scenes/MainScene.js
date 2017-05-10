@@ -16,7 +16,7 @@ export default class MainScene extends Component {
   }
 
   render() {
-    console.log('mainscene', this.props);
+    // console.log('mainscene', this.props);
     return (
       <MenuBar {...this.props} />
     )

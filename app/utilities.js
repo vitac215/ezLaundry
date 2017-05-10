@@ -4,7 +4,7 @@ import API from './api';
 
 const UTIL = {
   fetchData: async function(username, selectedTab, bottomTab, title) {
-    console.log("fetchdata");
+    // console.log("fetchdata");
 
     switch (bottomTab) {
       case 'Status':
@@ -14,19 +14,19 @@ const UTIL = {
             return res; // !!! probably closure
           });
       case 'Reservation':
-        console.log('UTL title', title);
+        // console.log('UTL title', title);
         if (title === "Reservation") {
-          console.log("fetch all res schedule");
+          // console.log("fetch all res schedule");
           return await API.getAllResSchedule(username, selectedTab, new Date())
             .then((res) => {
-              console.log(res);
+              // console.log(res);
               return res;
             });
         } else {
-          console.log("fetch res schedule");
+          // console.log("fetch res schedule");
           return await API.getResSchedule(username, selectedTab, new Date())
             .then((res) => {
-              console.log('fetch res schedule result', res);
+              // console.log('fetch res schedule result', res);
               return res;
             });
         }
@@ -35,7 +35,7 @@ const UTIL = {
   },
 
   processResData: function(data, machine_type) {
-    console.log("processResData");
+    // console.log("processResData");
 
     var buffer = 10;
     var w_interval = 30+buffer;
@@ -74,7 +74,7 @@ const UTIL = {
       row.slot = moment().startOf('day').add(row.slot, 'minutes').format("HH:mm A");
     }
 
-    console.log(schedule);
+    // console.log(schedule);
     return schedule;
   },
 

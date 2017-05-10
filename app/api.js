@@ -19,7 +19,7 @@ const API_URL = {
 
 const API = {
   signUp: async function(username, email, password, address, city) {
-    console.log('signup API');
+    // console.log('signup API');
     try{
       let response = await fetch(`${API_URL.signUp}`, {
         method: 'POST',
@@ -35,14 +35,14 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
-        return json;
+      // console.log(json);
+      return json;
     } catch(err) {
       console.log(err);
     }
   },
   resendEmail: async function(username) {
-    console.log('resendEmail API');
+    // console.log('resendEmail API');
     try{
       let response = await fetch(`${API_URL.resendEmail}`, {
         method: 'POST',
@@ -54,7 +54,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
         return json;
     } catch(err) {
       console.log(err);
@@ -74,7 +74,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
       return json;
     } catch(err) {
       console.log(err);
@@ -94,7 +94,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
       return json;
     } catch(err) {
       console.log(err);
@@ -119,7 +119,7 @@ const API = {
         })
       })
       let json = await response.json();
-      //console.log(json.schedules);
+      // console.log(json.schedules);
       return json.schedules;
     } catch(err) {
       console.log(err);
@@ -152,7 +152,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
       return json;
     } catch(err) {
       console.log(err);
@@ -176,14 +176,14 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
         return json;
     } catch(err) {
       console.log(err);
     }
   },
   report: async function(username, report) {
-    console.log('report API', report)
+    // console.log('report API', report)
     try{
       let response = await fetch(`${API_URL.report}`, {
         method: 'POST',
@@ -196,7 +196,7 @@ const API = {
         })
       })
       let json = await response.json();
-      console.log(json);
+      // console.log(json);
         return json;
     } catch(err) {
       console.log(err);
@@ -224,7 +224,7 @@ const API = {
   },
 
   checkOldPassword: async function(username, old_password) {
-    console.log('checkOldPassword API', old_password);
+    // console.log('checkOldPassword API', old_password);
     try{
       let response = await fetch(`${API_URL.checkOldPassword}`, {
         method: 'POST',

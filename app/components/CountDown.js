@@ -29,6 +29,7 @@ var CountDown = React.createClass ({
   },
 
   render(){
+    console.log("CountDown");
     var style = [styles.text];
     var component;
     component =

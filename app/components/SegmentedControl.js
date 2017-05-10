@@ -14,7 +14,7 @@ export default class SegmentedControl extends Component {
   }
 
   render() {
-    console.log("SegmentedControl props", this.props);
+    // console.log("SegmentedControl props", this.props);
     switch(this.props.bottomTab) {
       case 'Status':
           return (
@@ -31,7 +31,7 @@ export default class SegmentedControl extends Component {
             </View>
           );
         } else {
-          console.log("enter ListViewResConfirmContainer");
+          // console.log("enter ListViewResConfirmContainer");
           return (
             <View>
               <ListViewResConfirmContainer {...this.props} />

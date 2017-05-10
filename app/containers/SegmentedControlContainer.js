@@ -16,7 +16,7 @@ import API from '../api';
 
 export default class SegmentedControlContainer extends Component {
   constructor(props) {
-    console.log("SegmentedControlContainer props", props);
+    // console.log("SegmentedControlContainer props", props);
     super(props);
 
     this.state = {
@@ -30,12 +30,12 @@ export default class SegmentedControlContainer extends Component {
 
 
   componentWillMount() {
-    console.log("SegmentedControlContainer didmount");
-    console.log("SegmentedControlContainer props", this.props);
+    // console.log("SegmentedControlContainer didmount");
+    // console.log("SegmentedControlContainer props", this.props);
     // check the server if this person has a reservation
     API.getResSchedule(this.props.username, this.state.selectedTab).done((res) => {
       // TODO: check the data format
-      console.log('SegmentedControlContainer titleToPass res', res);
+      // console.log('SegmentedControlContainer titleToPass res', res);
       if (res.length >= 1) {
         this.setState({
           titleToPass: 'Your Reservation',
@@ -47,13 +47,13 @@ export default class SegmentedControlContainer extends Component {
       }
       this.callUTLfetchData();
     });
-    console.log('SegmentedControlContainer titleToPass:', this.state.titleToPass);
+    // console.log('SegmentedControlContainer titleToPass:', this.state.titleToPass);
   };
 
 
   callUTLfetchData() {
     UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
-      console.log(res);
+      // console.log(res);
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
       });
@@ -63,13 +63,13 @@ export default class SegmentedControlContainer extends Component {
       //   clearInterval(timer);
       // }
     });
-    console.log("segementedcontrol ds",this.props.dataSource);
+    // console.log("segementedcontrol ds",this.props.dataSource);
   }
 
 
   render() {
-    console.log("SegmentedControlContainer props", this.props);
-    console.log("SegmentedControlContainer datasource", this.state.dataSource);
+    // console.log("SegmentedControlContainer props", this.props);
+    // console.log("SegmentedControlContainer datasource", this.state.dataSource);
 
 
     if (!this.state.dataSource) {

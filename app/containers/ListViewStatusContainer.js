@@ -28,14 +28,34 @@ export default class ListViewStatusContainer extends Component {
     }
   };
 
+  componentDidMount() {
+
+    // console.log("ListViewStatusContainer props", this.props);
+    // check the server if this person has a reservation
+    this.callUTLfetchData();
+
+    //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
+  };
+
+  callUTLfetchData() {
+    UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, this.props.title).done((res) => {
+      // console.log("callUTLfetchData", res);
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(res),
+      });
+    });
+  }
+
   render() {
-    console.log(this.props);
-    console.log('status ds',this.props.dataSource);
+    // console.log(this.props);
+    console.log("state ds", this.state.dataSource === this.props.dataSource);
+    // console.log("props ds", );
+    console.log('status props',this.props);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
           <ListView
-            dataSource = {this.props.dataSource}
+            dataSource = {this.state.dataSource}
             renderRow = {this.renderRow.bind(this)} // auto bind
           />
         </ScrollView>
@@ -44,7 +64,8 @@ export default class ListViewStatusContainer extends Component {
   };
 
   renderRow(rowData) {
-    console.log(this.props);
+    // console.log(this.props);
+    // console.log('rowData', rowData);
     var img = this.props.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
     var remainTime_num;
@@ -59,7 +80,7 @@ export default class ListViewStatusContainer extends Component {
 
       // changed
       remainTime_num = rowData.end_time;
-      console.log("raw remainTime: "+remainTime_num);
+      // console.log("raw remainTime: "+remainTime_num);
       var remainTime = moment(remainTime_num).format('mmss');
       var min = parseInt(rowData.end_time.substring(0,2));
       var sec = parseInt(rowData.end_time.substring(2,4));
@@ -70,6 +91,7 @@ export default class ListViewStatusContainer extends Component {
     }
 
     if (remainTime_num > 0) {
+      // console.log("remainTime_num", remainTime_num);
       return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -130,22 +152,23 @@ export default class ListViewStatusContainer extends Component {
   */
   handleCountDown(newRemainTime, end_time, username) {
     // TODO:
-    console.log("handleCountDown:\t" + end_time);
+    // console.log("handleCountDown:\t" + end_time);
     const now = moment(new Date()).tz("America/New_York");
     if ( moment(now).isAfter(end_time) ) {
-      console.log("handleCountDown:\t timeout!");
+      // console.log("handleCountDown:\t timeout!");
       // TODO: Need to figure out whether it is n expired reservation or finished laundry
       if (username === this.props.username) { // It can be an expired reservation or finished laundry
         Alert.alert("Your reservation just expired!");
       }
 
-      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, this.props.title).done((res) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(res),
-        });
-      });
+      // UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, this.props.title).done((res) => {
+      //   this.setState({
+      //     dataSource: this.state.dataSource.cloneWithRows(res),
+      //   });
+      // });
+      this.callUTLfetchData();
     } else {
-      console.log("handleCountDown:\t still waiting");
+      // console.log("handleCountDown:\t still waiting");
       return newRemainTime;
     }
 
@@ -177,30 +200,32 @@ export default class ListViewStatusContainer extends Component {
 
   async quickReserveSuccess(machine_id) {
     // Call API to reserve this machine_id
-    var res = await API.quickReserve(this.state.username, machine_id);
-    console.log("quick reserve", res);
-    console.log("seg props", this.props);
+    var res = await API.quickReserve(this.props.username, machine_id);
+    // console.log("quick reserve", res);
+    // console.log("seg props", this.props);
     if (res.message && res.message.toUpperCase() === 'SUCCESS') {
       // Update the DS state - fetch the data again
-      console.log("quick reserve success feftch data");
+      // console.log("quick reserve success feftch data");
 
       UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
+        // console.log("fetched data", res);
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(res),
         });
       });
 
-      this.props.navigator.push({
-      component: ListViewResConfirmContainer,
-      passProps: {
-        username: this.props.username,
-        reserve_time: moment().format("hh:mm A"),
-        type: this.state.selectedTab,
-        title: "Your Reservation",
-        bottomTab: 'Reservation',
-      }
-      });
-      console.log("push end");
+      // this.props.navigator.push({
+      // component: ListViewResConfirmContainer,
+      // passProps: {
+      //   username: this.props.username,
+      //   reserve_time: moment().format("hh:mm A"),
+      //   type: this.state.selectedTab,
+      //   title: "Your Reservation",
+      //   bottomTab: 'Reservation',
+      //   dataSource: this.props.dataSource,
+      // }
+      // });
+      // console.log("push end");
     } else {
       // Do nothing
       Alert.alert(res.message);
