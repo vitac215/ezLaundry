@@ -104,9 +104,9 @@ const API = {
   getMachineData: async function(username, machine_type) {
     // original
 
-    // console.log(API_URL.getMachineData);
+    console.log(API_URL.getMachineData);
     // console.log(username);
-    // console.log(machine_type);
+    console.log(machine_type);
     try{
       let response = await fetch(`${API_URL.getMachineData}`, {
         method: 'POST',
@@ -119,7 +119,7 @@ const API = {
         })
       })
       let json = await response.json();
-      // console.log(json.schedules);
+      console.log(json.schedules);
       return json.schedules;
     } catch(err) {
       console.log(err);
