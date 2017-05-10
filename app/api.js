@@ -183,7 +183,7 @@ const API = {
     }
   },
   report: async function(username, report) {
-    // console.log('report API', report)
+    console.log('report API', report)
     try{
       let response = await fetch(`${API_URL.report}`, {
         method: 'POST',

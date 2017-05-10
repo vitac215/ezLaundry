@@ -25,13 +25,14 @@ export default class MaintainScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedMachine: '0',
+      selected: '',
+      selected2: '',
+      selected3: '',
       problem: '',
       report:'',
     }
   };
   async report() {
-
     console.log('report', this.props);
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
@@ -41,7 +42,7 @@ export default class MaintainScene extends Component {
       Alert.alert('Your report length must be smaller than 10');
     } else {
       try {
-        let res = await API.report(username, report);
+        let res = await API.report(username, this.state.selected1 + " " + report);
         if (res.message && res.message.toUpperCase() === "SUCCESS") {
           Alert.alert("Your report is on its way");
           console.log(res);
@@ -61,17 +62,19 @@ export default class MaintainScene extends Component {
     console.log('Maintain Scene', this.props);
     const { navigator } = this.props;
     const { username, password, passwordconfirm, address, city, property_name, report } = this.state;
+    const label = ["Machine is broken", "Machine is dirty", "Others"];
+    console.log("lable[0] ", label[0]);
     var problem = '';
     return (
       <View style={styles.container}>
         <Navbar title={this.props.title} leftBtn='Back' rightBtn navigator={navigator} />
         <Text style={styles.text}>What is the problem?</Text>
         <Picker
-          selectedValue={this.state.problem}
-          onValueChange={(prob) => this.setState({report: prob})}>
-          <Picker.Item label="Machine is broken" value="1" />
-          <Picker.Item label="Machine is dirty" value="2" />
-          <Picker.Item label="Others" value="0" />
+            selectedValue={this.state.selected1}
+            onValueChange={this.onValueChange.bind(this, 'selected1')}>
+            <Picker.Item label={label[0]} value={label[0]} />
+            <Picker.Item label={label[1]} value={label[1]} />
+            <Picker.Item label={label[2]} value={label[2]} />
         </Picker>
         <View style={styles.inputContainer}>
           <TextInput
@@ -100,11 +103,13 @@ export default class MaintainScene extends Component {
   //   this.setState({mode: newMode});
   // },
   //
-  // onValueChange: function(key: string, value: string) {
-  //   const newState = {};
-  //   newState[key] = value;
-  //   this.setState(newState);
-  // },
+  onValueChange (key, value) {
+    console.log("onValueChange key", key);
+    console.log("onValueChange value", value);
+    const newState = {};
+    newState[key] = value;
+    this.setState(newState);
+  };
 };
 
 var styles = StyleSheet.create({
