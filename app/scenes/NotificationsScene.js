@@ -28,7 +28,6 @@ export default class NotificationsScene extends Component {
     // let done = (await store.getRemindDone() != null) ? await store.getRemindDone() : false;
 
     AsyncStorage.getItem("Washing").then((value) => {
-            console.log(value);
             if (value === "true") {
               value = true;
             } else {
@@ -37,11 +36,9 @@ export default class NotificationsScene extends Component {
             this.setState({
               remindWashingAvailable: value,
             });
-            console.log(this.state);
         }).done();
 
     AsyncStorage.getItem("Dryer").then((value) => {
-            console.log(value);
             if (value === "true") {
               value = true;
             } else {
@@ -50,11 +47,9 @@ export default class NotificationsScene extends Component {
             this.setState({
               remindDryerAvailable: value,
             });
-            console.log(this.state);
         }).done();
 
     AsyncStorage.getItem("Laundry").then((value) => {
-            console.log(value);
             if (value === "true") {
               value = true;
             } else {
@@ -63,13 +58,10 @@ export default class NotificationsScene extends Component {
             this.setState({
               remindDone: value,
             });
-            console.log(this.state);
         }).done();
   }
 
   saveNoti(key, value) {
-    console.log(key);
-    console.log(value);
     AsyncStorage.setItem(key, JSON.stringify(value));
     switch (key) {
       case "Washing":
@@ -96,7 +88,6 @@ export default class NotificationsScene extends Component {
 
   render() {
     const { navigator } = this.props;
-    console.log(this.state);
 
     return (
       <View style={styles.container}>
