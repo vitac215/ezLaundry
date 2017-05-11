@@ -22,28 +22,47 @@ import API from '../api';
 export default class ListViewStatusContainer extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      WashingDS: this.props.WashingDS,
+      DryerDS: this.props.DryerDS,
+    }
   };
 
-  // componentDidMount() {
-  //   // console.log("ListViewStatusContainer props", this.props);
-  //   // check the server if this person has a reservation
-  //   this.callUTLfetchData("washing");
-  //   this.callUTLfetchData("dryer");
-  //
-  //   // fetch machine data every 5 seconds
-  //   //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
-  // };
+  componentDidMount() {
+    // console.log("ListViewStatusContainer props", this.props);
+    // check the server if this person has a reservation
+    this.callUTLfetchData("washing");
+    this.callUTLfetchData("dryer");
 
+    // fetch machine data every 5 seconds
+    //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
+  };
+
+  callUTLfetchData() {
+    console.log("callUTLfetchData enter");
+    UTL.fetchData(this.props.username, "washing", this.props.bottomTab, this.props.titleToPass).done((res) => {
+      this.setState({
+        WashingDS: this.state.WashingDS.cloneWithRows(res),
+      });
+    });
+    UTL.fetchData(this.props.username, "dryer", this.props.bottomTab, this.props.titleToPass).done((res) => {
+      this.setState({
+        DryerDS: this.state.DryerDS.cloneWithRows(res),
+      });
+    });
+  }
 
 
   render() {
     console.log('status props',this.props);
+    console.log('status state', this.state);
     var dataSource;
     if (this.props.selectedTab === "Washing") {
-      dataSource = this.props.WashingDS;
+      dataSource = this.state.WashingDS;
     }
     else if (this.props.selectedTab === "Dryer") {
-      dataSource = this.props.DryerDS;
+      dataSource = this.state.DryerDS;
     }
     return (
       <View style={styles.container}>
@@ -199,15 +218,14 @@ export default class ListViewStatusContainer extends Component {
     // console.log("seg props", this.props);
     if (res.message && res.message.toUpperCase() === 'SUCCESS') {
       // Update the DS state - fetch the data again
-      // console.log("quick reserve success feftch data");
 
-      //TODO: uncomment
       // UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
       //   // console.log("fetched data", res);
       //   this.setState({
       //     dataSource: this.state.dataSource.cloneWithRows(res),
       //   });
       // });
+      this.callUTLfetchData();
 
       // this.props.navigator.push({
       // component: ListViewResConfirmContainer,

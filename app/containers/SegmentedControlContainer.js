@@ -16,7 +16,6 @@ import API from '../api';
 
 export default class SegmentedControlContainer extends Component {
   constructor(props) {
-    // console.log("SegmentedControlContainer props", props);
     super(props);
 
     this.state = {
@@ -49,18 +48,19 @@ export default class SegmentedControlContainer extends Component {
       this.callUTLfetchData();
 
       // fetch machine data every 5 seconds
-      //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
+      // this.timer = setInterval(() => this.callUTLfetchData(), 5000);
     });
   };
 
 
   callUTLfetchData() {
-    UTL.fetchData(this.props.username, "washing", this.props.bottomTab, this.props.titleToPass).done((res) => {
+    console.log("callUTLfetchData enter");
+    UTL.fetchData(this.props.username, "washing", this.state.bottomTab, this.state.titleToPass).done((res) => {
       this.setState({
         WashingDS: this.state.WashingDS.cloneWithRows(res),
       });
     });
-    UTL.fetchData(this.props.username, "dryer", this.props.bottomTab, this.props.titleToPass).done((res) => {
+    UTL.fetchData(this.props.username, "dryer", this.state.bottomTab, this.state.titleToPass).done((res) => {
       this.setState({
         DryerDS: this.state.DryerDS.cloneWithRows(res),
       });
