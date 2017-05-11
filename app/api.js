@@ -119,7 +119,7 @@ const API = {
         })
       })
       let json = await response.json();
-      // console.log(json.schedules);
+      console.log("api getMachineData json res", json.schedules);
       return json.schedules;
     } catch(err) {
       console.log(err);
