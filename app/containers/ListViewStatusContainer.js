@@ -29,15 +29,15 @@ export default class ListViewStatusContainer extends Component {
     }
   };
 
-  componentDidMount() {
-    // console.log("ListViewStatusContainer props", this.props);
-    // check the server if this person has a reservation
-    this.callUTLfetchData("washing");
-    this.callUTLfetchData("dryer");
-
-    // fetch machine data every 5 seconds
-    //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
-  };
+  // componentDidMount() {
+  //   // console.log("ListViewStatusContainer props", this.props);
+  //   // check the server if this person has a reservation
+  //   this.callUTLfetchData("washing");
+  //   this.callUTLfetchData("dryer");
+  //
+  //   // fetch machine data every 5 seconds
+  //   //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
+  // };
 
   callUTLfetchData() {
     console.log("callUTLfetchData enter");
@@ -59,10 +59,10 @@ export default class ListViewStatusContainer extends Component {
     console.log('status state', this.state);
     var dataSource;
     if (this.props.selectedTab === "Washing") {
-      dataSource = this.state.WashingDS;
+      dataSource = this.state.WashingDS._dataBlob == null ? this.props.WashingDS : this.state.WashingDS;
     }
     else if (this.props.selectedTab === "Dryer") {
-      dataSource = this.state.DryerDS;
+      dataSource = this.state.DryerDS._dataBlob == null ? this.props.DryerDS : this.state.DryerDS;
     }
     return (
       <View style={styles.container}>
