@@ -45,14 +45,14 @@ export default class SegmentedControlContainer extends Component {
           titleToPass: 'Reservation',
         });
       }
-      this.callUTLfetchData();
+      this.callUTLfetchData(this.state.selectedTab);
     });
     // console.log('SegmentedControlContainer titleToPass:', this.state.titleToPass);
   };
 
 
-  callUTLfetchData() {
-    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
+  callUTLfetchData(selectedTab) {
+    UTL.fetchData(this.props.username, selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
       // console.log(res);
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(res),
@@ -66,6 +66,15 @@ export default class SegmentedControlContainer extends Component {
     // console.log("segementedcontrol ds",this.props.dataSource);
   }
 
+
+  handleValueChange(val) {
+    // change state
+    this.setState({
+      selectedTab: val
+    });
+    // call fetchdata api
+    this.callUTLfetchData(val);
+  }
 
   render() {
     console.log("SegmentedControlContainer props", this.props);
@@ -86,11 +95,7 @@ export default class SegmentedControlContainer extends Component {
               tintColor='#B0FFFE'
               values={this.state.values}
               selectedIndex={0}
-              onValueChange={(val)=> {
-                this.setState({
-                  selectedTab: val
-                })
-              }}/>
+              onValueChange={this.handleValueChange.bind(this)}/>
           </View>
           <ScrollView style={styles.listContainer}>
             <SegmentedControl {...this.props} {...this.state} title={this.state.titleToPass}/>
