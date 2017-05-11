@@ -22,40 +22,34 @@ import API from '../api';
 export default class ListViewStatusContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      dataSource: this.props.dataSource,
-    }
   };
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   // console.log("ListViewStatusContainer props", this.props);
+  //   // check the server if this person has a reservation
+  //   this.callUTLfetchData("washing");
+  //   this.callUTLfetchData("dryer");
+  //
+  //   // fetch machine data every 5 seconds
+  //   //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
+  // };
 
-    // console.log("ListViewStatusContainer props", this.props);
-    // check the server if this person has a reservation
-    this.callUTLfetchData();
 
-    //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
-  };
-
-  callUTLfetchData() {
-    UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, this.props.title).done((res) => {
-      // console.log("callUTLfetchData", res);
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(res),
-      });
-    });
-  }
 
   render() {
-    // console.log(this.props);
-    console.log("state ds", this.state.dataSource === this.props.dataSource);
-    // console.log("props ds", );
     console.log('status props',this.props);
+    var dataSource;
+    if (this.props.selectedTab === "Washing") {
+      dataSource = this.props.WashingDS;
+    }
+    else if (this.props.selectedTab === "Dryer") {
+      dataSource = this.props.DryerDS;
+    }
     return (
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
           <ListView
-            dataSource = {this.state.dataSource}
+            dataSource = {dataSource}
             renderRow = {this.renderRow.bind(this)} // auto bind
           />
         </ScrollView>
@@ -207,12 +201,13 @@ export default class ListViewStatusContainer extends Component {
       // Update the DS state - fetch the data again
       // console.log("quick reserve success feftch data");
 
-      UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
-        // console.log("fetched data", res);
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(res),
-        });
-      });
+      //TODO: uncomment
+      // UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
+      //   // console.log("fetched data", res);
+      //   this.setState({
+      //     dataSource: this.state.dataSource.cloneWithRows(res),
+      //   });
+      // });
 
       // this.props.navigator.push({
       // component: ListViewResConfirmContainer,

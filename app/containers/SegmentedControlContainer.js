@@ -23,15 +23,16 @@ export default class SegmentedControlContainer extends Component {
       values: ['Washing', 'Dryer'],
       selectedTab: 'Washing',
       bottomTab: this.props.bottomTab,
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
+      WashingDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 }),
+      DryerDS: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       titleToPass: 'Reservation',
     }
   };
 
-
-  componentWillMount() {
+  componentDidMount() {
     // console.log("SegmentedControlContainer didmount");
     // console.log("SegmentedControlContainer props", this.props);
+
     // check the server if this person has a reservation
     API.getResSchedule(this.props.username, this.state.selectedTab).done((res) => {
       // TODO: check the data format
@@ -46,36 +47,32 @@ export default class SegmentedControlContainer extends Component {
         });
       }
       this.callUTLfetchData();
+
+      // fetch machine data every 5 seconds
+      //this.timer = setInterval(() => this.callUTLfetchData(), 5000);
     });
-    // console.log('SegmentedControlContainer titleToPass:', this.state.titleToPass);
   };
 
 
   callUTLfetchData() {
-    UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab, this.state.titleToPass).done((res) => {
-      // console.log(res);
+    UTL.fetchData(this.props.username, "washing", this.props.bottomTab, this.props.titleToPass).done((res) => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(res),
+        WashingDS: this.state.WashingDS.cloneWithRows(res),
       });
-      // // Fetch data every 5 sec
-      // var timer = setInterval(() => UTL.fetchData(this.props.username, this.state.selectedTab, this.state.bottomTab), 5000);
-      // if (this.state.bottomTab === "Settings") {
-      //   clearInterval(timer);
-      // }
     });
-    // console.log("segementedcontrol ds",this.props.dataSource);
+    UTL.fetchData(this.props.username, "dryer", this.props.bottomTab, this.props.titleToPass).done((res) => {
+      this.setState({
+        DryerDS: this.state.DryerDS.cloneWithRows(res),
+      });
+    });
   }
 
 
   render() {
     // console.log("SegmentedControlContainer props", this.props);
     // console.log("SegmentedControlContainer datasource", this.state.dataSource);
-
-
-    if (!this.state.dataSource) {
-      return (
-        <View><Text>Loading</Text></View>
-      )
+    if (this.state.WashingDS == undefined || this.state.DryerDS == undefined) {
+      return <View><Text>Loading</Text></View>
     }
     else {
       return (
@@ -96,10 +93,11 @@ export default class SegmentedControlContainer extends Component {
             <SegmentedControl {...this.props} {...this.state} title={this.state.titleToPass}/>
           </ScrollView>
         </View>
-      );
+      ); // end return
     }
-  };
-}
+
+  }; // end render
+} // end class
 
   var styles = StyleSheet.create({
     container: {

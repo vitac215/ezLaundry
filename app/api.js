@@ -106,7 +106,7 @@ const API = {
 
     // console.log(API_URL.getMachineData);
     // console.log(username);
-    // console.log(machine_type);
+    console.log("api getMachineData json machine_type: ", machine_type);
     try{
       let response = await fetch(`${API_URL.getMachineData}`, {
         method: 'POST',
