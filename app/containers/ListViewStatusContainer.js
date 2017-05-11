@@ -77,8 +77,7 @@ export default class ListViewStatusContainer extends Component {
   };
 
   renderRow(rowData) {
-    // console.log(this.props);
-    // console.log('rowData', rowData);
+    console.log('rowData', rowData);
     var img = this.props.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
 
     var remainTime_num;
@@ -93,17 +92,21 @@ export default class ListViewStatusContainer extends Component {
 
       // changed
       remainTime_num = rowData.end_time;
+      remainTime_num = parseInt(rowData.end_time);
       // console.log("raw remainTime: "+remainTime_num);
       var remainTime = moment(remainTime_num).format('mmss');
       var min = parseInt(rowData.end_time.substring(0,2));
       var sec = parseInt(rowData.end_time.substring(2,4));
       var end_time = moment().add(min, 'minutes').add(sec, 'seconds').format('hh:mm A');
+      console.log("rowData processed remainTime", remainTime);
+      console.log("rowData processed end_time", end_time);
       // end change
     } else {
       remainTime_num = 0;
     }
 
     if (remainTime_num > 0) {
+      console.log("rowData display in use");
       // console.log("remainTime_num", remainTime_num);
       return (
           <View style={styles.container}>
@@ -128,6 +131,7 @@ export default class ListViewStatusContainer extends Component {
           </View>
       );
     } else {
+      console.log("rowData display available");
       return (
         <View style={styles.container}>
           <TouchableOpacity
@@ -206,17 +210,19 @@ export default class ListViewStatusContainer extends Component {
       [
         { text: 'OK', onPress: (id) => {
           var id = machine_id;
-          this.quickReserveSuccess(id)} }
+          this.quickReserveFinish(id)} }
       ]
     );
   }; // end of quickReserveConfirm
 
-  async quickReserveSuccess(machine_id) {
+  async quickReserveFinish(machine_id) {
+    console.log("enter quickReserveFinish");
     // Call API to reserve this machine_id
     var res = await API.quickReserve(this.props.username, machine_id);
     // console.log("quick reserve", res);
     // console.log("seg props", this.props);
     if (res.message && res.message.toUpperCase() === 'SUCCESS') {
+      console.log("quickReserveFinish Success");
       // Update the DS state - fetch the data again
 
       // UTL.fetchData(this.props.username, this.props.selectedTab, this.props.bottomTab, 'Your Reservation').done((res) => {
@@ -240,6 +246,7 @@ export default class ListViewStatusContainer extends Component {
       // });
       // console.log("push end");
     } else {
+      console.log("quickReserveFinish Fail");
       // Do nothing
       Alert.alert(res.message);
     }

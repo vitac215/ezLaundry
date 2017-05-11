@@ -31,12 +31,15 @@ export default class SegmentedControlContainer extends Component {
   componentDidMount() {
     // console.log("SegmentedControlContainer didmount");
     // console.log("SegmentedControlContainer props", this.props);
+    this.checkRes();
+  };
 
-    // check the server if this person has a reservation
+  // check the server if this person has a reservation, then fetch machine data
+  checkRes() {
     API.getResSchedule(this.props.username, this.state.selectedTab).done((res) => {
       // TODO: check the data format
-      // console.log('SegmentedControlContainer titleToPass res', res);
-      if (res.length >= 1) {
+      console.log('SegmentedControlContainer titleToPass res', res);
+      if (res.schedules.length >= 1) {
         this.setState({
           titleToPass: 'Your Reservation',
         });
@@ -50,7 +53,7 @@ export default class SegmentedControlContainer extends Component {
       // fetch machine data every 5 seconds
       // this.timer = setInterval(() => this.callUTLfetchData(), 5000);
     });
-  };
+  }
 
 
   callUTLfetchData() {
@@ -67,6 +70,14 @@ export default class SegmentedControlContainer extends Component {
     });
   }
 
+  handleMachineChange(val) {
+    // change the selectedTab state
+    this.setState({
+      selectedTab: val
+    });
+    // check if the user has a reservation for this machine
+    this.checkRes();
+  }
 
   render() {
     // console.log("SegmentedControlContainer props", this.props);
@@ -83,11 +94,7 @@ export default class SegmentedControlContainer extends Component {
               tintColor='#B0FFFE'
               values={this.state.values}
               selectedIndex={0}
-              onValueChange={(val)=> {
-                this.setState({
-                  selectedTab: val
-                })
-              }}/>
+              onValueChange={this.handleMachineChange.bind(this)}/>
           </View>
           <ScrollView style={styles.listContainer}>
             <SegmentedControl {...this.props} {...this.state} title={this.state.titleToPass}/>

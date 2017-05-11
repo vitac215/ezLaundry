@@ -26,23 +26,28 @@ export default class ListViewResConfirmContainer extends Component {
     super(props);
     //TODO: how to set reserved state
     this.state = {
-      dataSource: this.props.dataSource,
+      WashingDS: this.props.WashingDS,
+      DryerDS: this.props.DryerDS,
       reserved: true,
     }
   };
 
   render() {
-    console.log("here at ListViewResConfirmContainer");
-    console.log(this.props);
-    console.log('resconfirm ds',this.props.dataSource);
-
+    console.log("ListViewResConfirmContainer", this.props);
+    var dataSource;
+    if (this.props.selectedTab === "Washing") {
+      dataSource = this.props.WashingDS;
+    }
+    else if (this.props.selectedTab === "Dryer") {
+      dataSource = this.props.DryerDS;
+    }
     return (
       <View>
 
         <View style={styles.container}>
           <ScrollView style={styles.listContainer}>
             <ListView
-              dataSource = {this.props.dataSource}
+              dataSource = {dataSource}
               renderRow = {this.renderRow.bind(this)}
             />
           </ScrollView>
@@ -55,7 +60,6 @@ export default class ListViewResConfirmContainer extends Component {
 
   renderRow(rowData) {
     // rowData: reserve_time, display_id, access_code
-    console.log('renderRow props', this.props);
     console.log("renderRow data", rowData);
 
     var img = this.props.selectedTab === 'Washing' ? require('../img/status/Washing.png') : require('../img/status/Dryer.png');
@@ -73,7 +77,7 @@ export default class ListViewResConfirmContainer extends Component {
                 <View style={[styles.textContainer, styles.centerContainer]}>
                 <Text style={[styles.text]}>{this.state.selectedTab}</Text>
                   <Text style={[styles.text, styles.available]}>{reserve_time}</Text>
-                  <Text style={[styles.text]}>Access code: {rowData.access_code ? rowData.access_code : 1011}</Text>
+                  <Text style={[styles.text]}>Access code: {rowData.access_code ? rowData.access_code : 1001}</Text>
                   <TouchableOpacity
                           style={styles.btn}
                           onPress={this.cancelRes.bind(this)}>
