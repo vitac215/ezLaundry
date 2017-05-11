@@ -281,37 +281,36 @@ const API = {
   },
 
   getResSchedule: async function(username, machine_type) {
-    console.log('API getResSchedule');
-    try {
-      let response = await fetch(`${API_URL.getResSchedule}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          machine_type,
-        })
-      })
-      let json = await response.json();
-      console.log("API getResSchedule res", json);
-      return json;
-    } catch(err) {
-      console.log(err);
-    }
+    // console.log('API getResSchedule');
+    // try {
+    //   let response = await fetch(`${API_URL.getResSchedule}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       machine_type,
+    //     })
+    //   })
+    //   let json = await response.json();
+    //   console.log("API getResSchedule res", json);
+    //   return json;
+    // } catch(err) {
+    //   console.log(err);
+    // }
+    // return await json.schedules;
 
-    // //NOTE: change
-    // // res_time: the start time all the machines are not available, date object
-    // // TODO: need to get a reserve_time.
-    // // NOTE: test your reservation
-    // reserve_time = 'May 9, 2017 10:30:00';
-    // let json = [
-    //              {'username': 'v', 'reserve_time': new Date(reserve_time), 'display_id': 1, 'access_code': 1011},
-    //            ]
-    // return await json;
-    // // end change
-
+    //NOTE: change (hardcode to show a reservation in your reservation scene)
+    // res_time: the start time all the machines are not available, date object
+    // TODO: need to get a reserve_time.
+    // NOTE: test your reservation
+    reserve_time = 'May 9, 2017 10:30:00';
+    let json = [
+                 {'username': 'xinwang', 'reserve_time': new Date(reserve_time), 'display_id': 1, 'access_code': 1011},
+               ]
     return await json;
+    // end change
   },
 
 

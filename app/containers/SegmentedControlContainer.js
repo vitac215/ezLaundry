@@ -39,7 +39,7 @@ export default class SegmentedControlContainer extends Component {
     API.getResSchedule(this.props.username, this.state.selectedTab).done((res) => {
       // TODO: check the data format
       console.log('SegmentedControlContainer titleToPass res', res);
-      if (res.schedules.length >= 1) {
+      if (res.length >= 1) {
         this.setState({
           titleToPass: 'Your Reservation',
         });

@@ -27,7 +27,7 @@ const UTIL = {
           return await API.getResSchedule(username, selectedTab)
             .then((res) => {
               // console.log('fetch res schedule result', res);
-              return res.schedules;
+              return res;
             });
         }
 
