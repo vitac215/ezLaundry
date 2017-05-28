@@ -102,7 +102,7 @@ export default class LoginScene extends Component {
           res.message,
           '',
           [
-            {text: 'Confirm', onPress: () => {
+            {text: 'Reset Password', onPress: () => {
               this.resendEmail(username)} },
             {text: 'Cancel'},
           ]);
@@ -120,6 +120,7 @@ export default class LoginScene extends Component {
       console.log(res);
       if (res.message && res.message.toUpperCase() === "SUCCESS") {
         console.log(res);
+        Alert.alert("An email has been sent to your registered email address to reset the password");
         return;
       // Alert error message
       } else {

@@ -23,18 +23,25 @@ export default class ListViewReservationContainer extends Component {
     super(props);
 
     this.state = {
-      dataSource: this.props.dataSource,
+      WashingDS: this.props.WashingDS,
+      DryerDS: this.props.DryerDS,
     }
   };
 
   render() {
-    console.log(this.props);
-    console.log('res ds', this.props.dataSource);
+    console.log("ListViewReservationContainer props", this.props);
+    var dataSource;
+    if (this.props.selectedTab === "Washing") {
+      dataSource = this.props.WashingDS;
+    }
+    else if (this.props.selectedTab === "Dryer") {
+      dataSource = this.props.DryerDS;
+    }
     return (
       <View style={styles.container}>
         <ScrollView style={styles.listContainer}>
           <ListView
-            dataSource = {this.props.dataSource}
+            dataSource = {dataSource}
             renderRow = {this.renderRow.bind(this)} // auto bind
           />
         </ScrollView>

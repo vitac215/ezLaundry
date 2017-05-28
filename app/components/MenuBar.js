@@ -33,20 +33,40 @@ export default class MenuBar extends Component {
     };
   }
 
-  _renderContent = (component) => {
+  _renderContent = (component, checkRes) => {
+    console.log("menubar checkRes", checkRes);
     var Component = component;
     console.log('props', {...this.props});
     // console.log('state', {...this.state});
-    let titleToPass;
+
+    // to avoid overwrite of the prop title from state undefined
+    let titleDefined;
     if (this.state.title === undefined) {
-      titleToPass = this.props.title;
+      titleDefined = this.props.title;
     } else {
-      titleToPass = this.state.title
+      titleDefined = this.state.title
     }
-    // console.log("prop title to child", titleToPass);
+
+
+    var titleToPass;
+    // if the user is clicking the Reservation menu button, check the if s/he has reservation
+    if (checkRes) {
+      // check the server if this person has a reservation
+      API.getResSchedule(this.props.username, "washing").done((res) => {
+        // TODO: check the data format
+        console.log('SegmentedControlContainer titleToPass res', res);
+        if (res.length >= 1) {
+          titleToPass = 'Your Reservation';
+        } else {
+          titleToPass = 'Reservation';
+        }
+      });
+    }
+
+    console.log("menubar titleToPass", titleToPass);
     return (
       <View style={styles.tabContent}>
-        <Component {...this.props} {...this.state} title={titleToPass} />
+        <Component {...this.props} {...this.state} title={titleDefined} titleToPass={titleToPass} />
       </View>
     )
   }
@@ -68,7 +88,7 @@ export default class MenuBar extends Component {
               title: this.props.property_name
             });
           }}>
-          { this._renderContent(StatusResScene) }
+          { this._renderContent(StatusResScene, false) }
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -76,7 +96,7 @@ export default class MenuBar extends Component {
           icon={{uri: reservationIcon, scale: 3}}
           selected={this.state.bottomTab === 'Reservation'}
           onPress={this.checkReservation.bind(this)}>
-          { this._renderContent(StatusResScene) }
+          { this._renderContent(StatusResScene, true) }
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -89,7 +109,7 @@ export default class MenuBar extends Component {
               title: 'Settings'
             });
           }}>
-          { this._renderContent(SettingsScene) }
+          { this._renderContent(SettingsScene, false) }
         </TabBarIOS.Item>
 
       </TabBarIOS>

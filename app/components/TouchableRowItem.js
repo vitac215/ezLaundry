@@ -26,10 +26,10 @@ export default class TouchableRowItem extends Component {
                   'Reserve a ' + this.props.selectedTab + ' machine at ' + rowData.slot +'?',
                   'Please note that your reservation will be cancelled if you are late for 10 minutes',
                   [
+                    {text: 'Cancel'},
                     {text: 'Confirm', onPress: (reserveTime) => {
                       var reserveTime = rowData.slot;
                       this.reservationConfirm(reserveTime);} },   // TODO: pass time to api
-                    {text: 'Cancel'},
                   ]
                 );
               }}>

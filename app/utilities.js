@@ -17,14 +17,14 @@ const UTIL = {
         // console.log('UTL title', title);
         if (title === "Reservation") {
           // console.log("fetch all res schedule");
-          return await API.getAllResSchedule(username, selectedTab, new Date())
+          return await API.getAllResSchedule(username, selectedTab)
             .then((res) => {
               // console.log(res);
               return res;
             });
         } else {
           // console.log("fetch res schedule");
-          return await API.getResSchedule(username, selectedTab, new Date())
+          return await API.getResSchedule(username, selectedTab)
             .then((res) => {
               // console.log('fetch res schedule result', res);
               return res;
